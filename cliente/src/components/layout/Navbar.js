@@ -6,13 +6,12 @@ import { NavLink } from "react-router-dom";
 // importamos imagenes
 import venta from "../../assets/venta.svg";
 
-const Links = () => {
+const Navbar = (query) => {
   return (
     <div className={styles.links}>
       <NavLink
         to={"/inicio"}
-        className={`${styles.customBtn} ${styles.boton}`}
-        activeClassName={`${styles.activo}`}
+        className={`customBtn boton ${query === "/inicio" ? "active" : ""}`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}
@@ -21,8 +20,7 @@ const Links = () => {
       </NavLink>
       <NavLink
         to={"/clientes"}
-        className={`${styles.customBtn} ${styles.boton}`}
-        activeClassName={`${styles.activo}`}
+        className={`customBtn boton ${query === "/clientes" ? "active" : ""}`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}
@@ -31,8 +29,7 @@ const Links = () => {
       </NavLink>
       <NavLink
         to={"/productos"}
-        className={`${styles.customBtn} ${styles.boton}`}
-        activeClassName={`${styles.activo}`}
+        className={`customBtn boton ${query === "/productos" ? "active" : ""}`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}
@@ -41,8 +38,7 @@ const Links = () => {
       </NavLink>
       <NavLink
         to={"/ventas"}
-        className={`${styles.customBtn} ${styles.boton}`}
-        activeClassName={`${styles.activo}`}
+        className={`customBtn boton ${query === "/ventas" ? "active" : ""}`}
       >
         <div className={styles.link}>
           {/* <img src={venta} alt="svg venta" /> */}
@@ -51,8 +47,7 @@ const Links = () => {
       </NavLink>
       <NavLink
         to={"/reportes"}
-        className={`${styles.customBtn} ${styles.boton}`}
-        activeClassName={`${styles.activo}`}
+        className={`customBtn boton ${query === "/reportes" ? "active" : ""}`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}
@@ -63,4 +58,4 @@ const Links = () => {
   );
 };
 
-export default Links;
+export default Navbar;

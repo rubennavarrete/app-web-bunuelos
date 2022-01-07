@@ -3,12 +3,12 @@ import React, { useState } from "react";
 const Login = () => {
   //State para iniciar Sesión
   const [usuario, guardarUsuario] = useState({
-    email: "",
+    correo: "",
     password: "",
   });
 
   //Extraer de usuario
-  const { email, password } = usuario;
+  const { correo, password } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -33,13 +33,13 @@ const Login = () => {
 
         <form>
           <div className="campo-form">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="Tu Email"
-              value={email}
+              placeholder="Tu Correo"
+              value={correo}
               onChange={onChange}
             />
           </div>

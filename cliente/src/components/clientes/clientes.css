@@ -1,0 +1,228 @@
+.contenedor-cliente {
+}
+
+.content-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.container-2 {
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+
+.container-2 input#search {
+  width: 50px;
+  height: 40px;
+  background: #2b303b;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #262626;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+
+  -webkit-transition: width 0.55s ease;
+  -moz-transition: width 0.55s ease;
+  -ms-transition: width 0.55s ease;
+  -o-transition: width 0.55s ease;
+  transition: width 0.55s ease;
+}
+
+.container-2 input#search::-webkit-input-placeholder {
+  color: #65737e;
+}
+
+.container-2 input#search:-moz-placeholder {
+  /* Firefox 18- */
+  color: #65737e;
+}
+
+.container-2 input#search::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #65737e;
+}
+
+.container-2 input#search:-ms-input-placeholder {
+  color: #65737e;
+}
+
+.container-2 .icon {
+  position: absolute;
+  top: 50%;
+  margin-left: 12px;
+  margin-top: 5px;
+  z-index: 1;
+  color: #4f5b66;
+}
+
+.container-2 img {
+  height: 30px;
+}
+
+.container-2 input#search:focus,
+.container-2 input#search:active {
+  outline: none;
+  width: 300px;
+}
+
+.container-2:hover input#search {
+  width: 300px;
+}
+
+.container-2:hover .icon {
+  color: #93a2ad;
+}
+
+/* Tabla responsive */
+
+/* Etiquetas para entradas marcadas */
+#radio {
+  margin-top: 5px;
+}
+
+.content-tabla {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  font-size: 15px;
+  overflow-y: scroll;
+  height: 65vh;
+}
+
+table.rwd_auto {
+  width: 100%;
+}
+.width200 th,
+.rwd_auto th {
+  background: #ccc;
+  padding: 5px;
+  text-align: center;
+}
+.width200 td,
+.rwd_auto td {
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+}
+.width200 tr:last-child td,
+.rwd_auto tr:last-child td {
+  border: 0;
+}
+
+.rwd {
+  width: 100%;
+  overflow: auto;
+}
+.rwd table.rwd_auto {
+  width: auto;
+  min-width: 100%;
+}
+.rwd_auto th,
+.rwd_auto td {
+  white-space: nowrap;
+}
+
+@media only screen and (max-width: 760px),
+  (min-width: 768px) and (max-width: 1024px) {
+  table.width200,
+  .width200 thead,
+  .width200 tbody,
+  .width200 th,
+  .width200 td,
+  .width200 tr {
+    display: block;
+  }
+
+  .width200 thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .width200 tr {
+    border: 1px solid #ccc;
+  }
+
+  .width200 td {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .width200 td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .width200 td:nth-of-type(1):before {
+    content: "Nombre";
+  }
+  .width200 td:nth-of-type(2):before {
+    content: "Apellidos";
+  }
+  .width200 td:nth-of-type(3):before {
+    content: "Cargo";
+  }
+  .width200 td:nth-of-type(4):before {
+    content: "Twitter";
+  }
+  .width200 td:nth-of-type(5):before {
+    content: "ID";
+  }
+
+  .descarto {
+    display: none;
+  }
+  .fontsize {
+    font-size: 10px;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  body {
+    width: 320px;
+  }
+  .descarto {
+    display: none;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  body {
+    width: 495px;
+  }
+  .descarto {
+    display: none;
+  }
+  .fontsize {
+    font-size: 10px;
+  }
+}
+
+.botn-cerrar {
+  position: absolute;
+  top: 45px;
+  left: 63%;
+}
+
+.redondear {
+  border-radius: 25px;
+  width: 47px;
+  font-size: 15px;
+}

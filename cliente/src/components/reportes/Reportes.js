@@ -1,7 +1,12 @@
 import React from "react";
+import MainLayout from "../layout/main.layout";
 
 const Reportes = () => {
-  return <h1>Desde Reportes</h1>;
+  return (
+    <MainLayout>
+      <h1>Desde Reportes</h1>
+    </MainLayout>
+  );
 };
 
 export default Reportes;
