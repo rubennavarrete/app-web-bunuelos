@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import MainLayout from "../layout/main.layout";
 import Tabla from "./Tabla";
 import Editar from "./Editar";
@@ -14,10 +14,15 @@ import lupa from "../../assets/lupa.svg";
 const Clientes = () => {
   //Obtener el stado del boton agregar y los datos
   const clienteContext = useContext(clientesContext);
-  const { agregar, datos } = clienteContext;
+  const { agregar, clientes, obtenerClientes } = clienteContext;
+
+  //Obtener clientes cuando carga el componente
+  useEffect(() => {
+    obtenerClientes();
+  }, []);
 
   // recisar si los datos que vienen de clientes tiene contenido
-  if (datos.length === 0) return null;
+  if (clientes.length === 0) return null;
 
   return (
     <MainLayout>
@@ -49,8 +54,8 @@ const Clientes = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {datos
-                      ? datos.map((item) => {
+                    {clientes
+                      ? clientes.map((item) => {
                           return <Tabla key={item.cedula} clientes={item} />;
                         })
                       : null}

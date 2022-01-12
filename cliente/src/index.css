@@ -4,6 +4,9 @@
   --gris2: #2f3848;
   --gris3: #1a202d;
   --negro: #000000;
+  --borde: #0075ff;
+  --error: #bb2929;
+  --exito: #1ed12d;
   --headingFont: "Raleway", sans-serif;
   --textFont: "Roboto", sans-serif;
 }
@@ -11,6 +14,9 @@
 *:before,
 *:after {
   box-sizing: inherit;
+}
+:focus-visible {
+  outline: none;
 }
 html {
   box-sizing: border-box;
@@ -48,7 +54,7 @@ a {
 /** Nav **/
 
 nav {
-  padding: 2rem 0 0 0;
+  margin-top: 3rem;
 }
 
 /** BOTONES **/
@@ -97,7 +103,7 @@ nav {
 
   aside {
     background-color: var(--blanco);
-    flex: 0 0 250px;
+    flex: 0 0 300px;
   }
   .seccion-principal {
     flex: 1;
@@ -107,18 +113,6 @@ nav {
 /* BARRA LATERAL */
 aside {
   padding: 3rem;
-}
-
-.formulario-nuevo-proyecto {
-  margin-top: 6rem;
-}
-.formulario-nuevo-proyecto .input-text {
-  border-bottom: 1px solid var(--gris2);
-  border-radius: 0;
-  background-color: var(--gris1);
-}
-.formulario-nuevo-proyecto .input-text::placeholder {
-  color: var(--gris2);
 }
 .crud {
   margin-top: 10rem;
@@ -180,7 +174,7 @@ aside {
 
 /** TAREAS LISTADO **/
 .contenedor-tareas {
-  padding: 4rem;
+  margin-top: 6rem;
 }
 
 .listado-tareas {
@@ -282,8 +276,7 @@ aside {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 79vh;
-  position: relative;
+  height: 75vh;
 }
 
 .contenedor-form {
@@ -373,7 +366,7 @@ aside {
 
 .boton,
 .active {
-  line-height: 42px;
+  line-height: 20px;
   padding: 0;
   border: none;
   margin-bottom: 20px;
@@ -471,12 +464,13 @@ aside {
   padding: 15px 29px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin: 10px 2px;
+  margin: 10px 0px;
   cursor: pointer;
   transition-duration: 0.4s;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .button2:hover {

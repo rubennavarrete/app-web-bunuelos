@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import clientesContext from "../../context/Clientes/clientesContext";
+
+import Input from "../inputs/Input";
+
+// importe de iconos
+import alertaTriangulo from "../../assets/alert.svg";
 
 const Editar = () => {
+  //Cambiar el stado del boton agregar
+  const clienteContext = useContext(clientesContext);
+  const { cerrarAgregarCliente, agregarCliente } = clienteContext;
+
   //State para agregar cliente
   const [cliente, guardarCliente] = useState({
     cedula: "",
@@ -12,7 +23,7 @@ const Editar = () => {
   });
 
   //Extraer de agregar cliente
-  const { cedula, nombre, direccion, telefono, correo, fecha } = cliente;
+  // const { cedula, nombre, direccion, telefono, correo, fecha } = cliente;
 
   const onChangeAgregar = (e) => {
     guardarCliente({
@@ -22,104 +33,163 @@ const Editar = () => {
   };
 
   //Para agregaar un nuevo cliente
-  const onSubmit = (e) => {
+  const onSubmitCLiente = (e) => {
     e.preventDefault();
 
-    //Validar que no haya campos vacios
+    //Validar que todos los campos sean validos
+    console.log("cedula nos da:", cedulaV.valido);
+    console.log("nombre nos da:", nombreV.valido);
+    console.log("direccion nos da:", direccionV.valido);
+    console.log("telefono nos da:", telefonoV.valido);
+    console.log("correo nos da:", correoV.valido);
+    console.log("fecha nos da:", fechaV.valido);
+    if (
+      cedulaV.valido === "true" &&
+      nombreV.valido === "true" &&
+      direccionV.valido === "true" &&
+      telefonoV.valido === "true" &&
+      correoV.valido === "true" &&
+      fechaV.valido === "true"
+    ) {
+      cambiarFormularioV(true);
+      cambiarCedulaV({ campo: "", valido: null });
+      cambiarNombreV({ campo: "", valido: null });
+      cambiarDireccionV({ campo: "", valido: null });
+      cambiarTelefonoV({ campo: "", valido: null });
+      cambiarCorreoV({ campo: "", valido: null });
+      cambiarFechaV({ campo: "", valido: null });
+      console.log("agregamos el cliente");
+      //agregar al State
+      setTimeout(agregarCliente(cliente), 2000);
+    } else {
+      console.log("pusimos el formulario en falso");
+      cambiarFormularioV(false);
+    }
+  };
 
-    //Pasarlo al action
+  //State para validar los campos del componente input
+  const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
+  const [nombreV, cambiarNombreV] = useState({ campo: "", valido: null });
+  const [direccionV, cambiarDireccionV] = useState({ campo: "", valido: null });
+  const [telefonoV, cambiarTelefonoV] = useState({ campo: "", valido: null });
+  const [correoV, cambiarCorreoV] = useState({ campo: "", valido: null });
+  const [fechaV, cambiarFechaV] = useState({ campo: "", valido: null });
+  const [formularioV, cambiarFormularioV] = useState(null);
+
+  const expresiones = {
+    cedula: /^[0-9] {2,3}-? ?[0-9] {6,7} $/,
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
+    direccion: /^[#.0-9a-zA-Z\s,-]+$/,
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    telefono: /^\d{8,10}$/, // 8 a 10 numeros.
+    fecha: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
   };
 
   return (
     <div className="form-usuario">
-      <div className="botn-cerrar">
-        <button type="button" className="btn btn-block btn-primario redondear">
-          X
-        </button>
-      </div>
-      <div className="contenedor-form sonbra-dark">
-        <h1>Ingresar Cliente</h1>
+      <div className="contenedor-form-cliente">
+        <div className="botn-cerrar">
+          <button
+            type="button"
+            className="btn btn-block btn-primario redondear"
+            onClick={() => cerrarAgregarCliente()}
+          >
+            X
+          </button>
+        </div>
+        <h1>Ingresar datos del Cliente</h1>
 
-        <form>
-          <div className="campo-form">
-            <label htmlFor="cedula">Cedula</label>
-            <input
-              type="text"
-              className="input-text"
-              name="cedula"
-              placeholder="Ingrese la Cedula..."
-              value={cedula}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
-            <label htmlFor="nombre">Nombre</label>
-            <input
-              type="text"
-              className="input-text"
-              name="nombre"
-              placeholder="Ingrese el nombre..."
-              value={nombre}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
-            <label htmlFor="direccion">Direccion</label>
-            <input
-              type="text"
-              className="input-text"
-              name="direccion"
-              placeholder="Ingrese la direccion..."
-              value={direccion}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
-            <label htmlFor="telefono">Telefono</label>
-            <input
-              type="text"
-              className="input-text"
-              name="direccion"
-              placeholder="Ingrese el telefono..."
-              value={telefono}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
-            <label htmlFor="correo">Correo</label>
-            <input
-              type="email"
-              className="input-text"
-              name="correo"
-              placeholder="Ingrese el correo..."
-              value={correo}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
-            <label htmlFor="fecha">Fecha de nacimiento</label>
-            <input
-              type="text"
-              className="input-text"
-              name="fecha"
-              placeholder="Ingrese la fecha de nacimiento..."
-              value={fecha}
-              onChange={onChangeAgregar}
-            />
-          </div>
-
-          <div className="campo-form">
+        <form className="formulario-nuevo-cliente" onSubmit={onSubmitCLiente}>
+          <Input
+            estado={cedulaV}
+            cambiarEstado={cambiarCedulaV}
+            label="Cédula"
+            type="text"
+            name="cedula"
+            placeholder="Ingrese la cédula..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="La cédula debe de ser de 10 dígitos y solo puede contener números enteros positivos"
+            expressionRegular={expresiones.cedula}
+            tipoExpresion="1"
+          />
+          <Input
+            estado={nombreV}
+            cambiarEstado={cambiarNombreV}
+            label="Nombre"
+            type="text"
+            name="nombre"
+            placeholder="Ingrese el nombre..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="El nombre debe tener de 4 a 20 caracteres y solo puede contener letras y espacios"
+            expressionRegular={expresiones.nombre}
+            tipoExpresion="2"
+          />
+          <Input
+            estado={direccionV}
+            cambiarEstado={cambiarDireccionV}
+            label="Dirección"
+            type="text"
+            name="direccion"
+            placeholder="Ingrese el dirección..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="La dirección debe tener de 4 a 50 caracteres y solo puede contener letras, números y espacios"
+            expressionRegular={expresiones.direccion}
+            tipoExpresion="2"
+          />
+          <Input
+            estado={telefonoV}
+            cambiarEstado={cambiarTelefonoV}
+            label="Teléfono"
+            type="text"
+            name="telefono"
+            placeholder="Ingrese el teléfono..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="El teléfono debe de ser de 8 a 10 dígitos y solo puede contener números enteros positivos"
+            expressionRegular={expresiones.telefono}
+            tipoExpresion="2"
+          />
+          <Input
+            estado={correoV}
+            cambiarEstado={cambiarCorreoV}
+            label="Correo"
+            type="email"
+            name="correo"
+            placeholder="Ingrese el correo..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="Se espera una '@'"
+            expressionRegular={expresiones.correo}
+            tipoExpresion="2"
+          />
+          <Input
+            estado={fechaV}
+            cambiarEstado={cambiarFechaV}
+            label="Fecha de nacimiento"
+            type="text"
+            name="fecha"
+            placeholder="Ingrese la fecha de nacimiento..."
+            onChangeAgregar={onChangeAgregar}
+            leyenda="Ingrese una fecha con el siguiente formato yyyy-mm-dd"
+            expressionRegular={expresiones.fecha}
+            tipoExpresion="2"
+          />
+          {formularioV === false && (
+            <div className="errorM">
+              <p>
+                <img src={alertaTriangulo} alt="" />
+                <b>Error:</b> Por favor rellena el formulario correctamente.
+              </p>
+            </div>
+          )}
+          <div className="boton-centrado">
             <input
               type="submit"
               className="btn btn-primario btn-block"
               value="Ingresar"
             />
           </div>
+          {formularioV === true && (
+            <p className="exito">Cliente ingresado exitosamente!</p>
+          )}
         </form>
       </div>
     </div>
