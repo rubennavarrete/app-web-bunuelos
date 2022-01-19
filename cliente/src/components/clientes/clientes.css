@@ -4,7 +4,8 @@
 .content-search {
   width: 100%;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+  padding: 0 11rem;
 }
 
 .container-2 {

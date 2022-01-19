@@ -4,7 +4,7 @@ import styles from "./Links.module.css";
 import { NavLink } from "react-router-dom";
 
 // importamos imagenes
-import venta from "../../assets/venta.svg";
+// import venta from "../../assets/venta.svg";
 
 const Navbar = (query) => {
   return (

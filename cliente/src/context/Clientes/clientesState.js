@@ -7,6 +7,10 @@ import {
   CERRAR_AGREGAR_CLIENTE,
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
+  MOSTRAR_ACTUALIZAR_CLIENTE,
+  // ACTUALIZAR_CLIENTE,
+  ELIMINAR_CLIENTE,
+  OBTENER_CEDULA,
 } from "../../types";
 
 const ClienteState = (props) => {
@@ -81,6 +85,8 @@ const ClienteState = (props) => {
     clientes: [],
     agregarCliente: true,
     cerrarAgregarCliente: false,
+    actualizarCliente: false,
+    cedulaObte: null,
   };
 
   // Dispach para ejecutar las acciones
@@ -99,7 +105,29 @@ const ClienteState = (props) => {
     });
   };
 
+  const mostrarActualizarCliente = () => {
+    dispach({
+      type: MOSTRAR_ACTUALIZAR_CLIENTE,
+    });
+  };
+
   // Funciones para el CRUD
+
+  // Obtener los datos de clientes
+  const obtenerClientes = () => {
+    dispach({
+      type: OBTENER_CLIENTES,
+      payload: clientes,
+    });
+  };
+
+  const obtenerCedulaCliente = (cedula) => {
+    console.log("la cedula dentro de el state: ", cedula);
+    dispach({
+      type: OBTENER_CEDULA,
+      payload: cedula,
+    });
+  };
 
   // Agregar un nuevo cliente
   const agregarCliente = (clientes) => {
@@ -110,23 +138,39 @@ const ClienteState = (props) => {
     });
   };
 
-  // Obtener los datos de clientes
-  const obtenerClientes = () => {
+  //Edita o modica un cliente
+  // const actualizarCliente = (clientes) => {
+  //   dispach({
+  //     type: ACTUALIZAR_CLIENTE,
+  //     payload: clientes,
+  //   });
+  // };
+
+  // Eliminar un cliente por su numero de cedula
+  const eliminarCliente = (ci) => {
     dispach({
-      type: OBTENER_CLIENTES,
-      payload: clientes,
+      type: ELIMINAR_CLIENTE,
+      payload: ci,
     });
   };
 
   return (
     <clienteContext.Provider
       value={{
+        state,
+        dispach,
         clientes: state.clientes,
         agregar: state.agregarCliente,
+        actualizar: state.actualizarCliente,
+        cedulaObte: state.cedulaObte,
         mostrarAgregarCliente,
         cerrarAgregarCliente,
+        mostrarActualizarCliente,
         obtenerClientes,
         agregarCliente,
+        // actualizarCliente,
+        obtenerCedulaCliente,
+        eliminarCliente,
       }}
     >
       {props.children}

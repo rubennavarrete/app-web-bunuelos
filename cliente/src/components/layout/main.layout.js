@@ -9,7 +9,6 @@ import logo from "../../assets/Logo.svg";
 
 const MainLayout = ({ children, ...props }) => {
   const search = useLocation().pathname;
-  console.log("aqui los parametros:", search);
 
   return (
     <div className="contenedor-app">

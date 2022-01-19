@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import MainLayout from "../layout/main.layout";
 import Tabla from "./Tabla";
 import Editar from "./Editar";
+// import Actualizar from "./Actualizar";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -12,17 +13,31 @@ import "./clientes.css";
 import lupa from "../../assets/lupa.svg";
 
 const Clientes = () => {
-  //Obtener el stado del boton agregar y los datos
+  //Obtener las funcnciones del context de clientes
   const clienteContext = useContext(clientesContext);
-  const { agregar, clientes, obtenerClientes } = clienteContext;
+  const {
+    agregar,
+    clientes,
+    obtenerClientes,
+    actualizar,
+    cedulaObte,
+    cerrarAgregarCliente,
+  } = clienteContext;
 
   //Obtener clientes cuando carga el componente
   useEffect(() => {
     obtenerClientes();
   }, []);
 
-  // recisar si los datos que vienen de clientes tiene contenido
+  // recvisar si los datos que vienen de clientes tiene contenido
   if (clientes.length === 0) return null;
+
+  if (actualizar) {
+    if (cedulaObte === null) {
+      console.log("Aun no a seleccionado un cliente");
+      // cerrarAgregarCliente();
+    }
+  }
 
   return (
     <MainLayout>
@@ -64,8 +79,10 @@ const Clientes = () => {
               </div>
             </section>
           </Fragment>
+        ) : actualizar ? (
+          <Editar titulo={"Actualizar datos del Cliente"} />
         ) : (
-          <Editar />
+          <Editar titulo={"Ingresar datos del Cliente"} />
         )}
       </div>
     </MainLayout>

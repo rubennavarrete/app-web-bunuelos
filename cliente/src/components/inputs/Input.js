@@ -21,29 +21,18 @@ const Input = ({
     cambiarEstado({ ...estado, campo: e.target.value });
   };
 
-  //   const validacion = () => {
-  //     if(expressionRegular.test(estado.campo)){
-  //         console.log("Imput correcto")
-  //     } else {
-  //         console.log("Imput incorecto")
-  //     }
-  //   };
   const validacion = () => {
     if (tipoExpresion === "1") {
       if (ValidarCedula(estado.campo)) {
-        console.log(
-          "En estado de la sedula viene verificado como: ",
-          estado.campo
-        );
-        cambiarEstado({ ...estado, validado: true });
+        cambiarEstado({ ...estado, valido: true });
       } else {
-        cambiarEstado({ ...estado, validado: false });
+        cambiarEstado({ ...estado, valido: false });
       }
     } else if (tipoExpresion === "2") {
       if (expressionRegular.test(estado.campo)) {
-        cambiarEstado({ ...estado, validado: true });
+        cambiarEstado({ ...estado, valido: true });
       } else {
-        cambiarEstado({ ...estado, validado: false });
+        cambiarEstado({ ...estado, valido: false });
       }
     }
   };
@@ -53,8 +42,8 @@ const Input = ({
       <label
         htmlFor={name}
         className={`${
-          estado.validado !== undefined
-            ? estado.validado
+          estado.valido !== null
+            ? estado.valido
               ? "validacion-label-correcto"
               : "validacion-label-incorrecto"
             : ""
@@ -66,8 +55,8 @@ const Input = ({
         <input
           type={type}
           className={`input-text ${
-            estado.validado !== undefined
-              ? estado.validado
+            estado.valido !== null
+              ? estado.valido
                 ? ""
                 : "validacion-input-incorrecto"
               : ""
@@ -81,21 +70,21 @@ const Input = ({
         />
         <img
           className={`${
-            estado.validado !== undefined
-              ? estado.validado
+            estado.valido !== null
+              ? estado.valido
                 ? "validacion-img-correcto"
                 : "validacion-img-incorrecto"
               : ""
           }`}
-          src={estado.validado ? checkCircle : close}
+          src={estado.valido ? checkCircle : close}
           alt=""
         />
       </div>
       <div
         id="grup"
         className={`leyenda-error ${
-          estado.validado !== undefined
-            ? estado.validado
+          estado.valido !== null
+            ? estado.valido
               ? "leyenda-error-correcto"
               : "leyenda-error-incorrecto"
             : ""

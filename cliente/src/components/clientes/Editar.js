@@ -7,7 +7,7 @@ import Input from "../inputs/Input";
 // importe de iconos
 import alertaTriangulo from "../../assets/alert.svg";
 
-const Editar = () => {
+const Editar = ({ titulo }) => {
   //Cambiar el stado del boton agregar
   const clienteContext = useContext(clientesContext);
   const { cerrarAgregarCliente, agregarCliente } = clienteContext;
@@ -32,41 +32,6 @@ const Editar = () => {
     });
   };
 
-  //Para agregaar un nuevo cliente
-  const onSubmitCLiente = (e) => {
-    e.preventDefault();
-
-    //Validar que todos los campos sean validos
-    console.log("cedula nos da:", cedulaV.valido);
-    console.log("nombre nos da:", nombreV.valido);
-    console.log("direccion nos da:", direccionV.valido);
-    console.log("telefono nos da:", telefonoV.valido);
-    console.log("correo nos da:", correoV.valido);
-    console.log("fecha nos da:", fechaV.valido);
-    if (
-      cedulaV.valido === "true" &&
-      nombreV.valido === "true" &&
-      direccionV.valido === "true" &&
-      telefonoV.valido === "true" &&
-      correoV.valido === "true" &&
-      fechaV.valido === "true"
-    ) {
-      cambiarFormularioV(true);
-      cambiarCedulaV({ campo: "", valido: null });
-      cambiarNombreV({ campo: "", valido: null });
-      cambiarDireccionV({ campo: "", valido: null });
-      cambiarTelefonoV({ campo: "", valido: null });
-      cambiarCorreoV({ campo: "", valido: null });
-      cambiarFechaV({ campo: "", valido: null });
-      console.log("agregamos el cliente");
-      //agregar al State
-      setTimeout(agregarCliente(cliente), 2000);
-    } else {
-      console.log("pusimos el formulario en falso");
-      cambiarFormularioV(false);
-    }
-  };
-
   //State para validar los campos del componente input
   const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
   const [nombreV, cambiarNombreV] = useState({ campo: "", valido: null });
@@ -75,6 +40,45 @@ const Editar = () => {
   const [correoV, cambiarCorreoV] = useState({ campo: "", valido: null });
   const [fechaV, cambiarFechaV] = useState({ campo: "", valido: null });
   const [formularioV, cambiarFormularioV] = useState(null);
+
+  //Para agregaar un nuevo cliente
+  const onSubmitCLiente = (e) => {
+    e.preventDefault();
+
+    if (
+      cedulaV.valido === true &&
+      nombreV.valido === true &&
+      direccionV.valido === true &&
+      telefonoV.valido === true &&
+      correoV.valido === true &&
+      fechaV.valido === true
+    ) {
+      cambiarFormularioV(true);
+      setTimeout(
+        () =>
+          agregarCliente({
+            cedula: cedulaV.campo,
+            nombre: nombreV.campo,
+            direccion: direccionV.campo,
+            telefono: telefonoV.campo,
+            correo: correoV.campo,
+            fecha: fechaV.campo,
+          }),
+        3000
+      );
+
+      cambiarCedulaV({ campo: "", valido: null });
+      cambiarNombreV({ campo: "", valido: null });
+      cambiarDireccionV({ campo: "", valido: null });
+      cambiarTelefonoV({ campo: "", valido: null });
+      cambiarCorreoV({ campo: "", valido: null });
+      cambiarFechaV({ campo: "", valido: null });
+      //agregar al State
+    } else {
+      cambiarFormularioV(false);
+      setTimeout(() => cambiarFormularioV(null), 4000);
+    }
+  };
 
   const expresiones = {
     cedula: /^[0-9] {2,3}-? ?[0-9] {6,7} $/,
@@ -97,7 +101,7 @@ const Editar = () => {
             X
           </button>
         </div>
-        <h1>Ingresar datos del Cliente</h1>
+        <h1>{titulo}</h1>
 
         <form className="formulario-nuevo-cliente" onSubmit={onSubmitCLiente}>
           <Input
@@ -108,7 +112,7 @@ const Editar = () => {
             name="cedula"
             placeholder="Ingrese la cédula..."
             onChangeAgregar={onChangeAgregar}
-            leyenda="La cédula debe de ser de 10 dígitos y solo puede contener números enteros positivos"
+            leyenda="Esta cédula no pertenece a ninguna región "
             expressionRegular={expresiones.cedula}
             tipoExpresion="1"
           />
