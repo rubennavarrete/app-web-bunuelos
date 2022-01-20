@@ -7,10 +7,15 @@ import Input from "../inputs/Input";
 // importe de iconos
 import alertaTriangulo from "../../assets/alert.svg";
 
-const Editar = ({ titulo }) => {
+const Editar = ({ titulo, clientes }) => {
   //Cambiar el stado del boton agregar
   const clienteContext = useContext(clientesContext);
-  const { cerrarAgregarCliente, agregarCliente } = clienteContext;
+  const {
+    cerrarAgregarCliente,
+    agregarCliente,
+    datoActualizar,
+    mostarActualizar,
+  } = clienteContext;
 
   //State para agregar cliente
   const [cliente, guardarCliente] = useState({
@@ -40,6 +45,13 @@ const Editar = ({ titulo }) => {
   const [correoV, cambiarCorreoV] = useState({ campo: "", valido: null });
   const [fechaV, cambiarFechaV] = useState({ campo: "", valido: null });
   const [formularioV, cambiarFormularioV] = useState(null);
+
+  let dCedula = { campo: "", valido: null };
+  let dNombre = { campo: "", valido: null };
+  let dDireccion = { campo: "", valido: null };
+  let dTelefomo = { campo: "", valido: null };
+  let dCorreo = { campo: "", valido: null };
+  let dFecha = { campo: "", valido: null };
 
   //Para agregaar un nuevo cliente
   const onSubmitCLiente = (e) => {
@@ -89,6 +101,18 @@ const Editar = ({ titulo }) => {
     fecha: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
   };
 
+  if (mostarActualizar) {
+    dCedula = {
+      campo: datoActualizar[0].cedula,
+      valido: null,
+    };
+    dNombre = { campo: datoActualizar[0].nombre, valido: null };
+    dDireccion = { campo: datoActualizar[0].direccion, valido: null };
+    dTelefomo = { campo: datoActualizar[0].telefono, valido: null };
+    dCorreo = { campo: datoActualizar[0].correo, valido: null };
+    dFecha = { campo: datoActualizar[0].fecha, valido: null };
+  }
+
   return (
     <div className="form-usuario">
       <div className="contenedor-form-cliente">
@@ -105,7 +129,7 @@ const Editar = ({ titulo }) => {
 
         <form className="formulario-nuevo-cliente" onSubmit={onSubmitCLiente}>
           <Input
-            estado={cedulaV}
+            estado={cedulaV.campo ? cedulaV : dCedula}
             cambiarEstado={cambiarCedulaV}
             label="Cédula"
             type="text"
@@ -117,7 +141,7 @@ const Editar = ({ titulo }) => {
             tipoExpresion="1"
           />
           <Input
-            estado={nombreV}
+            estado={nombreV.campo ? nombreV : dNombre}
             cambiarEstado={cambiarNombreV}
             label="Nombre"
             type="text"
@@ -129,7 +153,7 @@ const Editar = ({ titulo }) => {
             tipoExpresion="2"
           />
           <Input
-            estado={direccionV}
+            estado={direccionV.campo ? direccionV : dDireccion}
             cambiarEstado={cambiarDireccionV}
             label="Dirección"
             type="text"
@@ -141,7 +165,7 @@ const Editar = ({ titulo }) => {
             tipoExpresion="2"
           />
           <Input
-            estado={telefonoV}
+            estado={telefonoV.campo ? telefonoV : dTelefomo}
             cambiarEstado={cambiarTelefonoV}
             label="Teléfono"
             type="text"
@@ -153,7 +177,7 @@ const Editar = ({ titulo }) => {
             tipoExpresion="2"
           />
           <Input
-            estado={correoV}
+            estado={correoV.campo ? correoV : dCorreo}
             cambiarEstado={cambiarCorreoV}
             label="Correo"
             type="email"
@@ -165,7 +189,7 @@ const Editar = ({ titulo }) => {
             tipoExpresion="2"
           />
           <Input
-            estado={fechaV}
+            estado={fechaV.campo ? fechaV : dFecha}
             cambiarEstado={cambiarFechaV}
             label="Fecha de nacimiento"
             type="text"

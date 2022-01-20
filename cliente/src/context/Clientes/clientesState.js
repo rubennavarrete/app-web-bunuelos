@@ -8,7 +8,7 @@ import {
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
   MOSTRAR_ACTUALIZAR_CLIENTE,
-  // ACTUALIZAR_CLIENTE,
+  ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
 } from "../../types";
@@ -85,8 +85,9 @@ const ClienteState = (props) => {
     clientes: [],
     agregarCliente: true,
     cerrarAgregarCliente: false,
-    actualizarCliente: false,
+    mostrarActualizarCliente: false,
     cedulaObte: null,
+    datoActualizar: null,
   };
 
   // Dispach para ejecutar las acciones
@@ -122,7 +123,6 @@ const ClienteState = (props) => {
   };
 
   const obtenerCedulaCliente = (cedula) => {
-    console.log("la cedula dentro de el state: ", cedula);
     dispach({
       type: OBTENER_CEDULA,
       payload: cedula,
@@ -138,13 +138,13 @@ const ClienteState = (props) => {
     });
   };
 
-  //Edita o modica un cliente
-  // const actualizarCliente = (clientes) => {
-  //   dispach({
-  //     type: ACTUALIZAR_CLIENTE,
-  //     payload: clientes,
-  //   });
-  // };
+  // Edita o modica un cliente
+  const actualizarCliente = (ci) => {
+    dispach({
+      type: ACTUALIZAR_CLIENTE,
+      payload: ci,
+    });
+  };
 
   // Eliminar un cliente por su numero de cedula
   const eliminarCliente = (ci) => {
@@ -161,14 +161,15 @@ const ClienteState = (props) => {
         dispach,
         clientes: state.clientes,
         agregar: state.agregarCliente,
-        actualizar: state.actualizarCliente,
+        mostarActualizar: state.mostrarActualizarCliente,
         cedulaObte: state.cedulaObte,
+        datoActualizar: state.datoActualizar,
         mostrarAgregarCliente,
         cerrarAgregarCliente,
         mostrarActualizarCliente,
         obtenerClientes,
         agregarCliente,
-        // actualizarCliente,
+        actualizarCliente,
         obtenerCedulaCliente,
         eliminarCliente,
       }}

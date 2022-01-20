@@ -10,11 +10,17 @@ const Sidebar = ({ query }) => {
     mostrarActualizarCliente,
     eliminarCliente,
     cedulaObte,
+    actualizarCliente,
   } = clienteContext;
 
   //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
   const clienteEliminar = () => {
     eliminarCliente(cedulaObte);
+  };
+
+  const actualizar = () => {
+    mostrarActualizarCliente();
+    actualizarCliente(cedulaObte);
   };
 
   switch (query) {
@@ -30,10 +36,7 @@ const Sidebar = ({ query }) => {
           >
             Ingresar
           </button>
-          <button
-            className="button button2"
-            onClick={() => mostrarActualizarCliente()}
-          >
+          <button className="button button2" onClick={() => actualizar()}>
             Actualizar
           </button>
           <button className="button button2" onClick={() => clienteEliminar()}>

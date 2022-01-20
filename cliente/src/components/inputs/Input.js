@@ -12,13 +12,20 @@ const Input = ({
   type,
   name,
   placeholder,
-  onChangeAgregar,
+  mostarActualizar,
   leyenda,
   expressionRegular,
   tipoExpresion,
 }) => {
   const onChange = (e) => {
-    cambiarEstado({ ...estado, campo: e.target.value });
+    console.log("Estaso objeto: ", estado);
+    if (e.target.value === "") {
+      console.log("Esta bacio: ");
+      cambiarEstado({ ...estado, campo: null });
+    } else {
+      cambiarEstado({ ...estado, campo: e.target.value });
+      console.log("onchange: ", e.target.value);
+    }
   };
 
   const validacion = () => {

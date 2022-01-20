@@ -15,14 +15,8 @@ import lupa from "../../assets/lupa.svg";
 const Clientes = () => {
   //Obtener las funcnciones del context de clientes
   const clienteContext = useContext(clientesContext);
-  const {
-    agregar,
-    clientes,
-    obtenerClientes,
-    actualizar,
-    cedulaObte,
-    cerrarAgregarCliente,
-  } = clienteContext;
+  const { agregar, clientes, obtenerClientes, mostarActualizar } =
+    clienteContext;
 
   //Obtener clientes cuando carga el componente
   useEffect(() => {
@@ -31,13 +25,6 @@ const Clientes = () => {
 
   // recvisar si los datos que vienen de clientes tiene contenido
   if (clientes.length === 0) return null;
-
-  if (actualizar) {
-    if (cedulaObte === null) {
-      console.log("Aun no a seleccionado un cliente");
-      // cerrarAgregarCliente();
-    }
-  }
 
   return (
     <MainLayout>
@@ -79,7 +66,7 @@ const Clientes = () => {
               </div>
             </section>
           </Fragment>
-        ) : actualizar ? (
+        ) : mostarActualizar ? (
           <Editar titulo={"Actualizar datos del Cliente"} />
         ) : (
           <Editar titulo={"Ingresar datos del Cliente"} />

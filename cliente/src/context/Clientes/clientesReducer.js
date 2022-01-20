@@ -4,7 +4,7 @@ import {
   CERRAR_AGREGAR_CLIENTE,
   AGREGAR_CLIENTE,
   MOSTRAR_ACTUALIZAR_CLIENTE,
-  // ACTUALIZAR_CLIENTE,
+  ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
 } from "../../types";
@@ -15,7 +15,7 @@ export default (state, action) => {
       return {
         ...state,
         agregarCliente: false,
-        actualizarCliente: false,
+        mostrarActualizarCliente: false,
       };
     case CERRAR_AGREGAR_CLIENTE:
       return {
@@ -27,7 +27,7 @@ export default (state, action) => {
         ...state,
         agregarCliente: false,
         cerrarAgregarCliente: false,
-        actualizarCliente: true,
+        mostrarActualizarCliente: true,
       };
     case OBTENER_CLIENTES:
       return {
@@ -51,6 +51,13 @@ export default (state, action) => {
       return {
         ...state,
         cedulaObte: action.payload,
+      };
+    case ACTUALIZAR_CLIENTE:
+      return {
+        ...state,
+        datoActualizar: state.clientes.filter(
+          (cliente) => cliente.cedula === action.payload
+        ),
       };
     default:
       return state;
