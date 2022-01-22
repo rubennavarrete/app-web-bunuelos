@@ -1,0 +1,5 @@
+@api = http://localhost:4000/api/productos
+
+
+### Obteniendo todos los productos de la base de datos
+GET {{api}}
