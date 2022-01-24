@@ -33,9 +33,22 @@ PUT {{api}}/0706635091
 Content-Type: application/json
 
 {
-    "nombreCli": "Cristhian Romero",
-    "direccionCli": "ayacucho y la que crusa",
+    "nombreCli": "Cristi Romero",
+    "direccionCli": " la que crusa",
     "celularCli": "0986783467",
-    "correoCli": "crisyangel@yahoo.com",
+    "correoCli": "cristiano@yahoo.com",
     "fechNac": "1996-09-28T00:00:00.00Z"
+}
+
+### Modificar clienten con procedimiento almacenado
+
+PUT {{api}}/2300677362
+Content-Type: application/json
+
+{
+    "nombre": "Nayeli Secaira",
+    "direccion": "Santp",
+    "celular": "0981654855",
+    "correoCli": "melas1603@gamil.com",
+    "fecN": "2001-03-16T00:00:00.00Z"
 }

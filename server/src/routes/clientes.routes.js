@@ -5,7 +5,8 @@ import {
   obtenerCliente,
   eliminarCliente,
   numeroTotalClientes,
-  actualizarCliente,
+ // actualizarCliente,
+  modificarCliente,
 } from "../controllers/clientes.controller";
 
 const router = Router();
@@ -20,6 +21,8 @@ router.post("/clientes", crearNuevoCliente);
 
 router.delete("/clientes/:cedulaCli", eliminarCliente);
 
-router.put("/clientes/:cedulaCli", actualizarCliente);
+//router.put("/clientes/:cedulaCli", actualizarCliente);
+
+router.put("/clientes/:cedulaCli", modificarCliente);
 
 export default router;
