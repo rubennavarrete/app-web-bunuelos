@@ -1,7 +1,7 @@
 export const queries = {
   //Consultas para autentificar usuario
   obtenerUsuario:
-    "Select usernameUs, contrasenaUs, nombreUS, tipoUs from Usuario where usernameUs = @usernameUs",
+    "Select usernameUs, contrasenaUs, nombreUS, tipoUs, urImgUs from Usuario where usernameUs = @usernameUs",
 
   //Consultas para el apartado de clientes
   obtenerClientes: "SELECT * FROM Cliente",
