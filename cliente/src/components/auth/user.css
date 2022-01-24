@@ -1,0 +1,17 @@
+.user {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.user h3,
+.user p {
+  margin: 7px 0;
+}

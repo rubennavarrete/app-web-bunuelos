@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import AlertaContext from "../../context/alertas/alertaContext";
+import AuthContext from "../../context/autenticacion/authContext";
 
-const Login = () => {
-  //State para iniciar Sesión
+const Login = (props) => {
+  // extraer los valores del context
+  const alertaContext = useContext(AlertaContext);
+  const { alerta, mostrarAlerta } = alertaContext;
+
+  const authContext = useContext(AuthContext);
+  const { mensaje, autenticado, iniciarSesion } = authContext;
+
+  // En caso de que el password o usuario no exista
+  useEffect(() => {
+    if (autenticado) {
+      // props.history.push("/inicio");
+      window.location = "/inicio";
+    }
+
+    if (mensaje) {
+      mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }
+    // eslint-disable-next-line
+  }, [mensaje, autenticado, props.history]);
+
+  // State para iniciar sesión
   const [usuario, guardarUsuario] = useState({
-    correo: "",
+    user: "",
     password: "",
   });
 
-  //Extraer de usuario
-  const { correo, password } = usuario;
+  // extraer de usuario
+  const { user, password } = usuario;
 
   const onChange = (e) => {
     guardarUsuario({
@@ -17,29 +39,37 @@ const Login = () => {
     });
   };
 
-  //Cuando el usuario quiera iniciar sesión
+  // Cuando el usuario quiere iniciar sesión
   const onSubmit = (e) => {
     e.preventDefault();
 
-    //Validar que no haya campos vacios
+    // Validar que no haya campos vacios
+    if (user.trim() === "" || password.trim() === "") {
+      mostrarAlerta("Todos los campos son obligatorios", "alerta-error");
+    }
 
-    //Pasarlo al action
+    // Pasarlo al action
+    iniciarSesion({ usernameUs: user, contrasenaUs: password });
   };
 
   return (
     <div className="form-usuario">
-      <div className="contenedor-form sonbra-dark">
+      {alerta ? (
+        <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>
+      ) : null}
+
+      <div className="contenedor-form sombra-dark">
         <h1>Iniciar Sesión</h1>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="campo-form">
-            <label htmlFor="email">Correo</label>
+            <label htmlFor="user">Usuario</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Tu Correo"
-              value={correo}
+              type="text"
+              id="user"
+              name="user"
+              placeholder="Tu Usuario"
+              value={user}
               onChange={onChange}
             />
           </div>

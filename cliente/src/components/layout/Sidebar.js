@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -9,18 +10,42 @@ const Sidebar = ({ query }) => {
     mostrarAgregarCliente,
     mostrarActualizarCliente,
     eliminarCliente,
+    obtenerDatosActualizar,
     cedulaObte,
-    actualizarCliente,
   } = clienteContext;
 
   //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
   const clienteEliminar = () => {
-    eliminarCliente(cedulaObte);
+    if (cedulaObte !== null) {
+      eliminarCliente(cedulaObte);
+      swal({
+        title: " Muy Bien",
+        text: "Cliente eliminado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
+    } else {
+      swal({
+        title: "Seleccione un Cliente",
+        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        icon: "warning",
+        button: "Aceptar",
+      });
+    }
   };
 
   const actualizar = () => {
-    mostrarActualizarCliente();
-    actualizarCliente(cedulaObte);
+    if (cedulaObte !== null) {
+      obtenerDatosActualizar(cedulaObte);
+      mostrarActualizarCliente();
+    } else {
+      swal({
+        title: "Seleccione un Cliente",
+        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        icon: "warning",
+        button: "Aceptar",
+      });
+    }
   };
 
   switch (query) {

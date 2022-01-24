@@ -10,7 +10,7 @@ const Tabla = ({ clientes }) => {
   const { obtenerCedulaCliente } = clienteContext;
 
   const capturarCedula = (clientes) => {
-    obtenerCedulaCliente(clientes.cedula);
+    obtenerCedulaCliente(clientes.cedulaCli);
   };
 
   return (
@@ -23,12 +23,14 @@ const Tabla = ({ clientes }) => {
           onClick={() => capturarCedula(clientes)}
         />
       </th>
-      <td>{clientes.cedula}</td>
-      <td>{clientes.nombre}</td>
-      <td>{clientes.direccion}</td>
-      <td>{clientes.telefono}</td>
-      <td>{clientes.correo}</td>
-      <td>{clientes.fecha}</td>
+      <td>{clientes.cedulaCli}</td>
+      <td>{clientes.nombreCli}</td>
+      <td>{clientes.direccionCli}</td>
+      <td>{clientes.celularCli}</td>
+      <td>{clientes.correoCli}</td>
+      <td>
+        {clientes.fechNac !== null ? clientes.fechNac.substring(0, 10) : null}
+      </td>
     </tr>
   );
 };
