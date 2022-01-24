@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -14,17 +15,19 @@ const Editar = ({ titulo, clientes }) => {
     cerrarAgregarCliente,
     agregarCliente,
     datoActualizar,
+    actualizarCliente,
+    cedulaObte,
     mostarActualizar,
   } = clienteContext;
 
   //State para agregar cliente
   const [cliente, guardarCliente] = useState({
-    cedula: "",
-    nombre: "",
-    direccion: "",
-    telefono: "",
-    correo: "",
-    fecha: "",
+    cedulaCli: "",
+    nombreCli: "",
+    direccionCli: "",
+    celularCli: "",
+    correoCli: "",
+    fechNac: "",
   });
 
   //Extraer de agregar cliente
@@ -57,6 +60,8 @@ const Editar = ({ titulo, clientes }) => {
   const onSubmitCLiente = (e) => {
     e.preventDefault();
 
+    cambiarCedulaV({ campo: datoActualizar[0].nombreCli, valido: true });
+
     if (
       cedulaV.valido === true &&
       nombreV.valido === true &&
@@ -66,18 +71,45 @@ const Editar = ({ titulo, clientes }) => {
       fechaV.valido === true
     ) {
       cambiarFormularioV(true);
-      setTimeout(
-        () =>
-          agregarCliente({
-            cedula: cedulaV.campo,
-            nombre: nombreV.campo,
-            direccion: direccionV.campo,
-            telefono: telefonoV.campo,
-            correo: correoV.campo,
-            fecha: fechaV.campo,
-          }),
-        3000
-      );
+      if (!mostarActualizar) {
+        swal({
+          title: " Muy Bien",
+          text: "Cliente ingresado exitosamente",
+          icon: "success",
+          timer: "3000",
+        });
+        setTimeout(
+          () =>
+            agregarCliente({
+              cedulaCli: cedulaV.campo,
+              nombreCli: nombreV.campo,
+              direccionCli: direccionV.campo,
+              celularCli: telefonoV.campo,
+              correoCli: correoV.campo,
+              fechNac: fechaV.campo,
+            }),
+          3000
+        );
+      } else {
+        swal({
+          title: " Muy Bien",
+          text: "Cliente actualizado exitosamente",
+          icon: "success",
+          timer: "3000",
+        });
+        setTimeout(
+          () =>
+            actualizarCliente({
+              cedulaCli: cedulaV.campo,
+              nombreCli: nombreV.campo,
+              direccionCli: direccionV.campo,
+              celularCli: telefonoV.campo,
+              correoCli: correoV.campo,
+              fechNac: fechaV.campo,
+            }),
+          3000
+        );
+      }
 
       cambiarCedulaV({ campo: "", valido: null });
       cambiarNombreV({ campo: "", valido: null });
@@ -103,14 +135,17 @@ const Editar = ({ titulo, clientes }) => {
 
   if (mostarActualizar) {
     dCedula = {
-      campo: datoActualizar[0].cedula,
-      valido: null,
+      campo: datoActualizar[0].cedulaCli,
+      valido: true,
     };
-    dNombre = { campo: datoActualizar[0].nombre, valido: null };
-    dDireccion = { campo: datoActualizar[0].direccion, valido: null };
-    dTelefomo = { campo: datoActualizar[0].telefono, valido: null };
-    dCorreo = { campo: datoActualizar[0].correo, valido: null };
-    dFecha = { campo: datoActualizar[0].fecha, valido: null };
+    dNombre = { campo: datoActualizar[0].nombreCli, valido: true };
+    dDireccion = { campo: datoActualizar[0].direccionCli, valido: true };
+    dTelefomo = { campo: datoActualizar[0].celularCli, valido: true };
+    dCorreo = { campo: datoActualizar[0].correoCli, valido: true };
+    dFecha = {
+      campo: datoActualizar[0].fechNac.substring(0, 10),
+      valido: true,
+    };
   }
 
   return (
@@ -215,9 +250,6 @@ const Editar = ({ titulo, clientes }) => {
               value="Ingresar"
             />
           </div>
-          {formularioV === true && (
-            <p className="exito">Cliente ingresado exitosamente!</p>
-          )}
         </form>
       </div>
     </div>

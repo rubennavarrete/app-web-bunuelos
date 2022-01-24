@@ -15,8 +15,14 @@ import lupa from "../../assets/lupa.svg";
 const Clientes = () => {
   //Obtener las funcnciones del context de clientes
   const clienteContext = useContext(clientesContext);
-  const { agregar, clientes, obtenerClientes, mostarActualizar } =
-    clienteContext;
+  const {
+    agregar,
+    clientes,
+    obtenerClientes,
+    mostarActualizar,
+    cedulaObte,
+    agregarCliente,
+  } = clienteContext;
 
   //Obtener clientes cuando carga el componente
   useEffect(() => {
@@ -58,7 +64,7 @@ const Clientes = () => {
                   <tbody>
                     {clientes
                       ? clientes.map((item) => {
-                          return <Tabla key={item.cedula} clientes={item} />;
+                          return <Tabla key={item.cedulaCli} clientes={item} />;
                         })
                       : null}
                   </tbody>

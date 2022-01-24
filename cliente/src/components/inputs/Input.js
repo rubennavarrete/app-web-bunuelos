@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import clientesContext from "../../context/Clientes/clientesContext";
 
 import ValidarCedula from "../../utils/validarCedula";
 
@@ -12,19 +14,18 @@ const Input = ({
   type,
   name,
   placeholder,
-  mostarActualizar,
   leyenda,
   expressionRegular,
   tipoExpresion,
 }) => {
+  const clienteContext = useContext(clientesContext);
+  const { mostarActualizar } = clienteContext;
+
   const onChange = (e) => {
-    console.log("Estaso objeto: ", estado);
-    if (e.target.value === "") {
-      console.log("Esta bacio: ");
-      cambiarEstado({ ...estado, campo: null });
+    if (e.target.value.length === 1) {
+      cambiarEstado({ ...estado, campo: "" });
     } else {
       cambiarEstado({ ...estado, campo: e.target.value });
-      console.log("onchange: ", e.target.value);
     }
   };
 
@@ -74,6 +75,9 @@ const Input = ({
           onChange={onChange}
           onKeyUp={validacion} //propiedad que ejecuta una funcion cuando precionamos una tecla y la soltamos
           onBlur={validacion} // propiedad que ejecuta una funcion cuando damos clik fuera del imput
+          disabled={
+            mostarActualizar ? (name === "cedula" ? true : false) : null
+          }
         />
         <img
           className={`${

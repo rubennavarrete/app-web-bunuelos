@@ -7,6 +7,7 @@ import {
   ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
+  OBTENER_DATOS_ACTUALIZAR,
 } from "../../types";
 
 export default (state, action) => {
@@ -40,23 +41,30 @@ export default (state, action) => {
         clientes: [...state.clientes, action.payload],
         agregarCliente: true,
       };
+    case ACTUALIZAR_CLIENTE:
+      return {
+        ...state,
+        clientes: [...state.clientes, action.payload],
+        agregarCliente: true,
+      };
     case ELIMINAR_CLIENTE:
       return {
         ...state,
         clientes: state.clientes.filter(
           (cliente) => cliente.cedula !== action.payload
         ),
+        cedulaObte: null,
       };
     case OBTENER_CEDULA:
       return {
         ...state,
         cedulaObte: action.payload,
       };
-    case ACTUALIZAR_CLIENTE:
+    case OBTENER_DATOS_ACTUALIZAR:
       return {
         ...state,
         datoActualizar: state.clientes.filter(
-          (cliente) => cliente.cedula === action.payload
+          (cliente) => cliente.cedulaCli === action.payload
         ),
       };
     default:

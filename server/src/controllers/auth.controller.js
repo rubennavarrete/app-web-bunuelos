@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 export const autenticarUsuario = async (req, res) => {
   const { usernameUs, contrasenaUs } = req.body;
 
+  console.log("req.body", req.body);
+
   //Revisamos que los campos del formulario de login no esten vacios
   if (usernameUs == null || contrasenaUs == null) {
     return res.status(400).json({
@@ -34,9 +36,9 @@ export const autenticarUsuario = async (req, res) => {
     }
 
     const datos = {
-      usernameUs: user.usernameUs,
       nombreUS: user.nombreUS,
       tipoUs: user.tipoUs,
+      urImgUs: user.urImgUs,
     };
 
     const token = jwt.sign(datos, process.env.SECRETA, {
@@ -48,7 +50,7 @@ export const autenticarUsuario = async (req, res) => {
         expires: new Date(Date.now() + 9999999),
         httpOnly: false,
       })
-      .send({ user, token: token });
+      .send({ user: datos, token: token });
   } catch (error) {
     res.json({ msg: error });
   }

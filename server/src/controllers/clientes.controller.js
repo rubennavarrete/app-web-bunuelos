@@ -4,21 +4,23 @@ import validar from "../services/auth.service";
 
 // Este metodo nos trae todos los clientes de la base de datos
 export const obtenerClientes = async (req, res) => {
-  const cookies = req.headers.cookie;
-  if (!cookies)
-    return res.json({ msg: "No tienes autorizacion para ver esto" });
-  const validToken = cookies.split("=")[1];
-  if (validToken) {
-    try {
-      const pool = await getConnection();
-      const result = await pool.request().query(queries.obtenerClientes);
-      res.json(result.recordset);
-    } catch (error) {
-      res.status(500);
-      res.send(error.message);
-    }
-  } else {
-    res.json({ msg: "No tienes autorizacion para ver esto" });
+  // const cookies = req.headers.cookie;
+  // if (!cookies)
+  //   return res.json({ msg: "No tienes autorizacion para ver esto" });
+  // const validToken = cookies.split("=")[1];
+  // if (validToken) {
+
+  // } else {
+  //   res.json({ msg: "No tienes autorizacion para ver esto" });
+  // }
+
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(queries.obtenerClientes);
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
   }
 };
 

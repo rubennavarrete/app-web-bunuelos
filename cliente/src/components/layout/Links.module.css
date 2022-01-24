@@ -12,3 +12,13 @@
 .links h2 {
   font-weight: bold;
 }
+
+.user {
+  font-size: 22px;
+}
+
+.user img {
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+}

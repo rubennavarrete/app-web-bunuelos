@@ -7,80 +7,16 @@ import {
   CERRAR_AGREGAR_CLIENTE,
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
+  OBTENER_DATOS_ACTUALIZAR,
   MOSTRAR_ACTUALIZAR_CLIENTE,
   ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
 } from "../../types";
 
-const ClienteState = (props) => {
-  const clientes = [
-    {
-      cedula: "0302304342",
-      nombre: "Perea Salasar",
-      direccion: "Santa Marianita",
-      telefono: "0934345843",
-      correo: "b@b.com",
-      fecha: "2000-02-23",
-    },
-    {
-      cedula: "0604855866",
-      nombre: "Santy Guaylla",
-      direccion: "España",
-      telefono: "0984242647",
-      correo: "santyguaylla@gmail.com",
-      fecha: "2000-12-31",
-    },
-    {
-      cedula: "0803051150",
-      nombre: "Ruben Valencia",
-      direccion: "Av 11 de noviembre",
-      telefono: "0962739354",
-      correo: "rd_navarrete@outlook.com",
-      fecha: "1987-12-09",
-    },
-    {
-      cedula: "0803229525",
-      nombre: "Luis Robles",
-      direccion: "En la esquina",
-      telefono: "0948567363",
-      correo: "a@a.com",
-      fecha: "2000-01-01",
-    },
-    {
-      cedula: "0803229533",
-      nombre: "Leonel Robles",
-      direccion: "Tonsupa",
-      telefono: "0934873461",
-      correo: "b@b.ec",
-      fecha: "2000-01-02",
-    },
-    {
-      cedula: "0834237467",
-      nombre: "Milton Cava",
-      direccion: "Sucre y Mexico",
-      telefono: "0923473234",
-      correo: "dsf@wer.com",
-      fecha: "",
-    },
-    {
-      cedula: "1234567890",
-      nombre: "Anastasia Gonzales",
-      direccion: "Milton Reyes y la 11",
-      telefono: "0981748550",
-      correo: "ansgzls@gmail.com",
-      fecha: "2000-01-03",
-    },
-    {
-      cedula: "1712886470",
-      nombre: "Angela Zambrano",
-      direccion: "El Carmen",
-      telefono: "092145697",
-      correo: "zamangel@gmail.com",
-      fecha: "1985-01-03",
-    },
-  ];
+import clienteAxios from "../../config/axios";
 
+const ClienteState = (props) => {
   const initialState = {
     clientes: [],
     agregarCliente: true,
@@ -112,14 +48,27 @@ const ClienteState = (props) => {
     });
   };
 
+  const obtenerDatosActualizar = (ci) => {
+    dispach({
+      type: OBTENER_DATOS_ACTUALIZAR,
+      payload: ci,
+    });
+  };
+
   // Funciones para el CRUD
 
   // Obtener los datos de clientes
-  const obtenerClientes = () => {
-    dispach({
-      type: OBTENER_CLIENTES,
-      payload: clientes,
-    });
+  const obtenerClientes = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/clientes");
+
+      dispach({
+        type: OBTENER_CLIENTES,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const obtenerCedulaCliente = (cedula) => {
@@ -130,28 +79,53 @@ const ClienteState = (props) => {
   };
 
   // Agregar un nuevo cliente
-  const agregarCliente = (clientes) => {
-    // Insertar el proyecto en el state
-    dispach({
-      type: AGREGAR_CLIENTE,
-      payload: clientes,
-    });
+  const agregarCliente = async (clientes) => {
+    // Insertar al cliente en el state
+
+    try {
+      const resultado = await clienteAxios.post("/api/clientes", clientes);
+      console.log(resultado);
+
+      dispach({
+        type: AGREGAR_CLIENTE,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Edita o modica un cliente
-  const actualizarCliente = (ci) => {
-    dispach({
-      type: ACTUALIZAR_CLIENTE,
-      payload: ci,
-    });
+  const actualizarCliente = async (ci) => {
+    console.log("ci", ci.cedulaCli);
+
+    try {
+      const resultado = await clienteAxios.put(
+        `/api/clientes/${ci.cedulaCli}`,
+        ci
+      );
+      console.log("resultado", resultado);
+      dispach({
+        type: ACTUALIZAR_CLIENTE,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Eliminar un cliente por su numero de cedula
-  const eliminarCliente = (ci) => {
-    dispach({
-      type: ELIMINAR_CLIENTE,
-      payload: ci,
-    });
+  const eliminarCliente = async (ci) => {
+    try {
+      await clienteAxios.delete(`/api/clientes/${ci}`);
+
+      dispach({
+        type: ELIMINAR_CLIENTE,
+        payload: ci,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -171,6 +145,7 @@ const ClienteState = (props) => {
         agregarCliente,
         actualizarCliente,
         obtenerCedulaCliente,
+        obtenerDatosActualizar,
         eliminarCliente,
       }}
     >
