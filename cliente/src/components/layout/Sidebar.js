@@ -73,9 +73,20 @@ const Sidebar = ({ query }) => {
     case "/productos":
       return (
         <div className="crud">
-          <h2>Ingresar</h2>
-          <h2>Modificar</h2>
-          <h2>Eliminar</h2>
+          <button
+            className="button button2"
+            // onClick={() => mostrarAgregarCliente()}
+          >
+            Ingresar
+          </button>
+          <button className="button button2" /*onClick={() => actualizar()}*/>
+            Actualizar
+          </button>
+          <button
+            className="button button2" /*onClick={() => clienteEliminar()}*/
+          >
+            Eliminar
+          </button>
         </div>
       );
 

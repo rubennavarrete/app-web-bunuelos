@@ -23,6 +23,7 @@ const ClienteState = (props) => {
     cerrarAgregarCliente: false,
     mostrarActualizarCliente: false,
     cedulaObte: null,
+    buscarT: null,
     datoActualizar: null,
   };
 
@@ -55,6 +56,14 @@ const ClienteState = (props) => {
     });
   };
 
+  // const obtenerCedulaAbuscar = (ci) => {
+  //   console.log("% Buscar %: ", ci);
+  //   dispach({
+  //     type: BUSCAR,
+  //     payload: ci,
+  //   });
+  // };
+
   // Funciones para el CRUD
 
   // Obtener los datos de clientes
@@ -62,6 +71,21 @@ const ClienteState = (props) => {
     try {
       const resultado = await clienteAxios.get("/api/clientes");
 
+      dispach({
+        type: OBTENER_CLIENTES,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const buscar = async (ci) => {
+    try {
+      const resultado = await clienteAxios.get(
+        `/api/clientes/buscar/${ci ? ci : "null"}`
+      );
+      console.log("% resultado Buscar %: ", resultado);
       dispach({
         type: OBTENER_CLIENTES,
         payload: resultado.data,
@@ -98,11 +122,21 @@ const ClienteState = (props) => {
   // Edita o modica un cliente
   const actualizarCliente = async (ci) => {
     console.log("ci", ci.cedulaCli);
+    console.log("datos", ci);
+    const datosA = {
+      nombreCli: ci.nombreCli,
+      direccionCli: ci.direccionCli,
+      celularCli: ci.celularCli,
+      correoCli: ci.correoCli,
+      fechNac: ci.fechNac,
+    };
+
+    console.log("datosA", datosA);
 
     try {
       const resultado = await clienteAxios.put(
         `/api/clientes/${ci.cedulaCli}`,
-        ci
+        datosA
       );
       console.log("resultado", resultado);
       dispach({
@@ -137,8 +171,11 @@ const ClienteState = (props) => {
         agregar: state.agregarCliente,
         mostarActualizar: state.mostrarActualizarCliente,
         cedulaObte: state.cedulaObte,
+        buscarT: state.buscarT,
         datoActualizar: state.datoActualizar,
         mostrarAgregarCliente,
+        buscar,
+        // obtenerCedulaAbuscar,
         cerrarAgregarCliente,
         mostrarActualizarCliente,
         obtenerClientes,

@@ -8,6 +8,8 @@ import {
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
   OBTENER_DATOS_ACTUALIZAR,
+  // BUSCAR,
+  // OBTENER_BUSQUEDA,
 } from "../../types";
 
 export default (state, action) => {
@@ -17,6 +19,7 @@ export default (state, action) => {
         ...state,
         agregarCliente: false,
         mostrarActualizarCliente: false,
+        buscarT: false,
       };
     case CERRAR_AGREGAR_CLIENTE:
       return {
@@ -29,6 +32,7 @@ export default (state, action) => {
         agregarCliente: false,
         cerrarAgregarCliente: false,
         mostrarActualizarCliente: true,
+        buscarT: true,
       };
     case OBTENER_CLIENTES:
       return {
@@ -36,10 +40,12 @@ export default (state, action) => {
         clientes: action.payload,
       };
     case AGREGAR_CLIENTE:
+      // case OBTENER_BUSQUEDA:
       return {
         ...state,
         clientes: [...state.clientes, action.payload],
         agregarCliente: true,
+        buscarT: false,
       };
     case ACTUALIZAR_CLIENTE:
       return {
@@ -55,6 +61,11 @@ export default (state, action) => {
         ),
         cedulaObte: null,
       };
+    // case BUSCAR:
+    //   return {
+    //     ...state,
+    //     buscarT: action.payload,
+    //   };
     case OBTENER_CEDULA:
       return {
         ...state,

@@ -22,11 +22,7 @@ const Input = ({
   const { mostarActualizar } = clienteContext;
 
   const onChange = (e) => {
-    if (e.target.value.length === 1) {
-      cambiarEstado({ ...estado, campo: "" });
-    } else {
-      cambiarEstado({ ...estado, campo: e.target.value });
-    }
+    cambiarEstado({ ...estado, campo: e.target.value });
   };
 
   const validacion = () => {
