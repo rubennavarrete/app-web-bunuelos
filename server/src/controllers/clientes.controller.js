@@ -78,6 +78,25 @@ export const obtenerCliente = async (req, res) => {
   res.send(result.recordset[0]);
 };
 
+// Con este nmetodo es para buscar los valores que coincidan
+export const buscar = async (req, res) => {
+  const { cedulaCli } = req.params;
+  let result;
+  console.log("cedulaCli", cedulaCli);
+  const pool = await getConnection();
+  if (cedulaCli !== "null") {
+    result = await pool
+      .request()
+      .input("cedulaCli", cedulaCli)
+      .query("Select * from Cliente where cedulaCli LIKE '" + cedulaCli + "%'");
+  } else {
+    result = await pool.request().query(queries.obtenerClientes);
+  }
+
+  console.log("result", result);
+  res.send(result.recordset);
+};
+
 // Con este nmetodo se busca y elimina a un cliente por su cedula
 export const eliminarCliente = async (req, res) => {
   const { cedulaCli } = req.params;
@@ -97,16 +116,16 @@ export const numeroTotalClientes = async (req, res) => {
   console.log(result);
   res.json(result.recordset[0][""]);
 };
-/*
+
 export const actualizarCliente = async (req, res) => {
   const { nombreCli, direccionCli, celularCli, correoCli, fechNac } = req.body;
-
+  console.log(nombreCli, direccionCli, celularCli, correoCli, fechNac);
   const { cedulaCli } = req.params;
   if (
     nombreCli == null ||
     direccionCli == null ||
     celularCli == null ||
-    correoCli == null 
+    correoCli == null
   ) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
@@ -133,44 +152,44 @@ export const actualizarCliente = async (req, res) => {
     correoCli,
     fechNac,
   });
-};*/
-export const modificarCliente = async (req, res) => {
-
-  //llega desde el formulario
-  const { nombre, direccion, celular, correoCli, fecN } = req.body;
-  console.log(nombre, direccion, celular, correoCli, fecN);
-  //viene desde el interno
-  const { cedula } = req.params;
-//desde el body
-  if (
-    nombre == null ||
-    direccion == null ||
-    celular == null ||
-    correoCli == null
-  ) {
-    return res.status(400).json({
-      msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
-    });
-  }
-
-  const pool = await getConnection();
-
-  await pool
-    .request()
-    .input("cedula", sql.VarChar, cedula)
-    .input("nombre", sql.VarChar, nombre)
-    .input("direccion", sql.VarChar, direccion)
-    .input("celular", sql.VarChar, celular)
-    .input("correoCli", sql.VarChar, correoCli)
-    .input("fecN", sql.Date, fecN)
-    .query(queries.modificarCliente);
-
-  res.json({
-    cedula, 
-    nombre, 
-    direccion, 
-    celular, 
-    correoCli, 
-    fecN
-  });
 };
+
+// export const modificarCliente = async (req, res) => {
+//   //llega desde el formulario
+//   const { nombre, direccion, celular, correoCli, fecN } = req.body;
+//   console.log(nombre, direccion, celular, correoCli, fecN);
+//   //viene desde el interno
+//   const { cedula } = req.params;
+//   //desde el body
+//   if (
+//     nombre == null ||
+//     direccion == null ||
+//     celular == null ||
+//     correoCli == null
+//   ) {
+//     return res.status(400).json({
+//       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
+//     });
+//   }
+
+//   const pool = await getConnection();
+
+//   await pool
+//     .request()
+//     .input("cedula", sql.VarChar, cedula)
+//     .input("nombre", sql.VarChar, nombre)
+//     .input("direccion", sql.VarChar, direccion)
+//     .input("celular", sql.VarChar, celular)
+//     .input("correoCli", sql.VarChar, correoCli)
+//     .input("fecN", sql.Date, fecN)
+//     .query(queries.modificarCliente);
+
+//   res.json({
+//     cedula,
+//     nombre,
+//     direccion,
+//     celular,
+//     correoCli,
+//     fecN,
+//   });
+// };
