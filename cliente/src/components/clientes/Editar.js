@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
@@ -8,7 +8,7 @@ import Input from "../inputs/Input";
 // importe de iconos
 import alertaTriangulo from "../../assets/alert.svg";
 
-const Editar = ({ titulo, clientes }) => {
+const Editar = ({ titulo }) => {
   //Cambiar el stado del boton agregar
   const clienteContext = useContext(clientesContext);
   const {
@@ -16,7 +16,6 @@ const Editar = ({ titulo, clientes }) => {
     agregarCliente,
     datoActualizar,
     actualizarCliente,
-    cedulaObte,
     mostarActualizar,
   } = clienteContext;
 
@@ -33,13 +32,6 @@ const Editar = ({ titulo, clientes }) => {
   //Extraer de agregar cliente
   // const { cedula, nombre, direccion, telefono, correo, fecha } = cliente;
 
-  const onChangeAgregar = (e) => {
-    guardarCliente({
-      ...cliente,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   //State para validar los campos del componente input
   const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
   const [nombreV, cambiarNombreV] = useState({ campo: "", valido: null });
@@ -49,18 +41,20 @@ const Editar = ({ titulo, clientes }) => {
   const [fechaV, cambiarFechaV] = useState({ campo: "", valido: null });
   const [formularioV, cambiarFormularioV] = useState(null);
 
-  let dCedula = { campo: "", valido: null };
-  let dNombre = { campo: "", valido: null };
-  let dDireccion = { campo: "", valido: null };
-  let dTelefomo = { campo: "", valido: null };
-  let dCorreo = { campo: "", valido: null };
-  let dFecha = { campo: "", valido: null };
-
   //Para agregaar un nuevo cliente
   const onSubmitCLiente = (e) => {
     e.preventDefault();
 
-    cambiarCedulaV({ campo: datoActualizar[0].nombreCli, valido: true });
+    if (mostarActualizar) {
+      cambiarCedulaV({ campo: datoActualizar[0].cedulaCli, valido: true });
+    }
+
+    console.log("Cambio cedulaV.valido a: ", cedulaV.valido);
+    console.log("Cambio nombreV.valido a: ", nombreV.valido);
+    console.log("Cambio direccionV.valido a: ", direccionV.valido);
+    console.log("Cambio telefonoV.valido a: ", telefonoV.valido);
+    console.log("Cambio correoV.valido a: ", correoV.valido);
+    console.log("Cambio fechaV.valido a: ", fechaV.valido);
 
     if (
       cedulaV.valido === true &&
@@ -71,6 +65,7 @@ const Editar = ({ titulo, clientes }) => {
       fechaV.valido === true
     ) {
       cambiarFormularioV(true);
+      console.log("Cambio formularioV a: ", formularioV);
       if (!mostarActualizar) {
         swal({
           title: " Muy Bien",
@@ -120,6 +115,7 @@ const Editar = ({ titulo, clientes }) => {
       //agregar al State
     } else {
       cambiarFormularioV(false);
+      console.log("Cambio formularioV a: ", formularioV);
       setTimeout(() => cambiarFormularioV(null), 4000);
     }
   };
@@ -133,20 +129,23 @@ const Editar = ({ titulo, clientes }) => {
     fecha: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
   };
 
-  if (mostarActualizar) {
-    dCedula = {
-      campo: datoActualizar[0].cedulaCli,
-      valido: true,
-    };
-    dNombre = { campo: datoActualizar[0].nombreCli, valido: true };
-    dDireccion = { campo: datoActualizar[0].direccionCli, valido: true };
-    dTelefomo = { campo: datoActualizar[0].celularCli, valido: true };
-    dCorreo = { campo: datoActualizar[0].correoCli, valido: true };
-    dFecha = {
-      campo: datoActualizar[0].fechNac.substring(0, 10),
-      valido: true,
-    };
-  }
+  useEffect(() => {
+    if (mostarActualizar) {
+      cambiarCedulaV({ campo: datoActualizar[0].cedulaCli, valido: true });
+      cambiarNombreV({ campo: datoActualizar[0].nombreCli, valido: true });
+      cambiarDireccionV({
+        campo: datoActualizar[0].direccionCli,
+        valido: true,
+      });
+      cambiarTelefonoV({ campo: datoActualizar[0].celularCli, valido: true });
+      cambiarCorreoV({ campo: datoActualizar[0].correoCli, valido: true });
+      cambiarFechaV({
+        campo: datoActualizar[0].fechNac.substring(0, 10),
+        valido: true,
+      });
+      console.log("En el useEffect");
+    }
+  }, []);
 
   return (
     <div className="form-usuario">
@@ -164,73 +163,67 @@ const Editar = ({ titulo, clientes }) => {
 
         <form className="formulario-nuevo-cliente" onSubmit={onSubmitCLiente}>
           <Input
-            estado={cedulaV.campo ? cedulaV : dCedula}
+            estado={cedulaV}
             cambiarEstado={cambiarCedulaV}
             label="Cédula"
             type="text"
             name="cedula"
             placeholder="Ingrese la cédula..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Esta cédula no pertenece a ninguna región "
             expressionRegular={expresiones.cedula}
             tipoExpresion="1"
           />
           <Input
-            estado={nombreV.campo ? nombreV : dNombre}
+            estado={nombreV}
             cambiarEstado={cambiarNombreV}
             label="Nombre"
             type="text"
             name="nombre"
             placeholder="Ingrese el nombre..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="El nombre debe tener de 4 a 20 caracteres y solo puede contener letras y espacios"
             expressionRegular={expresiones.nombre}
             tipoExpresion="2"
           />
           <Input
-            estado={direccionV.campo ? direccionV : dDireccion}
+            estado={direccionV}
             cambiarEstado={cambiarDireccionV}
             label="Dirección"
             type="text"
             name="direccion"
             placeholder="Ingrese el dirección..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="La dirección debe tener de 4 a 50 caracteres y solo puede contener letras, números y espacios"
             expressionRegular={expresiones.direccion}
             tipoExpresion="2"
           />
           <Input
-            estado={telefonoV.campo ? telefonoV : dTelefomo}
+            estado={telefonoV}
             cambiarEstado={cambiarTelefonoV}
             label="Teléfono"
             type="text"
             name="telefono"
             placeholder="Ingrese el teléfono..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="El teléfono debe de ser de 8 a 10 dígitos y solo puede contener números enteros positivos"
             expressionRegular={expresiones.telefono}
             tipoExpresion="2"
           />
           <Input
-            estado={correoV.campo ? correoV : dCorreo}
+            estado={correoV}
             cambiarEstado={cambiarCorreoV}
             label="Correo"
             type="email"
             name="correo"
             placeholder="Ingrese el correo..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Se espera una '@'"
             expressionRegular={expresiones.correo}
             tipoExpresion="2"
           />
           <Input
-            estado={fechaV.campo ? fechaV : dFecha}
+            estado={fechaV}
             cambiarEstado={cambiarFechaV}
             label="Fecha de nacimiento"
             type="text"
             name="fecha"
             placeholder="Ingrese la fecha de nacimiento..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Ingrese una fecha con el siguiente formato yyyy-mm-dd"
             expressionRegular={expresiones.fecha}
             tipoExpresion="2"

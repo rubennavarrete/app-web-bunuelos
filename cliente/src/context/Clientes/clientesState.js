@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import swal from "sweetalert";
 
 import clienteContext from "./clientesContext";
 import clientesReducer from "./clientesReducer";
@@ -23,6 +24,7 @@ const ClienteState = (props) => {
     cerrarAgregarCliente: false,
     mostrarActualizarCliente: false,
     cedulaObte: null,
+    buscarT: null,
     datoActualizar: null,
   };
 
@@ -55,6 +57,14 @@ const ClienteState = (props) => {
     });
   };
 
+  // const obtenerCedulaAbuscar = (ci) => {
+  //   console.log("% Buscar %: ", ci);
+  //   dispach({
+  //     type: BUSCAR,
+  //     payload: ci,
+  //   });
+  // };
+
   // Funciones para el CRUD
 
   // Obtener los datos de clientes
@@ -67,7 +77,22 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No pudimos obtener la informacion los Clientes", "error");
+    }
+  };
+
+  const buscar = async (ci) => {
+    try {
+      const resultado = await clienteAxios.get(
+        `/api/clientes/buscar/${ci ? ci : "null"}`
+      );
+      console.log("% resultado Buscar %: ", resultado);
+      dispach({
+        type: OBTENER_CLIENTES,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      swal("¡Ups!", "El cliente que buscas no existe!", "error");
     }
   };
 
@@ -91,18 +116,28 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No se puede agregar a este cliente", "error");
     }
   };
 
   // Edita o modica un cliente
   const actualizarCliente = async (ci) => {
     console.log("ci", ci.cedulaCli);
+    console.log("datos", ci);
+    const datosA = {
+      nombreCli: ci.nombreCli,
+      direccionCli: ci.direccionCli,
+      celularCli: ci.celularCli,
+      correoCli: ci.correoCli,
+      fechNac: ci.fechNac,
+    };
+
+    console.log("datosA", datosA);
 
     try {
       const resultado = await clienteAxios.put(
         `/api/clientes/${ci.cedulaCli}`,
-        ci
+        datosA
       );
       console.log("resultado", resultado);
       dispach({
@@ -110,7 +145,11 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal(
+        "¡Ups!",
+        "No se puede actualizar la informacion de este cliente",
+        "error"
+      );
     }
   };
 
@@ -123,8 +162,15 @@ const ClienteState = (props) => {
         type: ELIMINAR_CLIENTE,
         payload: ci,
       });
+
+      swal({
+        title: " Muy Bien",
+        text: "Cliente eliminado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No se puede eliminar a este cliente", "error");
     }
   };
 
@@ -137,8 +183,11 @@ const ClienteState = (props) => {
         agregar: state.agregarCliente,
         mostarActualizar: state.mostrarActualizarCliente,
         cedulaObte: state.cedulaObte,
+        buscarT: state.buscarT,
         datoActualizar: state.datoActualizar,
         mostrarAgregarCliente,
+        buscar,
+        // obtenerCedulaAbuscar,
         cerrarAgregarCliente,
         mostrarActualizarCliente,
         obtenerClientes,

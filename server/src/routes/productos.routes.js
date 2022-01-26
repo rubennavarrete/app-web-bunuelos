@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { 
-    obtenerProductos, 
-    ingresarProducto,
-    editarProducto,
-    borrarProducto,
-    buscarProducto,
+import {
+  obtenerProductos,
+  ingresarProducto,
+  editarProducto,
+  borrarProducto,
+  buscarProducto,
 } from "../controllers/productos.cotroller";
 
 const router = Router();
@@ -17,6 +17,6 @@ router.put("/productos/:codProducto", editarProducto);
 
 router.delete("/productos/:codProducto", borrarProducto);
 
-router.get("/productos/:codProducto", buscarProducto);
+router.get("/productos/buscar/:codProducto", buscarProducto);
 
 export default router;

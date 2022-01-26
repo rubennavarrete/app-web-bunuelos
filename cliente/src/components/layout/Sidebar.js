@@ -17,12 +17,15 @@ const Sidebar = ({ query }) => {
   //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
   const clienteEliminar = () => {
     if (cedulaObte !== null) {
-      eliminarCliente(cedulaObte);
       swal({
-        title: " Muy Bien",
-        text: "Cliente eliminado exitosamente",
-        icon: "success",
-        timer: "3000",
+        title: "Está seguro?",
+        text: "¿Estás seguro de que quieres eliminar este Cliente?",
+        icon: "warning",
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          eliminarCliente(cedulaObte);
+        }
       });
     } else {
       swal({
@@ -73,9 +76,20 @@ const Sidebar = ({ query }) => {
     case "/productos":
       return (
         <div className="crud">
-          <h2>Ingresar</h2>
-          <h2>Modificar</h2>
-          <h2>Eliminar</h2>
+          <button
+            className="button button2"
+            // onClick={() => mostrarAgregarCliente()}
+          >
+            Ingresar
+          </button>
+          <button className="button button2" /*onClick={() => actualizar()}*/>
+            Actualizar
+          </button>
+          <button
+            className="button button2" /*onClick={() => clienteEliminar()}*/
+          >
+            Eliminar
+          </button>
         </div>
       );
 

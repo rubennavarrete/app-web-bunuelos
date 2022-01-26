@@ -36,5 +36,5 @@ Content-Type: application/json
 ### Eliminando un producto por su código de producto  
 DELETE {{api}}/AA06
 
-### Obteniendo un cliente por su numero de cedula 
-GET {{api}}/AA01
+### Obteniendo todos los productos que coinciden con la entrada 
+GET {{api}}/buscar/A
