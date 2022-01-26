@@ -17,12 +17,15 @@ const Sidebar = ({ query }) => {
   //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
   const clienteEliminar = () => {
     if (cedulaObte !== null) {
-      eliminarCliente(cedulaObte);
       swal({
-        title: " Muy Bien",
-        text: "Cliente eliminado exitosamente",
-        icon: "success",
-        timer: "3000",
+        title: "Está seguro?",
+        text: "¿Estás seguro de que quieres eliminar este Cliente?",
+        icon: "warning",
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          eliminarCliente(cedulaObte);
+        }
       });
     } else {
       swal({

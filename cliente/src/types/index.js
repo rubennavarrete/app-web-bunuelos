@@ -11,6 +11,8 @@ export const CLIENTE_ERROR = "CLIENTE_ERROR";
 export const BUSCAR = "BUSCAR";
 export const OBTENER_BUSQUEDA = "OBTENER_BUSQUEDA";
 
+export const OBTNER_PODUCTOS = "OBTNER_PODUCTOS";
+
 export const MOSTRAR_ALERTA = "MOSTRAR_ALERTA";
 export const OCULTAR_ALERTA = "OCULTAR_ALERTA";
 

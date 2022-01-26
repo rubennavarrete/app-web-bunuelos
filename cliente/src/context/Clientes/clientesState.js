@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import swal from "sweetalert";
 
 import clienteContext from "./clientesContext";
 import clientesReducer from "./clientesReducer";
@@ -76,7 +77,7 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No pudimos obtener la informacion los Clientes", "error");
     }
   };
 
@@ -91,7 +92,7 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "El cliente que buscas no existe!", "error");
     }
   };
 
@@ -115,7 +116,7 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No se puede agregar a este cliente", "error");
     }
   };
 
@@ -144,7 +145,11 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      console.log(error);
+      swal(
+        "¡Ups!",
+        "No se puede actualizar la informacion de este cliente",
+        "error"
+      );
     }
   };
 
@@ -157,8 +162,15 @@ const ClienteState = (props) => {
         type: ELIMINAR_CLIENTE,
         payload: ci,
       });
+
+      swal({
+        title: " Muy Bien",
+        text: "Cliente eliminado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
     } catch (error) {
-      console.log(error);
+      swal("¡Ups!", "No se puede eliminar a este cliente", "error");
     }
   };
 
