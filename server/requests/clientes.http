@@ -1,0 +1,56 @@
+@api = http://localhost:4000/api/clientes
+
+### Obteniendo todos los clientes de la base de datos 
+GET {{api}}
+
+###Incertando un cliente en la base de datos 
+POST {{api}}
+Content-Type: application/json
+
+{
+    "cedulaCli": "0706635091",
+    "nombreCli": "Cristhian Romero",
+    "direccionCli": "Las Palmas",
+    "celularCli": "0986783467",
+    "correoCli": "crisyangel@yahoo.com",
+    "fechNac": "1996-09-28T00:00:00.00Z"
+}
+
+### Obteniendo un cliente por su numero de cedula 
+GET {{api}}/0706635091
+
+### Obteniendo los clientes que coincidan con los digitos ingresados
+GET {{api}}/buscar/17
+
+### Eliminando un cliente por su numero de cedula 
+DELETE {{api}}/0706635091
+
+
+### Obteniendo el total de clientes registrados desde la base de datos
+GET {{api}}/contar
+
+
+### Actualizando la informacion de un cliente por su numero de cedula 
+PUT {{api}}/0706635091
+Content-Type: application/json
+
+{
+    "nombreCli": "Cristi Romero",
+    "direccionCli": " la que crusa",
+    "celularCli": "0986783467",
+    "correoCli": "cristiano@yahoo.com",
+    "fechNac": "1996-09-28T00:00:00.00Z"
+}
+
+### Modificar clienten con procedimiento almacenado
+
+PUT {{api}}/2300677362
+Content-Type: application/json
+
+{
+    "nombre": "Nayeli Secaira",
+    "direccion": "Santp",
+    "celular": "0981654855",
+    "correoCli": "melas1603@gamil.com",
+    "fecN": "2001-03-16T00:00:00.00Z"
+}

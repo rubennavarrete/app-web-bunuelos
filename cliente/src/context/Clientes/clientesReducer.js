@@ -4,9 +4,12 @@ import {
   CERRAR_AGREGAR_CLIENTE,
   AGREGAR_CLIENTE,
   MOSTRAR_ACTUALIZAR_CLIENTE,
-  // ACTUALIZAR_CLIENTE,
+  ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
+  OBTENER_DATOS_ACTUALIZAR,
+  // BUSCAR,
+  // OBTENER_BUSQUEDA,
 } from "../../types";
 
 export default (state, action) => {
@@ -15,7 +18,8 @@ export default (state, action) => {
       return {
         ...state,
         agregarCliente: false,
-        actualizarCliente: false,
+        mostrarActualizarCliente: false,
+        buscarT: false,
       };
     case CERRAR_AGREGAR_CLIENTE:
       return {
@@ -27,7 +31,8 @@ export default (state, action) => {
         ...state,
         agregarCliente: false,
         cerrarAgregarCliente: false,
-        actualizarCliente: true,
+        mostrarActualizarCliente: true,
+        buscarT: true,
       };
     case OBTENER_CLIENTES:
       return {
@@ -35,6 +40,14 @@ export default (state, action) => {
         clientes: action.payload,
       };
     case AGREGAR_CLIENTE:
+      // case OBTENER_BUSQUEDA:
+      return {
+        ...state,
+        clientes: [...state.clientes, action.payload],
+        agregarCliente: true,
+        buscarT: false,
+      };
+    case ACTUALIZAR_CLIENTE:
       return {
         ...state,
         clientes: [...state.clientes, action.payload],
@@ -46,11 +59,24 @@ export default (state, action) => {
         clientes: state.clientes.filter(
           (cliente) => cliente.cedula !== action.payload
         ),
+        cedulaObte: null,
       };
+    // case BUSCAR:
+    //   return {
+    //     ...state,
+    //     buscarT: action.payload,
+    //   };
     case OBTENER_CEDULA:
       return {
         ...state,
         cedulaObte: action.payload,
+      };
+    case OBTENER_DATOS_ACTUALIZAR:
+      return {
+        ...state,
+        datoActualizar: state.clientes.filter(
+          (cliente) => cliente.cedulaCli === action.payload
+        ),
       };
     default:
       return state;

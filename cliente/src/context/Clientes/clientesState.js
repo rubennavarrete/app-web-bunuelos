@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import swal from "sweetalert";
 
 import clienteContext from "./clientesContext";
 import clientesReducer from "./clientesReducer";
@@ -7,86 +8,24 @@ import {
   CERRAR_AGREGAR_CLIENTE,
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
+  OBTENER_DATOS_ACTUALIZAR,
   MOSTRAR_ACTUALIZAR_CLIENTE,
-  // ACTUALIZAR_CLIENTE,
+  ACTUALIZAR_CLIENTE,
   ELIMINAR_CLIENTE,
   OBTENER_CEDULA,
 } from "../../types";
 
-const ClienteState = (props) => {
-  const clientes = [
-    {
-      cedula: "0302304342",
-      nombre: "Perea Salasar",
-      direccion: "Santa Marianita",
-      telefono: "0934345843",
-      correo: "b@b.com",
-      fecha: "2000-02-23",
-    },
-    {
-      cedula: "0604855866",
-      nombre: "Santy Guaylla",
-      direccion: "España",
-      telefono: "0984242647",
-      correo: "santyguaylla@gmail.com",
-      fecha: "2000-12-31",
-    },
-    {
-      cedula: "0803051150",
-      nombre: "Ruben Valencia",
-      direccion: "Av 11 de noviembre",
-      telefono: "0962739354",
-      correo: "rd_navarrete@outlook.com",
-      fecha: "1987-12-09",
-    },
-    {
-      cedula: "0803229525",
-      nombre: "Luis Robles",
-      direccion: "En la esquina",
-      telefono: "0948567363",
-      correo: "a@a.com",
-      fecha: "2000-01-01",
-    },
-    {
-      cedula: "0803229533",
-      nombre: "Leonel Robles",
-      direccion: "Tonsupa",
-      telefono: "0934873461",
-      correo: "b@b.ec",
-      fecha: "2000-01-02",
-    },
-    {
-      cedula: "0834237467",
-      nombre: "Milton Cava",
-      direccion: "Sucre y Mexico",
-      telefono: "0923473234",
-      correo: "dsf@wer.com",
-      fecha: "",
-    },
-    {
-      cedula: "1234567890",
-      nombre: "Anastasia Gonzales",
-      direccion: "Milton Reyes y la 11",
-      telefono: "0981748550",
-      correo: "ansgzls@gmail.com",
-      fecha: "2000-01-03",
-    },
-    {
-      cedula: "1712886470",
-      nombre: "Angela Zambrano",
-      direccion: "El Carmen",
-      telefono: "092145697",
-      correo: "zamangel@gmail.com",
-      fecha: "1985-01-03",
-    },
-  ];
+import clienteAxios from "../../config/axios";
 
+const ClienteState = (props) => {
   const initialState = {
     clientes: [],
     agregarCliente: true,
     cerrarAgregarCliente: false,
-    actualizarCliente: false,
+    mostrarActualizarCliente: false,
     cedulaObte: null,
+    buscarT: null,
+    datoActualizar: null,
   };
 
   // Dispach para ejecutar las acciones
@@ -111,18 +50,53 @@ const ClienteState = (props) => {
     });
   };
 
-  // Funciones para el CRUD
-
-  // Obtener los datos de clientes
-  const obtenerClientes = () => {
+  const obtenerDatosActualizar = (ci) => {
     dispach({
-      type: OBTENER_CLIENTES,
-      payload: clientes,
+      type: OBTENER_DATOS_ACTUALIZAR,
+      payload: ci,
     });
   };
 
+  // const obtenerCedulaAbuscar = (ci) => {
+  //   console.log("% Buscar %: ", ci);
+  //   dispach({
+  //     type: BUSCAR,
+  //     payload: ci,
+  //   });
+  // };
+
+  // Funciones para el CRUD
+
+  // Obtener los datos de clientes
+  const obtenerClientes = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/clientes");
+
+      dispach({
+        type: OBTENER_CLIENTES,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      swal("¡Ups!", "No pudimos obtener la informacion los Clientes", "error");
+    }
+  };
+
+  const buscar = async (ci) => {
+    try {
+      const resultado = await clienteAxios.get(
+        `/api/clientes/buscar/${ci ? ci : "null"}`
+      );
+      console.log("% resultado Buscar %: ", resultado);
+      dispach({
+        type: OBTENER_CLIENTES,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      swal("¡Ups!", "El cliente que buscas no existe!", "error");
+    }
+  };
+
   const obtenerCedulaCliente = (cedula) => {
-    console.log("la cedula dentro de el state: ", cedula);
     dispach({
       type: OBTENER_CEDULA,
       payload: cedula,
@@ -130,28 +104,74 @@ const ClienteState = (props) => {
   };
 
   // Agregar un nuevo cliente
-  const agregarCliente = (clientes) => {
-    // Insertar el proyecto en el state
-    dispach({
-      type: AGREGAR_CLIENTE,
-      payload: clientes,
-    });
+  const agregarCliente = async (clientes) => {
+    // Insertar al cliente en el state
+
+    try {
+      const resultado = await clienteAxios.post("/api/clientes", clientes);
+      console.log(resultado);
+
+      dispach({
+        type: AGREGAR_CLIENTE,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      swal("¡Ups!", "No se puede agregar a este cliente", "error");
+    }
   };
 
-  //Edita o modica un cliente
-  // const actualizarCliente = (clientes) => {
-  //   dispach({
-  //     type: ACTUALIZAR_CLIENTE,
-  //     payload: clientes,
-  //   });
-  // };
+  // Edita o modica un cliente
+  const actualizarCliente = async (ci) => {
+    console.log("ci", ci.cedulaCli);
+    console.log("datos", ci);
+    const datosA = {
+      nombreCli: ci.nombreCli,
+      direccionCli: ci.direccionCli,
+      celularCli: ci.celularCli,
+      correoCli: ci.correoCli,
+      fechNac: ci.fechNac,
+    };
+
+    console.log("datosA", datosA);
+
+    try {
+      const resultado = await clienteAxios.put(
+        `/api/clientes/${ci.cedulaCli}`,
+        datosA
+      );
+      console.log("resultado", resultado);
+      dispach({
+        type: ACTUALIZAR_CLIENTE,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      swal(
+        "¡Ups!",
+        "No se puede actualizar la informacion de este cliente",
+        "error"
+      );
+    }
+  };
 
   // Eliminar un cliente por su numero de cedula
-  const eliminarCliente = (ci) => {
-    dispach({
-      type: ELIMINAR_CLIENTE,
-      payload: ci,
-    });
+  const eliminarCliente = async (ci) => {
+    try {
+      await clienteAxios.delete(`/api/clientes/${ci}`);
+
+      dispach({
+        type: ELIMINAR_CLIENTE,
+        payload: ci,
+      });
+
+      swal({
+        title: " Muy Bien",
+        text: "Cliente eliminado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
+    } catch (error) {
+      swal("¡Ups!", "No se puede eliminar a este cliente", "error");
+    }
   };
 
   return (
@@ -161,15 +181,20 @@ const ClienteState = (props) => {
         dispach,
         clientes: state.clientes,
         agregar: state.agregarCliente,
-        actualizar: state.actualizarCliente,
+        mostarActualizar: state.mostrarActualizarCliente,
         cedulaObte: state.cedulaObte,
+        buscarT: state.buscarT,
+        datoActualizar: state.datoActualizar,
         mostrarAgregarCliente,
+        buscar,
+        // obtenerCedulaAbuscar,
         cerrarAgregarCliente,
         mostrarActualizarCliente,
         obtenerClientes,
         agregarCliente,
-        // actualizarCliente,
+        actualizarCliente,
         obtenerCedulaCliente,
+        obtenerDatosActualizar,
         eliminarCliente,
       }}
     >

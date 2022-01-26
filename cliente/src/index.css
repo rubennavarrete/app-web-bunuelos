@@ -113,9 +113,11 @@ nav {
 /* BARRA LATERAL */
 aside {
   padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .crud {
-  margin-top: 10rem;
 }
 .listado-crud li {
   margin-bottom: 2rem;
@@ -460,6 +462,7 @@ aside {
 .button {
   background-color: #d7d7d7;
   border: none;
+  border-radius: 5px;
   color: var(--negro);
   padding: 15px 29px;
   text-align: center;

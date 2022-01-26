@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect } from "react";
 import MainLayout from "../layout/main.layout";
 import Tabla from "./Tabla";
 import Editar from "./Editar";
-// import Actualizar from "./Actualizar";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -19,25 +18,21 @@ const Clientes = () => {
     agregar,
     clientes,
     obtenerClientes,
-    actualizar,
+    mostarActualizar,
     cedulaObte,
-    cerrarAgregarCliente,
+    buscar,
   } = clienteContext;
 
   //Obtener clientes cuando carga el componente
   useEffect(() => {
     obtenerClientes();
-  }, []);
+  }, [cedulaObte, agregar]);
 
   // recvisar si los datos que vienen de clientes tiene contenido
-  if (clientes.length === 0) return null;
 
-  if (actualizar) {
-    if (cedulaObte === null) {
-      console.log("Aun no a seleccionado un cliente");
-      // cerrarAgregarCliente();
-    }
-  }
+  const onChangeAgregar = (e) => {
+    buscar(e.target.value);
+  };
 
   return (
     <MainLayout>
@@ -50,7 +45,12 @@ const Clientes = () => {
                   <span className="icon">
                     <img src={lupa} alt="" />
                   </span>
-                  <input type="search" id="search" placeholder="Search..." />
+                  <input
+                    type="number"
+                    id="search"
+                    placeholder="Numero de cedula..."
+                    onChange={onChangeAgregar}
+                  />
                 </div>
               </div>
             </section>
@@ -69,17 +69,19 @@ const Clientes = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {clientes
-                      ? clientes.map((item) => {
-                          return <Tabla key={item.cedula} clientes={item} />;
-                        })
-                      : null}
+                    {clientes.length > 0 ? (
+                      clientes.map((item) => {
+                        return <Tabla key={item.cedulaCli} clientes={item} />;
+                      })
+                    ) : (
+                      <p>No se encontron clientes</p>
+                    )}
                   </tbody>
                 </table>
               </div>
             </section>
           </Fragment>
-        ) : actualizar ? (
+        ) : mostarActualizar ? (
           <Editar titulo={"Actualizar datos del Cliente"} />
         ) : (
           <Editar titulo={"Ingresar datos del Cliente"} />

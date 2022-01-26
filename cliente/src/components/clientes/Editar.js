@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -10,27 +11,26 @@ import alertaTriangulo from "../../assets/alert.svg";
 const Editar = ({ titulo }) => {
   //Cambiar el stado del boton agregar
   const clienteContext = useContext(clientesContext);
-  const { cerrarAgregarCliente, agregarCliente } = clienteContext;
+  const {
+    cerrarAgregarCliente,
+    agregarCliente,
+    datoActualizar,
+    actualizarCliente,
+    mostarActualizar,
+  } = clienteContext;
 
   //State para agregar cliente
   const [cliente, guardarCliente] = useState({
-    cedula: "",
-    nombre: "",
-    direccion: "",
-    telefono: "",
-    correo: "",
-    fecha: "",
+    cedulaCli: "",
+    nombreCli: "",
+    direccionCli: "",
+    celularCli: "",
+    correoCli: "",
+    fechNac: "",
   });
 
   //Extraer de agregar cliente
   // const { cedula, nombre, direccion, telefono, correo, fecha } = cliente;
-
-  const onChangeAgregar = (e) => {
-    guardarCliente({
-      ...cliente,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   //State para validar los campos del componente input
   const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
@@ -45,6 +45,17 @@ const Editar = ({ titulo }) => {
   const onSubmitCLiente = (e) => {
     e.preventDefault();
 
+    if (mostarActualizar) {
+      cambiarCedulaV({ campo: datoActualizar[0].cedulaCli, valido: true });
+    }
+
+    console.log("Cambio cedulaV.valido a: ", cedulaV.valido);
+    console.log("Cambio nombreV.valido a: ", nombreV.valido);
+    console.log("Cambio direccionV.valido a: ", direccionV.valido);
+    console.log("Cambio telefonoV.valido a: ", telefonoV.valido);
+    console.log("Cambio correoV.valido a: ", correoV.valido);
+    console.log("Cambio fechaV.valido a: ", fechaV.valido);
+
     if (
       cedulaV.valido === true &&
       nombreV.valido === true &&
@@ -54,18 +65,46 @@ const Editar = ({ titulo }) => {
       fechaV.valido === true
     ) {
       cambiarFormularioV(true);
-      setTimeout(
-        () =>
-          agregarCliente({
-            cedula: cedulaV.campo,
-            nombre: nombreV.campo,
-            direccion: direccionV.campo,
-            telefono: telefonoV.campo,
-            correo: correoV.campo,
-            fecha: fechaV.campo,
-          }),
-        3000
-      );
+      console.log("Cambio formularioV a: ", formularioV);
+      if (!mostarActualizar) {
+        swal({
+          title: " Muy Bien",
+          text: "Cliente ingresado exitosamente",
+          icon: "success",
+          timer: "3000",
+        });
+        setTimeout(
+          () =>
+            agregarCliente({
+              cedulaCli: cedulaV.campo,
+              nombreCli: nombreV.campo,
+              direccionCli: direccionV.campo,
+              celularCli: telefonoV.campo,
+              correoCli: correoV.campo,
+              fechNac: fechaV.campo,
+            }),
+          3000
+        );
+      } else {
+        swal({
+          title: " Muy Bien",
+          text: "Cliente actualizado exitosamente",
+          icon: "success",
+          timer: "3000",
+        });
+        setTimeout(
+          () =>
+            actualizarCliente({
+              cedulaCli: cedulaV.campo,
+              nombreCli: nombreV.campo,
+              direccionCli: direccionV.campo,
+              celularCli: telefonoV.campo,
+              correoCli: correoV.campo,
+              fechNac: fechaV.campo,
+            }),
+          3000
+        );
+      }
 
       cambiarCedulaV({ campo: "", valido: null });
       cambiarNombreV({ campo: "", valido: null });
@@ -76,6 +115,7 @@ const Editar = ({ titulo }) => {
       //agregar al State
     } else {
       cambiarFormularioV(false);
+      console.log("Cambio formularioV a: ", formularioV);
       setTimeout(() => cambiarFormularioV(null), 4000);
     }
   };
@@ -88,6 +128,24 @@ const Editar = ({ titulo }) => {
     telefono: /^\d{8,10}$/, // 8 a 10 numeros.
     fecha: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
   };
+
+  useEffect(() => {
+    if (mostarActualizar) {
+      cambiarCedulaV({ campo: datoActualizar[0].cedulaCli, valido: true });
+      cambiarNombreV({ campo: datoActualizar[0].nombreCli, valido: true });
+      cambiarDireccionV({
+        campo: datoActualizar[0].direccionCli,
+        valido: true,
+      });
+      cambiarTelefonoV({ campo: datoActualizar[0].celularCli, valido: true });
+      cambiarCorreoV({ campo: datoActualizar[0].correoCli, valido: true });
+      cambiarFechaV({
+        campo: datoActualizar[0].fechNac.substring(0, 10),
+        valido: true,
+      });
+      console.log("En el useEffect");
+    }
+  }, []);
 
   return (
     <div className="form-usuario">
@@ -111,7 +169,6 @@ const Editar = ({ titulo }) => {
             type="text"
             name="cedula"
             placeholder="Ingrese la cédula..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Esta cédula no pertenece a ninguna región "
             expressionRegular={expresiones.cedula}
             tipoExpresion="1"
@@ -123,7 +180,6 @@ const Editar = ({ titulo }) => {
             type="text"
             name="nombre"
             placeholder="Ingrese el nombre..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="El nombre debe tener de 4 a 20 caracteres y solo puede contener letras y espacios"
             expressionRegular={expresiones.nombre}
             tipoExpresion="2"
@@ -135,7 +191,6 @@ const Editar = ({ titulo }) => {
             type="text"
             name="direccion"
             placeholder="Ingrese el dirección..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="La dirección debe tener de 4 a 50 caracteres y solo puede contener letras, números y espacios"
             expressionRegular={expresiones.direccion}
             tipoExpresion="2"
@@ -147,7 +202,6 @@ const Editar = ({ titulo }) => {
             type="text"
             name="telefono"
             placeholder="Ingrese el teléfono..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="El teléfono debe de ser de 8 a 10 dígitos y solo puede contener números enteros positivos"
             expressionRegular={expresiones.telefono}
             tipoExpresion="2"
@@ -159,7 +213,6 @@ const Editar = ({ titulo }) => {
             type="email"
             name="correo"
             placeholder="Ingrese el correo..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Se espera una '@'"
             expressionRegular={expresiones.correo}
             tipoExpresion="2"
@@ -171,7 +224,6 @@ const Editar = ({ titulo }) => {
             type="text"
             name="fecha"
             placeholder="Ingrese la fecha de nacimiento..."
-            onChangeAgregar={onChangeAgregar}
             leyenda="Ingrese una fecha con el siguiente formato yyyy-mm-dd"
             expressionRegular={expresiones.fecha}
             tipoExpresion="2"
@@ -191,9 +243,6 @@ const Editar = ({ titulo }) => {
               value="Ingresar"
             />
           </div>
-          {formularioV === true && (
-            <p className="exito">Cliente ingresado exitosamente!</p>
-          )}
         </form>
       </div>
     </div>

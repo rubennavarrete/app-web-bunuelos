@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -9,12 +10,45 @@ const Sidebar = ({ query }) => {
     mostrarAgregarCliente,
     mostrarActualizarCliente,
     eliminarCliente,
+    obtenerDatosActualizar,
     cedulaObte,
   } = clienteContext;
 
   //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
   const clienteEliminar = () => {
-    eliminarCliente(cedulaObte);
+    if (cedulaObte !== null) {
+      swal({
+        title: "Está seguro?",
+        text: "¿Estás seguro de que quieres eliminar este Cliente?",
+        icon: "warning",
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          eliminarCliente(cedulaObte);
+        }
+      });
+    } else {
+      swal({
+        title: "Seleccione un Cliente",
+        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        icon: "warning",
+        button: "Aceptar",
+      });
+    }
+  };
+
+  const actualizar = () => {
+    if (cedulaObte !== null) {
+      obtenerDatosActualizar(cedulaObte);
+      mostrarActualizarCliente();
+    } else {
+      swal({
+        title: "Seleccione un Cliente",
+        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        icon: "warning",
+        button: "Aceptar",
+      });
+    }
   };
 
   switch (query) {
@@ -30,10 +64,7 @@ const Sidebar = ({ query }) => {
           >
             Ingresar
           </button>
-          <button
-            className="button button2"
-            onClick={() => mostrarActualizarCliente()}
-          >
+          <button className="button button2" onClick={() => actualizar()}>
             Actualizar
           </button>
           <button className="button button2" onClick={() => clienteEliminar()}>
@@ -45,9 +76,20 @@ const Sidebar = ({ query }) => {
     case "/productos":
       return (
         <div className="crud">
-          <h2>Ingresar</h2>
-          <h2>Modificar</h2>
-          <h2>Eliminar</h2>
+          <button
+            className="button button2"
+            // onClick={() => mostrarAgregarCliente()}
+          >
+            Ingresar
+          </button>
+          <button className="button button2" /*onClick={() => actualizar()}*/>
+            Actualizar
+          </button>
+          <button
+            className="button button2" /*onClick={() => clienteEliminar()}*/
+          >
+            Eliminar
+          </button>
         </div>
       );
 
