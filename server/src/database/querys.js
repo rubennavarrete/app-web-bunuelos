@@ -12,8 +12,7 @@ export const queries = {
 
   buscarClienteCi: "Select * from Cliente where cedulaCli = @cedulaCli",
 
-  eliminarClienteCi:
-    "DELETE FROM [BonuelosDias].[dbo].[Cliente] WHERE cedulaCli = @cedulaCli",
+  eliminarClienteCi: "exec sp_BorrarCliente @cedulaCli",
 
   obtenerTotalClientes: "SELECT COUNT(*) FROM [BonuelosDias].[dbo].[Cliente]",
 
@@ -38,5 +37,5 @@ export const queries = {
     "exec sp_ModificarProducto @codProducto, @nombre, @categoria, @precio, @stock, @fechaElab, @foto",
 
   //borrar un producto
-  borrarProducto: "delete from Producto where [codProducto] = @codProducto",
+  borrarProducto: "exec sp_BorrarProducto @codProducto",
 };

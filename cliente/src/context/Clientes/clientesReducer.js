@@ -25,6 +25,7 @@ export default (state, action) => {
       return {
         ...state,
         agregarCliente: true,
+        cedulaObte: null,
       };
     case MOSTRAR_ACTUALIZAR_CLIENTE:
       return {

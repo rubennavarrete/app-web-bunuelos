@@ -124,7 +124,9 @@ export const borrarProducto = async (req, res) => {
     .input("codProducto", codProducto)
     .query(queries.borrarProducto);
 
-  res.sendStatus(204);
+  console.log("resultado de la eliminacion: ", result);
+
+  res.send(result.recordset[0]);
 };
 
 export const buscarProducto = async (req, res) => {

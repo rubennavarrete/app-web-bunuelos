@@ -229,6 +229,7 @@ table.rwd_auto {
   border-radius: 25px;
   width: 47px;
   font-size: 15px;
+  cursor: pointer;
 }
 
 /* Formulario nuevo cliente*/
@@ -268,7 +269,7 @@ table.rwd_auto {
   background-color: var(--blanco);
   border-radius: 1rem;
   position: relative;
-  width: 40vw;
+  width: 50vw;
 }
 
 .contenedor-form-cliente h1 {
@@ -276,7 +277,7 @@ table.rwd_auto {
 }
 
 .campo-form-cliente {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .campo-form-cliente label {
@@ -308,6 +309,7 @@ table.rwd_auto {
 }
 .leyenda-error-incorrecto {
   display: block !important;
+  font-size: 16px;
 }
 
 .grup-cliente img {
