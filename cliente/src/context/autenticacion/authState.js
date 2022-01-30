@@ -19,6 +19,7 @@ const AuthState = (props) => {
 
   // Cuando el usuario inicia sesión
   const iniciarSesion = async (datos) => {
+    console.log(datos)
     try {
       const respuesta = await clienteAxios.post("/api/login", datos);
 
