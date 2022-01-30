@@ -1,0 +1,52 @@
+@api = http://localhost:4000/api/ventas
+
+
+### Obteniendo todos los productos que pueden ser vendidos (no caducados, con stock mayor a 0) de la base de datos
+GET {{api}}
+
+### Obteniendo todos los productos que están siendo vendidos de la base de datos pasando como parámentro el número de orden (int)
+GET {{api}}/1
+
+
+### Genera un OC en la base de datos para poder implementarlo en detalle de venta, los demas compos quedan nulos
+POST {{api}}
+
+### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
+
+POST {{api}}
+Content-Type: application/json
+
+{
+   "oc":1,
+    "Vtotal":"12.85",
+    "fech": "2022-01-30T00:00:00.00Z",
+    "cedulC": "2300677362",
+    "usernameU": "Secaira"
+}
+
+### Insertar los campos para un detalle de compra (una fila en la tabla)
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "codPro":"AA01",
+    "nOrd":1,
+    "cant": 2
+}
+
+### Eliminando un producto de detalle venta, se necesita pasar el código del producto, el número de orden y la cantidad
+DELETE {{api}}/AA01/1/2
+
+
+### Editar la informacion de un producto en el detalle de venta mediante el código del producto
+PUT {{api}}/AA01
+Content-Type: application/json
+
+{
+    "nOrd":1,
+    "cant": 5
+}
+
+### Obteniene la cantidad de OC que existen, le agregas +1 y tienes el valor del proximo OC
+GET {{api}}/buscar/A
