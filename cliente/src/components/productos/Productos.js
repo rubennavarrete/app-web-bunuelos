@@ -3,7 +3,7 @@ import MainLayout from "../layout/main.layout";
 import CardProducto from "./cardProducto";
 import EditarProductos from "./EditarProductos";
 
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 
 import ProductosContext from "../../context/Productos/productoContext";
 
@@ -54,17 +54,17 @@ const Productos = () => {
           </section>
           <main>
             <div className="contenedor-cards">
+              <div className="encabezado">
+                <p>Código</p>
+                <p>Nombre</p>
+                <p>Categoría</p>
+                <p>Precio</p>
+                <p>Stock</p>
+                <p>Caducidad</p>
+                <p>Elaboración</p>
+                <p>Imagen </p>
+              </div>
               <ol className="gradient-list">
-                <div className="encabezado">
-                  <p>Código</p>
-                  <p>Nombre</p>
-                  <p>Categoría</p>
-                  <p>Precio</p>
-                  <p>Stock</p>
-                  <p>Caducidad</p>
-                  <p>Elaboración</p>
-                  <p>Imagen </p>
-                </div>
                 {productos.length > 0 ? (
                   productos.map((item) => {
                     return (

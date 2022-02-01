@@ -93,12 +93,41 @@
   padding: 2rem;
   background: white;
   border-radius: 15px;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .table-responsive {
   overflow-y: scroll;
-  height: 55vh;
+  height: 59vh;
+}
+
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+.table-responsive::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.table-responsive::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-button:increment,
+.table-responsive::-webkit-scrollbar-button {
+  display: none;
+}
+
+.table-responsive::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 
 table.rwd_auto {

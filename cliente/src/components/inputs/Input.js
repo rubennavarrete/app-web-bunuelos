@@ -40,7 +40,7 @@ const Input = ({
           if (resultado.data[0].cedulaCli !== undefined) {
             Swal.fire({
               title: " Alto",
-              text: "El cliente que intenta registrar ya existe en la base de datos",
+              text: "El cliente que intenta registrar ya existe en la base de datos. Prueba con otra cedula!",
               icon: "warning",
             });
 
