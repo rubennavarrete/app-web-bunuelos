@@ -1,3 +1,14 @@
+//Variables globales para el componente de alertas
+export const MOSTRAR_ALERTA = "MOSTRAR_ALERTA";
+export const OCULTAR_ALERTA = "OCULTAR_ALERTA";
+
+//Variables globales para el componente de login
+export const OBTENER_USUARIO = "OBTENER_USUARIO";
+export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const CERRAR_SESION = "CERRAR_SESION";
+
+//Variables globales para el componente de clientes
 export const FORMULARIO_AGREGAR_CLIENTE = "FORMULARIO_AGREGAR_CLIENTE";
 export const CERRAR_AGREGAR_CLIENTE = "CERRAR_AGREGAR_CLIENTE";
 export const OBTENER_CLIENTES = "OBTENER_CLIENTES";
@@ -11,12 +22,16 @@ export const CLIENTE_ERROR = "CLIENTE_ERROR";
 export const BUSCAR = "BUSCAR";
 export const OBTENER_BUSQUEDA = "OBTENER_BUSQUEDA";
 
+//Variables globales para el componente de productos
 export const OBTNER_PODUCTOS = "OBTNER_PODUCTOS";
+export const AGREGAR_PRODUCTO = "AGREGAR_PRODUCTO";
+export const OBTENER_CODIGO_PRODUCTO = "OBTENER_CODIGO_PRODUCTO";
+export const OBTENER_PRODUCTO_ACTUALIZAR = "OBTENER_PRODUCTO_ACTUALIZAR";
+export const ELIMINAR_PRODUCTO = "ELIMINAR_PRODUCTO";
+export const MOSTRAR_EDITAR_PRODUCTOS = "MOSTRAR_EDITAR_PRODUCTOS";
+export const CERRAR_EDITAR_PRODUCTOS = "CERRAR_EDITAR_PRODUCTOS";
+export const MOSTRAR_ACTUALIZAR_PRODUCTO = "MOSTRAR_ACTUALIZAR_PRODUCTO";
+export const ACTUALIZAR_PRODUCTO = "ACTUALIZAR_PRODUCTO";
 
-export const MOSTRAR_ALERTA = "MOSTRAR_ALERTA";
-export const OCULTAR_ALERTA = "OCULTAR_ALERTA";
-
-export const OBTENER_USUARIO = "OBTENER_USUARIO";
-export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
-export const LOGIN_ERROR = "LOGIN_ERROR";
-export const CERRAR_SESION = "CERRAR_SESION";
+//Variables globales para el componente de ventas
+export const OVTENER_PRODUCTOS_VEMTA = "OVTENER_PRODUCTOS_VEMTA";

@@ -55,19 +55,21 @@ const Clientes = () => {
               </div>
             </section>
             <section className="content-tabla">
+              <table className="rwd_auto fontsize">
+                <thead>
+                  <tr>
+                    <th style={{ width: 64 }}>#</th>
+                    <th style={{ width: 184 }}>Cedula</th>
+                    <th style={{ width: 253 }}>Nombre</th>
+                    <th style={{ width: 276 }}>Direccion</th>
+                    <th style={{ width: 181 }}>Telefono</th>
+                    <th style={{ width: 350 }}>Correo</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+              </table>
               <div className="table-responsive">
                 <table className="rwd_auto fontsize">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Cedula</th>
-                      <th>Nombre</th>
-                      <th>Direccion</th>
-                      <th>Telefono</th>
-                      <th>Correo</th>
-                      <th>Fecha Nac</th>
-                    </tr>
-                  </thead>
                   <tbody>
                     {clientes.length > 0 ? (
                       clientes.map((item) => {

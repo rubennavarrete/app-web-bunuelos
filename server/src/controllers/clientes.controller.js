@@ -107,7 +107,9 @@ export const eliminarCliente = async (req, res) => {
     .input("cedulaCli", cedulaCli)
     .query(queries.eliminarClienteCi);
 
-  res.sendStatus(204);
+  console.log("resultado de la eliminacion: ", result);
+
+  res.send(result.recordset[0]);
 };
 
 export const numeroTotalClientes = async (req, res) => {

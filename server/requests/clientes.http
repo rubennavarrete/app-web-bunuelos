@@ -23,7 +23,7 @@ GET {{api}}/0706635091
 GET {{api}}/buscar/17
 
 ### Eliminando un cliente por su numero de cedula 
-DELETE {{api}}/0706635091
+DELETE {{api}}/0803051150
 
 
 ### Obteniendo el total de clientes registrados desde la base de datos

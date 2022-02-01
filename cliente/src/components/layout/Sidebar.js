@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 import clientesContext from "../../context/Clientes/clientesContext";
+import ProductosContext from "../../context/Productos/productoContext";
 
 const Sidebar = ({ query }) => {
   //Obtener el stado de los botones
+
+  //Obtener las funcnciones del context de Clientes
   const clienteContext = useContext(clientesContext);
   const {
     mostrarAgregarCliente,
@@ -14,41 +17,147 @@ const Sidebar = ({ query }) => {
     cedulaObte,
   } = clienteContext;
 
-  //Función que se ejecuta cuando el usuario elimina el boton de eliminar cliente
+  //Obtener las funcnciones del context de Productos
+  const productoContext = useContext(ProductosContext);
+  const {
+    eliminarProducto,
+    codigoObtenido,
+    obtenerProductoActualizar,
+    mostrarEditarProducto,
+    mostrarActualizarProducto,
+    actualizar,
+  } = productoContext;
+
+  //Metodos para el el componente de Clientes
+
+  //Función que se ejecuta cuando el usuario da click el boton de eliminar cliente
   const clienteEliminar = () => {
     if (cedulaObte !== null) {
-      swal({
-        title: "Está seguro?",
-        text: "¿Estás seguro de que quieres eliminar este Cliente?",
-        icon: "warning",
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          eliminarCliente(cedulaObte);
-        }
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
       });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "¡No podrás revertir esto!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Eliminar este Cliente!",
+          cancelButtonText: "Cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+              eliminarCliente(cedulaObte),
+              "Eliminado!",
+              "Este cliente se ha eliminado.",
+              "success"
+            );
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "El cliente no se elimino :)",
+              "error"
+            );
+          }
+        });
     } else {
-      swal({
+      Swal.fire({
         title: "Seleccione un Cliente",
         text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
         icon: "warning",
-        button: "Aceptar",
       });
     }
   };
 
-  const actualizar = () => {
+  //Función que se ejecuta cuando el usuario da click el boton de actualizar cliente
+  const actualizarCliente = () => {
     if (cedulaObte !== null) {
       obtenerDatosActualizar(cedulaObte);
       mostrarActualizarCliente();
     } else {
-      swal({
+      Swal.fire({
         title: "Seleccione un Cliente",
         text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
         icon: "warning",
-        button: "Aceptar",
       });
     }
+  };
+
+  // Metodos para el componente de Productos
+  const productoEliminar = () => {
+    if (codigoObtenido !== null) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Está seguro?",
+          text: "¡No podrás revertir esto!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Eliminar este Producto!",
+          cancelButtonText: "Cancelar!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+              eliminarProducto(codigoObtenido),
+              "Eliminado!",
+              "Este Producto se ha eliminado.",
+              "success"
+            );
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              "Cancelado",
+              "El Producto no se elimino! :)",
+              "error"
+            );
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "Seleccione un Producto",
+        text: "Asegúrese de haber seleccionado un Producto antes de realizar la acción ",
+        icon: "warning",
+      });
+    }
+  };
+
+  //Función que se ejecuta cuando el usuario da click el boton de actualizar Productos
+  const actualizarProducto = () => {
+    if (codigoObtenido !== null) {
+      obtenerProductoActualizar(codigoObtenido);
+      mostrarActualizarProducto();
+    } else {
+      Swal.fire({
+        title: "Seleccione un Producto",
+        text: "Asegúrese de haber seleccionado un Producto antes de realizar la acción ",
+        icon: "warning",
+      });
+    }
+  };
+
+  const mostrarAgregarProducto = () => {
+    mostrarEditarProducto();
   };
 
   switch (query) {
@@ -64,7 +173,10 @@ const Sidebar = ({ query }) => {
           >
             Ingresar
           </button>
-          <button className="button button2" onClick={() => actualizar()}>
+          <button
+            className="button button2"
+            onClick={() => actualizarCliente()}
+          >
             Actualizar
           </button>
           <button className="button button2" onClick={() => clienteEliminar()}>
@@ -78,16 +190,17 @@ const Sidebar = ({ query }) => {
         <div className="crud">
           <button
             className="button button2"
-            // onClick={() => mostrarAgregarCliente()}
+            onClick={() => mostrarAgregarProducto()}
           >
             Ingresar
           </button>
-          <button className="button button2" /*onClick={() => actualizar()}*/>
+          <button
+            className="button button2"
+            onClick={() => actualizarProducto()}
+          >
             Actualizar
           </button>
-          <button
-            className="button button2" /*onClick={() => clienteEliminar()}*/
-          >
+          <button className="button button2" onClick={() => productoEliminar()}>
             Eliminar
           </button>
         </div>

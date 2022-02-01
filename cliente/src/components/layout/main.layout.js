@@ -14,7 +14,6 @@ const MainLayout = ({ children, ...props }) => {
 
   const token = localStorage.getItem("token");
   var decoded = jwt_decode(token);
-
   return (
     <div className="contenedor-app">
       <aside>

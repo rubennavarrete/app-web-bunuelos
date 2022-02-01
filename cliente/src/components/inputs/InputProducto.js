@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
-import Swal from "sweetalert2";
+
+import ProductosContext from "../../context/Productos/productoContext";
 import clienteAxios from "../../config/axios";
-
-import clientesContext from "../../context/Clientes/clientesContext";
-
-import ValidarCedula from "../../utils/validarCedula";
+import Swal from "sweetalert2";
 
 // importe de iconos
 import checkCircle from "../../assets/checkCircle.svg";
 import close from "../../assets/close.svg";
-const Input = ({
+
+const InputProducto = ({
   estado,
   cambiarEstado,
   label,
@@ -18,44 +17,34 @@ const Input = ({
   placeholder,
   leyenda,
   expressionRegular,
-  tipoExpresion,
 }) => {
-  const clienteContext = useContext(clientesContext);
-  const { mostarActualizar } = clienteContext;
+  //Obtener las funcnciones del context de Productos
+  const productoContext = useContext(ProductosContext);
+  const { actualizar } = productoContext;
 
   const onChange = (e) => {
     cambiarEstado({ ...estado, campo: e.target.value });
   };
 
   const validacion = async () => {
-    if (tipoExpresion === "1") {
-      if (ValidarCedula(estado.campo)) {
-        cambiarEstado({ ...estado, valido: true });
+    if (expressionRegular.test(estado.campo)) {
+      cambiarEstado({ ...estado, valido: true });
+      if (!actualizar && name === "codigo") {
+        const resultado = await clienteAxios.get(
+          `/api/productos/buscar/${estado.campo ? estado.campo : "null"}`
+        );
+        if (resultado.data[0].codProducto !== undefined) {
+          Swal.fire({
+            title: " Alto",
+            text: "El producto que intenta registrar ya existe en la base de datos. Prueba con otra Código!",
+            icon: "warning",
+          });
 
-        if (!mostarActualizar && estado.campo.length === 10) {
-          const resultado = await clienteAxios.get(
-            `/api/clientes/buscar/${estado.campo}`
-          );
-
-          if (resultado.data[0].cedulaCli !== undefined) {
-            Swal.fire({
-              title: " Alto",
-              text: "El cliente que intenta registrar ya existe en la base de datos. Prueba con otra cedula!",
-              icon: "warning",
-            });
-
-            cambiarEstado({ ...estado, campo: "", valido: null });
-          }
+          cambiarEstado({ ...estado, campo: "", valido: null });
         }
-      } else {
-        cambiarEstado({ ...estado, valido: false });
       }
-    } else if (tipoExpresion === "2") {
-      if (expressionRegular.test(estado.campo)) {
-        cambiarEstado({ ...estado, valido: true });
-      } else {
-        cambiarEstado({ ...estado, valido: false });
-      }
+    } else {
+      cambiarEstado({ ...estado, valido: false });
     }
   };
 
@@ -89,9 +78,7 @@ const Input = ({
           onChange={onChange}
           onKeyUp={validacion} //propiedad que ejecuta una funcion cuando precionamos una tecla y la soltamos
           onBlur={validacion} // propiedad que ejecuta una funcion cuando damos clik fuera del imput
-          disabled={
-            mostarActualizar ? (name === "cedula" ? true : false) : null
-          }
+          disabled={actualizar ? (name === "codigo" ? true : false) : null}
         />
         <img
           className={`${
@@ -121,4 +108,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default InputProducto;

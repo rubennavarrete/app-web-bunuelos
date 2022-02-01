@@ -4,13 +4,13 @@
 ### Obteniendo todos los productos de la base de datos
 GET {{api}}
 
-### Insertar un producto con procedimiento almacenado pasar @codProducto,@nombre,@categoria,@precio,@stock,@fechaElab
+### Insertar un producto con procedimiento almacenado pasar @codProducto,@nombre,@categoria,@precio,@stock,@fechaElab y el url de foto
 
 POST {{api}}
 Content-Type: application/json
 
 {
-    "codProducto": "AA06",
+    "codProducto": "AA15",
     "nombre": "Pan de Arroz",
     "categoria": "PA",
     "precio": "0.15",
@@ -19,7 +19,7 @@ Content-Type: application/json
     "foto": "https://www.google.com/search?q=pan+de+arroz&rlz=1C1UUXU_esEC988EC988&sxsrf=AOaemvIBnSr36OXYinyl5t4bZg4XWC0xIw:1643055616870&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE4Y6Tm8v1AhVekokEHbIvDKQQ_AUoAXoECAIQAw&biw=1536&bih=754&dpr=1.25#imgrc=sTdGsu5DXk5GiM"
 }
 
-### Editar la informacion de un producto por código 
+### Editar la informacion de un producto por código pasar @nombre,@categoria,@precio,@stock,@fechaElab y el url de foto
 
 PUT {{api}}/AA01
 Content-Type: application/json
@@ -29,12 +29,12 @@ Content-Type: application/json
     "categoria": "PA",
     "precio": "0.15",
     "stock": 100,
-    "fechElab": "2022-01-22T00:00:00.00Z",
+    "fechElab": "2022-01-30T00:00:00.00Z",
     "foto": "https://www.google.com/search?q=pan+de+arroz&rlz=1C1UUXU_esEC988EC988&sxsrf=AOaemvIBnSr36OXYinyl5t4bZg4XWC0xIw:1643055616870&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE4Y6Tm8v1AhVekokEHbIvDKQQ_AUoAXoECAIQAw&biw=1536&bih=754&dpr=1.25#imgrc=sTdGsu5DXk5GiM"
 }
 
 ### Eliminando un producto por su código de producto  
-DELETE {{api}}/AA06
+DELETE {{api}}/AA03
 
 ### Obteniendo todos los productos que coinciden con la entrada 
 GET {{api}}/buscar/A
