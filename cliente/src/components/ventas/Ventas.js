@@ -8,7 +8,7 @@ import VentasContext from "../../context/ventas/ventaContext";
 import "./Ventas.css";
 
 const Ventas = () => {
-  //Obtener las funcnciones del context de Productos
+  //Obtener las funcnciones del context de Ventas
   const ventasContext = useContext(VentasContext);
 
   const { obtenerProductosVenta, productosVenta } = ventasContext;
@@ -41,7 +41,7 @@ const Ventas = () => {
                 );
               })
             ) : (
-              <p>No se encontron productos que mostrar</p>
+              <p>Aun no se ingresan productos para la venta de hoy!</p>
             )}
           </div>
         </div>

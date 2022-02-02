@@ -1,8 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 
 import ItenProductoVenta from "./ItemProductoVenta";
 
+import VentasContext from "../../context/ventas/ventaContext";
+
 const DetalleVenta = () => {
+  const ventasContext = useContext(VentasContext);
+  const { cancelarVenta } = ventasContext;
+
   return (
     <Fragment>
       <div className="contenedor-header-detalle-venta">
@@ -34,6 +39,11 @@ const DetalleVenta = () => {
             <strong>$27.00</strong>
           </div>
         </div>
+      </div>
+      <div className="contenedor-boton-cancelar">
+        <button class="cart-button" onClick={() => cancelarVenta()}>
+          Cancelar Venta
+        </button>
       </div>
     </Fragment>
   );

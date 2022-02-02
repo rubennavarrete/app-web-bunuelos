@@ -1,3 +1,14 @@
+.mensaje-vistas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  background: #ffdba6cc;
+  font-weight: 700;
+}
+
 .contedor-cards {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -14,7 +25,7 @@
 
 .contenedor-header-detalle-venta {
   display: grid;
-  grid-template-columns: 135px 125px 130px 100px;
+  grid-template-columns: 135px 90px 120px 100px;
   margin-left: 5rem;
   font-size: 16px;
   font-weight: 600;
@@ -315,8 +326,8 @@ body {
 .cart_wrapper .cart_lists {
   background-color: #ecf0f1;
   padding: 30px;
-  width: calc(100% - 360px);
-  flex: 0 0 calc(100% - 360px);
+  width: calc(100% - 415px);
+  flex: 0 0 calc(100% - 415px);
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .cart_wrapper .cart_lists {
@@ -383,7 +394,7 @@ body {
 }
 .cart_wrapper .cart_lists .cart_list_wrap .cart_responsive .tr_item {
   display: grid;
-  grid-template-columns: 80px 140px 115px 110px 110px 45px;
+  grid-template-columns: 80px 130px 80px 110px 95px 45px;
   margin-bottom: 15px;
   transition: all 0.3s linear;
   position: relative;
@@ -1806,8 +1817,8 @@ body {
 .cart_wrapper .cart_details {
   background: linear-gradient(45deg, #303030, #4b4643);
   padding: 30px 40px;
-  width: 360px;
-  flex: 0 0 360px;
+  width: 415px;
+  flex: 0 0 415px;
   box-shadow: -8px 0px 32px rgba(0, 0, 0, 0.36);
   position: relative;
 }
@@ -1875,7 +1886,7 @@ body {
   position: relative;
   left: 50%;
   display: inline-block;
-  min-width: 330px;
+  min-width: 380px;
   max-width: 100%;
   width: auto;
   clear: both;
@@ -1888,17 +1899,11 @@ body {
 
 .paypal__header {
   display: flex;
-  -ms-align-items: flex-start;
-  align-items: flex-start;
-
-  padding: 10px 30px 10px;
+  padding: 10px 30px 15px;
   background: #fff;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-}
-
-.paypal__logo-wrapper {
-  flex: 1 0 40%;
+  justify-content: space-between;
 }
 
 .paypal__logo {
@@ -1906,10 +1911,6 @@ body {
   width: 150px;
   height: auto;
   margin-right: 35px;
-}
-
-.paypal__header-info {
-  flex: 1 0 50%;
 }
 
 .paypal__date,
@@ -1934,14 +1935,20 @@ body {
 }
 
 .paypal__username {
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
   font-size: 22px;
   font-weight: 600;
 }
 
 .paypal__help-text {
-  color: #aaa;
+  color: #aca8a8;
   font-size: 17px;
+  display: flex;
+}
+
+.paypal__help-text p {
+  margin: 5px 6px 0 0;
+  padding: 0;
 }
 
 .paypal__cart {
@@ -1966,7 +1973,7 @@ body {
   display: block;
   padding-top: 20px;
   margin-bottom: 20px;
-  border-top: 2px dashed #aaa;
+  border-top: 2px dashed #aca8a8;
 
   font-size: 18px;
 }
@@ -2156,4 +2163,51 @@ body {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.contenedor-iten-factura {
+  height: 19vh;
+  overflow: auto;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar-button:increment,
+.contenedor-iten-factura::-webkit-scrollbar-button {
+  display: none;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar-thumb {
+  background-color: #d8cccc;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.contenedor-iten-factura::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.contenedor-boton-cancelar {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.contenedor-boton-cancelar .cart-button {
+  width: 35%;
+  font-size: 20px;
+  padding: 25px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
+import VentasContext from "../../context/ventas/ventaContext";
+
 import Input from "../inputs/Input";
 
 // importe de iconos
@@ -17,6 +19,9 @@ const Editar = ({ titulo }) => {
     actualizarCliente,
     mostarActualizar,
   } = clienteContext;
+
+  const ventasContext = useContext(VentasContext);
+  const { cerrarIngresarCliente, obtenerCedulaFactura } = ventasContext;
 
   //State para validar los campos del componente input
   const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
@@ -46,6 +51,14 @@ const Editar = ({ titulo }) => {
       cambiarFormularioV(true);
       if (!mostarActualizar) {
         agregarCliente({
+          cedulaCli: cedulaV.campo,
+          nombreCli: nombreV.campo,
+          direccionCli: direccionV.campo,
+          celularCli: telefonoV.campo,
+          correoCli: correoV.campo,
+          fechNac: fechaV.campo,
+        });
+        obtenerCedulaFactura({
           cedulaCli: cedulaV.campo,
           nombreCli: nombreV.campo,
           direccionCli: direccionV.campo,
@@ -104,6 +117,11 @@ const Editar = ({ titulo }) => {
     }
   }, []);
 
+  const cerrar = () => {
+    cerrarAgregarCliente();
+    cerrarIngresarCliente();
+  };
+
   return (
     <div className="form-usuario">
       <div className="contenedor-form-cliente">
@@ -111,7 +129,7 @@ const Editar = ({ titulo }) => {
           <button
             type="button"
             className="btn2 btn-block btn-primario redondear"
-            onClick={() => cerrarAgregarCliente()}
+            onClick={() => cerrar()}
           >
             X
           </button>
