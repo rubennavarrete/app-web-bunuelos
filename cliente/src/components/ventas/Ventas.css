@@ -7,6 +7,7 @@
   font-size: 25px;
   background: #ffdba6cc;
   font-weight: 700;
+  min-height: 33vh;
 }
 
 .contedor-cards {
@@ -132,6 +133,10 @@
   }
 }
 
+.cantidad-cart {
+  margin: 0 10px;
+}
+
 .pqt-plus,
 .pqt-minus {
   background: #fff;
@@ -208,6 +213,8 @@
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  border: none;
+  padding: 0;
 }
 .container .list img {
   height: 110px;
@@ -369,7 +376,7 @@ body {
 .cart_wrapper .cart_lists .cart_list_wrap .cart_responsive {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 380px;
+  min-height: 39vh;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .cart_wrapper .cart_lists .cart_list_wrap .cart_responsive {
@@ -1757,9 +1764,11 @@ body {
 }
 .cart_wrapper .cart_lists .cart_list_wrap .footer {
   display: flex;
-  width: 92%;
   flex-direction: column;
   align-items: end;
+  margin-bottom: 0;
+  border-top: 2px solid #ffe155;
+  padding-right: 50px;
 }
 .cart_wrapper .cart_lists .cart_list_wrap .footer .back_cart {
   width: 50%;
@@ -2210,4 +2219,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.iva {
+  width: 100%;
+  display: flex;
+}
+
+.iva .select {
+  height: 25px;
+  width: 55px;
+}
+
+.iva .select::after {
+  padding: 0px 30px;
+  background-color: transparent;
+  left: 0;
+}
+
+.iva .select > select {
+  padding: 0 8px;
 }

@@ -175,7 +175,7 @@ const Sidebar = ({ query }) => {
   const verificarCliente = () => {
     Swal.fire({
       title: "Cedula Identidad",
-      text: "Ingrese la sedula del cliente para realizar la factura!",
+      text: "Ingrese la cedula del cliente para realizar la factura!",
       input: "number",
       inputAttributes: {
         autocapitalize: "off",
@@ -197,8 +197,6 @@ const Sidebar = ({ query }) => {
         const resultado = await clienteAxios.get(
           `/api/clientes/buscar/${ci ? ci : "null"}`
         );
-
-        console.log("Longitud del Resultado: ", resultado.data.length);
 
         if (resultado.data.length === 0) {
           Swal.fire({

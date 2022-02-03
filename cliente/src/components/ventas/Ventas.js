@@ -18,8 +18,6 @@ const Ventas = () => {
     obtenerProductosVenta();
   }, []);
 
-  console.log("productosVentas: ", productosVenta);
-
   return (
     <MainLayout>
       <div className="contedor-cards">
@@ -41,7 +39,9 @@ const Ventas = () => {
                 );
               })
             ) : (
-              <p>Aun no se ingresan productos para la venta de hoy!</p>
+              <p className="mensaje-vistas">
+                Aun no se ingresan productos para la venta de hoy!
+              </p>
             )}
           </div>
         </div>

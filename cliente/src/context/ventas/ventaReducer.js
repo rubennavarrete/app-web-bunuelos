@@ -6,6 +6,7 @@ import {
   MOSTRAR_INGRESAR_CLIENTE,
   CERRAR_INGRESAR_CLIENTE,
   CANCELAR_VENTA,
+  ACTUALIZAR_DETALLE_VENTA,
 } from "../../types";
 
 export default (state, action) => {
@@ -31,6 +32,7 @@ export default (state, action) => {
     case ITEMS_DETALLE_VENTA:
       return {
         ...state,
+        intemsDetalleVenta: [...state.intemsDetalleVenta, action.payload],
       };
     case MOSTRAR_INGRESAR_CLIENTE:
       return {
@@ -48,6 +50,11 @@ export default (state, action) => {
         ...state,
         mostrarDetalleVenta: false,
         clienteSeleccionado: [],
+        intemsDetalleVenta: [],
+      };
+    case ACTUALIZAR_DETALLE_VENTA:
+      return {
+        ...state,
       };
     default:
       return state;

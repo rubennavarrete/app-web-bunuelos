@@ -9,6 +9,7 @@
   height: 110px;
   width: 110px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .user h3,

@@ -13,6 +13,7 @@ import {
   MOSTRAR_INGRESAR_CLIENTE,
   CERRAR_INGRESAR_CLIENTE,
   CANCELAR_VENTA,
+  ACTUALIZAR_DETALLE_VENTA,
 } from "../../types";
 
 const VentasState = (props) => {
@@ -57,10 +58,10 @@ const VentasState = (props) => {
   };
 
   // Obtener los items para el detalle de ventas
-  const obtenerItemsDetalleVentas = (item) => {
+  const obtenerItemsDetalleVentas = (productosVenta) => {
     dispatch({
       type: ITEMS_DETALLE_VENTA,
-      payload: item,
+      payload: productosVenta,
     });
   };
 
@@ -71,6 +72,13 @@ const VentasState = (props) => {
     });
   };
 
+  // Refrescamos la vista de detalle venta cada vez que agregamos un productos
+  const actualizarDetalleVenta = () => {
+    dispatch({
+      type: ACTUALIZAR_DETALLE_VENTA,
+    });
+  };
+
   //Funciones para el CRUD
 
   // Obtener todos los productos de la base de datos
@@ -78,8 +86,6 @@ const VentasState = (props) => {
   const obtenerProductosVenta = async () => {
     try {
       const resultado = await clienteAxios.get("/api/ventas");
-
-      console.log("resultado: ", resultado.data);
 
       dispatch({
         type: OVTENER_PRODUCTOS_VEMTA,
@@ -97,6 +103,7 @@ const VentasState = (props) => {
   return (
     <VentasContext.Provider
       value={{
+        state,
         productosVenta: state.productosVenta,
         intemsDetalleVenta: state.intemsDetalleVenta,
         mostrarDetalleVenta: state.mostrarDetalleVenta,
@@ -109,6 +116,7 @@ const VentasState = (props) => {
         mostrarIngresarCliente,
         cerrarIngresarCliente,
         cancelarVenta,
+        actualizarDetalleVenta,
       }}
     >
       {props.children}

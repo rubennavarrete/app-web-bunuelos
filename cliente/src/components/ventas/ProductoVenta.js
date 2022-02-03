@@ -1,22 +1,48 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
+import Swal from "sweetalert2";
 
 import shopping from "../../assets/shopping.svg";
 
+import VentasContext from "../../context/ventas/ventaContext";
+
 const ProductoVenta = ({ productosVenta }) => {
+  //Obtener las funcnciones del context de Ventas
+  const ventasContext = useContext(VentasContext);
+
+  const { obtenerItemsDetalleVentas, clienteSeleccionado } = ventasContext;
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
 
-  console.log("productoVenta: ", productosVenta);
   const precio_usd = formatter.format(productosVenta.precio);
 
   const caducidad = productosVenta.fechaCad;
 
+  const comprobar = () => {
+    if (clienteSeleccionado != null) {
+      productosVenta.count = 0;
+      productosVenta.pTotal = 0;
+      obtenerItemsDetalleVentas(productosVenta);
+    } else {
+      Swal.fire({
+        title: "Consejo",
+        text: "Antes de continuar ingresa las cedula del cliente para la facturacion!",
+        icon: "info",
+        timer: "5000",
+      });
+    }
+  };
+
   return (
     <Fragment>
       <div className="container">
-        <div className="list">
+        <button
+          className="list"
+          onClick={() => comprobar()}
+          // disabled={productosVenta.seleccionado === true ? true : null}
+        >
           <img
             src={
               productosVenta.fotoUrl !== null
@@ -35,7 +61,7 @@ const ProductoVenta = ({ productosVenta }) => {
           <div className="shoping-img">
             <img src={shopping} alt="" />
           </div>
-        </div>
+        </button>
       </div>
     </Fragment>
   );
