@@ -27,9 +27,9 @@ Content-Type: application/json
 {
     "nombre": "Pan de Chocolate",
     "categoria": "PA",
-    "precio": "0.15",
+    "precio": 0.15,
     "stock": 100,
-    "fechElab": "2022-01-30T00:00:00.00Z",
+    "fechElab": "2022-02-30T00:00:00.00Z",
     "foto": "https://www.google.com/search?q=pan+de+arroz&rlz=1C1UUXU_esEC988EC988&sxsrf=AOaemvIBnSr36OXYinyl5t4bZg4XWC0xIw:1643055616870&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjE4Y6Tm8v1AhVekokEHbIvDKQQ_AUoAXoECAIQAw&biw=1536&bih=754&dpr=1.25#imgrc=sTdGsu5DXk5GiM"
 }
 

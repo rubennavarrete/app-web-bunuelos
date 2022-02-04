@@ -64,4 +64,34 @@ export const queries = {
 
   // conocer en que número de orden se está
   OC: "select COUNT(numOrden) as OC from OrdenCompra",
+
+    // ----------------------------------------------INICIO-------------------------------------------
+
+      // CAJA DE HOY
+      caja:"EXEC sp_gananciahoy",
+
+      //Número de productos toteles registrados
+      procT: "EXEC sp_Tproducto",
+
+      //número totales de compras realizadas
+      nCompras: "EXEC sp_Tordencompra",
+
+      //Número de clientes toteles registrados
+      clientT: "EXEC sp_Tcliente",
+
+    // ----------------------------------------------REPORTES-------------------------------------------
+    //Para mostrar la tabla Orden de Compra
+    OrdenCompra: "select * from OrdenCompra",
+
+    //Para mostrar la tabla Orden de Compra
+    PporAcabarse: "exec sp_PporAcabarse",
+
+    //Para mostrar la tabla Orden de Compra
+    Pcaducados: "exec sp_Pcaducados",
+
+    //Para mostrar la tabla Orden de Compra
+    CumpleañosCli: "sp_CumpleañosCli",
+
+     //Para mostrar la tabla Orden de Compra
+    factura: "select * from OrdenCompra oc inner join DetalleVenta dv on dv.numOrd=oc.numOrden",
 };

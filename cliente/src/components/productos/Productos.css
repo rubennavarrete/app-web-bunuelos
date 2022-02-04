@@ -34,12 +34,37 @@ body {
   padding: 2rem;
   background: white;
   border-radius: 15px;
-  font-size: 20px;
-  overflow-y: scroll;
-  height: 65vh;
+  font-size: 18px;
+  height: 68vh;
 }
 
-ol {
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+ol.gradient-list::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+ol.gradient-list::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+ol.gradient-list::-webkit-scrollbar-button:increment,
+ol.gradient-list::-webkit-scrollbar-button {
+  display: none;
+}
+
+ol.gradient-list::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+ol.gradient-list::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+ol.gradient-list::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 
 ol.gradient-list {
@@ -47,6 +72,8 @@ ol.gradient-list {
   list-style: none;
   margin: 1.75rem 0;
   padding-left: 1rem;
+  overflow-y: scroll;
+  height: 55vh;
 }
 ol.gradient-list > li {
   background: white;
@@ -151,7 +178,7 @@ ol.gradient-list > li + li {
 }
 .encabezado {
   display: flex;
-  margin-left: 45px;
+  margin-left: 70px;
   text-align: center;
 }
 
@@ -170,7 +197,7 @@ ol.gradient-list > li > p {
 }
 
 ol.gradient-list > li > img {
-  height: 150px;
+  height: 140px;
   width: 200px;
   border-radius: 5px;
 }

@@ -13,8 +13,9 @@ const MainLayout = ({ children, ...props }) => {
   const search = useLocation().pathname;
 
   const token = localStorage.getItem("token");
+
   var decoded = jwt_decode(token);
-  console.log(decoded);
+
   return (
     <div className="contenedor-app">
       <aside>

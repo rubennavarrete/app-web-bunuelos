@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
+// import Router from "react-router-dom";
 import Swal from "sweetalert2";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 import ProductosContext from "../../context/Productos/productoContext";
+import VentasContext from "../../context/ventas/ventaContext";
+
+import clienteAxios from "../../config/axios";
+import ValidarCedula from "../../utils/validarCedula";
 
 const Sidebar = ({ query }) => {
+  // const router = useRouter();
   //Obtener el stado de los botones
 
   //Obtener las funcnciones del context de Clientes
@@ -25,8 +31,12 @@ const Sidebar = ({ query }) => {
     obtenerProductoActualizar,
     mostrarEditarProducto,
     mostrarActualizarProducto,
-    actualizar,
   } = productoContext;
+
+  //Obtener las funcnciones del context de Ventas
+  const ventasContext = useContext(VentasContext);
+  const { obtenerCedulaFactura, mostrarVistaVenta, mostrarIngresarCliente } =
+    ventasContext;
 
   //Metodos para el el componente de Clientes
 
@@ -160,6 +170,67 @@ const Sidebar = ({ query }) => {
     mostrarEditarProducto();
   };
 
+  // Metodos para el componente de ventas
+
+  const verificarCliente = () => {
+    Swal.fire({
+      title: "Cedula Identidad",
+      text: "Ingrese la cedula del cliente para realizar la factura!",
+      input: "number",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Verificar",
+      showLoaderOnConfirm: true,
+      preConfirm: async (ci) => {
+        if (!ValidarCedula(ci)) {
+          Swal.fire({
+            title: "Ingresa una cedula valida",
+            text: "La cedula no perteneacea a ninguna regin",
+            icon: "warning",
+            timer: "3000",
+          });
+          return;
+        }
+
+        const resultado = await clienteAxios.get(
+          `/api/clientes/buscar/${ci ? ci : "null"}`
+        );
+
+        if (resultado.data.length === 0) {
+          Swal.fire({
+            title: "El cliente no existe en la base de datos",
+            text: "Desea Registrar el cliente!",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Registrar",
+            denyButtonText: "No registrar",
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              mostrarIngresarCliente();
+            } else if (result.isDenied) {
+              return;
+            }
+          });
+        } else {
+          obtenerCedulaFactura(resultado.data[0]);
+
+          Swal.fire({
+            title: " Muy Bien",
+            text: "Cliente verificado",
+            icon: "success",
+            timer: "2000",
+          });
+
+          mostrarVistaVenta();
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  };
+
   switch (query) {
     case "/inicio":
       return "";
@@ -209,16 +280,14 @@ const Sidebar = ({ query }) => {
     case "/ventas":
       return (
         <div className="crud">
-          <h2>Menu ventas</h2>;
+          <button className="button button2" onClick={() => verificarCliente()}>
+            Cedula del CLiente
+          </button>
         </div>
       );
 
     case "/reportes":
-      return (
-        <div className="crud">
-          <h2>Menu reportes</h2>;
-        </div>
-      );
+      return <div className="crud no-print"></div>;
 
     default:
   }

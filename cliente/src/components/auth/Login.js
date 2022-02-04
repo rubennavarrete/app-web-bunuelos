@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AlertaContext from "../../context/alertas/alertaContext";
 import AuthContext from "../../context/autenticacion/authContext";
+import jwt_decode from "jwt-decode";
 
 const Login = (props) => {
   // extraer los valores del context
@@ -14,7 +15,10 @@ const Login = (props) => {
   useEffect(() => {
     if (autenticado) {
       // props.history.push("/inicio");
-      window.location = "/inicio";
+      const token = localStorage.getItem("token");
+      var decoded = jwt_decode(token);
+      if (decoded.tipoUs === "V") window.location = "/productos";
+      else window.location = "/inicio";
     }
 
     if (mensaje) {

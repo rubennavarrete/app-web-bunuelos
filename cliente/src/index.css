@@ -168,6 +168,7 @@ aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #303030;
 }
 .crud {
 }
@@ -526,6 +527,7 @@ aside {
   width: 100%;
   display: flex;
   justify-content: center;
+  font-size: 22px;
 }
 
 .button2:hover {

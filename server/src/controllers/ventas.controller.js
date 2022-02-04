@@ -2,7 +2,7 @@ import { getConnection, sql, queries } from "../database";
 
 //Obtener todos los productos que pueden ser vendidos
 
-export const mostrarPAVender = async (res) => {
+export const mostrarPAVender = async (req, res) => {
   try {
     console.log("estoy en el try");
 
@@ -19,33 +19,25 @@ export const mostrarPAVender = async (res) => {
 export const detalleventa = async (req, res) => {
   const { no } = req.params;
   let result;
-  try{
+  try {
     const pool = await getConnection();
 
-  if (no !== "null") {
-    result = await pool
+    if (no !== "null") {
+      result = await pool.request().input("no", no).query(queries.detalleventa);
+    }
 
-    .request()
-    .input("no", no)
-    .query(queries.detalleventa);
-  } 
-
-  res.send(result.recordset);
-  }catch (error) {
-   // res.status(500);
-    //res.send(error.message);
+    res.send(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
   }
-  
 };
 
 export const generarOC = async (req, res) => {
-  
   console.log("entre a la fucion de controlller");
   try {
-
     const pool = await getConnection();
     const result = await pool.request().query(queries.generarOC);
-   
   } catch (error) {
     //res.status(500);
    // res.send(error.message);
@@ -53,8 +45,7 @@ export const generarOC = async (req, res) => {
 };
 
 export const llenarOrdenCompra = async (req, res) => {
-  const { oc, Vtotal, fech, cedulC, usernameU} =
-    req.body;
+  const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
   console.log(oc, Vtotal, fech, cedulC, usernameU);
   if (
     oc == null ||
@@ -85,7 +76,7 @@ export const llenarOrdenCompra = async (req, res) => {
       Vtotal,
       fech,
       cedulC,
-      usernameU
+      usernameU,
     });
   } catch (error) {
    // res.status(500);
@@ -95,14 +86,9 @@ export const llenarOrdenCompra = async (req, res) => {
 //--------------------------------------------------------
 
 export const insertarDv = async (req, res) => {
-  const { codPro, nOrd, cant} =
-    req.body;
+  const { codPro, nOrd, cant } = req.body;
   console.log(codPro, nOrd, cant);
-  if (
-    codPro == null ||
-    nOrd == null ||
-    cant == null
-  ) {
+  if (codPro == null || nOrd == null || cant == null) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
@@ -121,7 +107,7 @@ export const insertarDv = async (req, res) => {
     res.json({
       codPro,
       nOrd,
-      cant
+      cant,
     });
   } catch (error) {
    // res.status(500);
@@ -144,15 +130,12 @@ export const borrarDv = async (req, res) => {
 };
 //--------------------------------------------------------
 export const modificarDv = async (req, res) => {
-  const { nOrd, cant} = req.body;
+  const { nOrd, cant } = req.body;
   console.log(nOrd, cant);
   //viene desde el interno
   const { codPro } = req.params;
   //desde el body
-  if (
-    nOrd == null ||
-    cant == null
-  ) {
+  if (nOrd == null || cant == null) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
@@ -170,7 +153,7 @@ export const modificarDv = async (req, res) => {
 
     res.json({
       nOrd,
-      cant
+      cant,
     });
   } catch (error) {
    // res.send(error.message);
@@ -181,9 +164,7 @@ export const OC = async (req, res) => {
   let result;
   const pool = await getConnection();
 
-    result = await pool
-      .request()
-      .query(queries.OC);
+  result = await pool.request().query(queries.OC);
 
   res.send(result.recordset);
 };
