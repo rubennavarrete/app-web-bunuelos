@@ -76,7 +76,9 @@ const Clientes = () => {
                         return <Tabla key={item.cedulaCli} clientes={item} />;
                       })
                     ) : (
-                      <p>No se encontron clientes</p>
+                      <p className="mensaje-vistas">
+                        No se encontron clientes!
+                      </p>
                     )}
                   </tbody>
                 </table>

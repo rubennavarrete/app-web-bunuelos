@@ -17,7 +17,7 @@ const User = (datos) => {
     navigate("/");
   };
   return (
-    <div className="user">
+    <div className="user no-print">
       <img src={datos.decoded.urImgUs} alt="imagen de usuario" />
       <h3>{datos.decoded.nombreUS}</h3>
       <p>{datos.decoded.tipoUs === "A" ? "Administrador" : "Vendedor"}</p>

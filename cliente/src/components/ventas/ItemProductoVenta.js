@@ -1,34 +1,72 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import VentasContext from "../../context/ventas/ventaContext";
 
-const ItenProductoVenta = () => {
+const ItenProductoVenta = ({ intemsDetalleVenta }) => {
+  const ventasContext = useContext(VentasContext);
+  const { actualizarDetalleVenta, eliminarItems } = ventasContext;
+
+  let [cantidad, guardarCantidad] = useState(1);
+  let [total, guardarTotal] = useState(intemsDetalleVenta.precio);
+
+  const aumentar = () => {
+    cantidad++;
+    guardarCantidad(cantidad);
+    guardarTotal(cantidad * intemsDetalleVenta.precio);
+    actualizarDetalleVenta();
+  };
+
+  const disminuir = () => {
+    if (cantidad !== 1) {
+      cantidad--;
+      guardarCantidad(cantidad);
+      guardarTotal(cantidad * intemsDetalleVenta.precio);
+      actualizarDetalleVenta();
+    } else {
+      cantidad = 1;
+    }
+  };
+
+  intemsDetalleVenta.count = cantidad;
+  intemsDetalleVenta.pTotal = total;
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const precio_usd = formatter.format(intemsDetalleVenta.precio);
+
+  const preciototal = formatter.format(total);
+
   return (
     <div className="tr_item">
       <div className="td_item item_img">
-        <img
-          src="https://image.freepik.com/free-photo/fresh-bread_155003-937.jpg"
-          alt=""
-        />
+        <img src={intemsDetalleVenta.fotoUrl} alt="" />
       </div>
       <div className="td_item item_name">
-        <label className="main">Pan molde</label>
+        <label className="main">{intemsDetalleVenta.nombre}</label>
       </div>
       <div className="td_item item_color">
-        <label>1.75</label>
+        <label>{precio_usd}</label>
       </div>
       <div className="td_item item_qty cantidad">
-        <span class="pqt-minus">-</span>
-        <button class="cart-button">
-          <span class="add-to-cart">2</span>
-          <span class="added"></span>
-          <i class="fa fa-shopping-cart"></i>
+        <button className="pqt-minus" onClick={() => disminuir()}>
+          -
         </button>
-        <span class="pqt-plus">+</span>
+        <span className="cantidad-cart">{cantidad}</span>
+        <button className="pqt-plus" onClick={() => aumentar()}>
+          +
+        </button>
       </div>
       <div className="td_item item_price">
-        <label>$ 3.50</label>
+        <label>{preciototal}</label>
       </div>
       <div className="td_item item_remove">
-        <span className="material-icons-outlined">close</span>
+        <span
+          className="material-icons-outlined"
+          onClick={() => eliminarItems(intemsDetalleVenta.codProducto)}
+        >
+          close
+        </span>
       </div>
     </div>
   );

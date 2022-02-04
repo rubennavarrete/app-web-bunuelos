@@ -168,6 +168,7 @@ aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #303030;
 }
 .crud {
 }
