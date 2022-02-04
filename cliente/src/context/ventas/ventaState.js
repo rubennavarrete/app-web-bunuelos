@@ -14,6 +14,7 @@ import {
   CERRAR_INGRESAR_CLIENTE,
   CANCELAR_VENTA,
   ACTUALIZAR_DETALLE_VENTA,
+  ELIMINAR_ITEMS,
 } from "../../types";
 
 const VentasState = (props) => {
@@ -79,6 +80,14 @@ const VentasState = (props) => {
     });
   };
 
+  // Metodo para elimina intenms del detalle de ventas
+  const eliminarItems = (intemsDetalleVenta) => {
+    dispatch({
+      type: ELIMINAR_ITEMS,
+      payload: intemsDetalleVenta,
+    });
+  };
+
   //Funciones para el CRUD
 
   // Obtener todos los productos de la base de datos
@@ -117,6 +126,7 @@ const VentasState = (props) => {
         cerrarIngresarCliente,
         cancelarVenta,
         actualizarDetalleVenta,
+        eliminarItems,
       }}
     >
       {props.children}

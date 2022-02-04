@@ -376,7 +376,7 @@ body {
 .cart_wrapper .cart_lists .cart_list_wrap .cart_responsive {
   overflow-x: auto;
   overflow-y: auto;
-  min-height: 39vh;
+  height: 39vh;
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .cart_wrapper .cart_lists .cart_list_wrap .cart_responsive {
@@ -1761,6 +1761,9 @@ body {
   span:hover {
   opacity: 1;
   transform: scale(1.1);
+  background: #2b3044;
+  color: #fff;
+  border-radius: 50%;
 }
 .cart_wrapper .cart_lists .cart_list_wrap .footer {
   display: flex;
@@ -1983,7 +1986,6 @@ body {
   padding-top: 20px;
   margin-bottom: 20px;
   border-top: 2px dashed #aca8a8;
-
   font-size: 18px;
 }
 
@@ -1994,6 +1996,11 @@ body {
 .paypal__cart-item:last-child {
   margin-bottom: 0;
   border-top: 2px solid #ffe155;
+}
+
+.paypal__cart-item .contenedor-detalle {
+  display: grid;
+  grid-template-columns: 160px 55px 70px;
 }
 
 .paypal__index {

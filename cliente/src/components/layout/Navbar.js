@@ -17,7 +17,9 @@ const Navbar = (query) => {
       {decoded.tipoUs === "A" ? (
         <NavLink
           to={"/inicio"}
-          className={`customBtn boton ${query === "/inicio" ? "active" : ""}`}
+          className={`customBtn boton no-print ${
+            query === "/inicio" ? "active" : ""
+          }`}
         >
           <div className={styles.link}>
             {/* <img src={} alt="" /> */}
@@ -31,7 +33,9 @@ const Navbar = (query) => {
       {decoded.tipoUs === "A" ? (
         <NavLink
           to={"/clientes"}
-          className={`customBtn boton ${query === "/clientes" ? "active" : ""}`}
+          className={`customBtn boton no-print ${
+            query === "/clientes" ? "active" : ""
+          }`}
         >
           <div className={styles.link}>
             {/* <img src={} alt="" /> */}
@@ -44,7 +48,9 @@ const Navbar = (query) => {
 
       <NavLink
         to={"/productos"}
-        className={`customBtn boton ${query === "/productos" ? "active" : ""}`}
+        className={`customBtn boton no-print ${
+          query === "/productos" ? "active" : ""
+        }`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}
@@ -53,7 +59,9 @@ const Navbar = (query) => {
       </NavLink>
       <NavLink
         to={"/ventas"}
-        className={`customBtn boton ${query === "/ventas" ? "active" : ""}`}
+        className={`customBtn boton no-print ${
+          query === "/ventas" ? "active" : ""
+        }`}
       >
         <div className={styles.link}>
           {/* <img src={venta} alt="svg venta" /> */}
@@ -62,7 +70,9 @@ const Navbar = (query) => {
       </NavLink>
       <NavLink
         to={"/reportes"}
-        className={`customBtn boton ${query === "/reportes" ? "active" : ""}`}
+        className={`customBtn boton no-print ${
+          query === "/reportes" ? "active" : ""
+        }`}
       >
         <div className={styles.link}>
           {/* <img src={} alt="" /> */}

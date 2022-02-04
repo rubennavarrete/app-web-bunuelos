@@ -7,7 +7,9 @@ import logo from "../../assets/Logo.svg";
 
 const Factura = () => {
   const ventasContext = useContext(VentasContext);
-  const { clienteSeleccionado } = ventasContext;
+  const { clienteSeleccionado, intemsDetalleVenta } = ventasContext;
+
+  const hoy = new Date().toISOString().substring(0, 10);
 
   return (
     <div className="paypal">
@@ -17,7 +19,7 @@ const Factura = () => {
         </div>
 
         <div className="paypal__header-info">
-          <span className="paypal__date">25.04.2016</span>
+          <span className="paypal__date">{hoy}</span>
           <span className="paypal__ref">0f-113</span>
         </div>
       </div>
@@ -45,11 +47,18 @@ const Factura = () => {
 
         <ul className="paypal__cart-list">
           <div className="contenedor-iten-factura">
-            <ItemProductoFactura />
-            <ItemProductoFactura />
-            <ItemProductoFactura />
-            <ItemProductoFactura />
-            <ItemProductoFactura />
+            {intemsDetalleVenta.length > 0 ? (
+              intemsDetalleVenta.map((item) => {
+                return (
+                  <ItemProductoFactura
+                    key={item.codProducto}
+                    intemsDetalleVenta={item}
+                  />
+                );
+              })
+            ) : (
+              <p className="">Seleccione los productos!</p>
+            )}
           </div>
 
           <li className="paypal__cart-item">

@@ -1,11 +1,20 @@
 import React from "react";
 
-const ItemProductoFactura = () => {
+const ItemProductoFactura = ({ intemsDetalleVenta }) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const precioTP = formatter.format(intemsDetalleVenta.pTotal);
+
   return (
     <li className="paypal__cart-item">
-      <span className="paypal__index">1</span>
-      <span className="paypal__item-name">t-Shirt Lacoste</span>
-      <span className="paypal__item-price">$48.00</span>
+      <div className="contenedor-detalle">
+        <span className="paypal__item-name">{intemsDetalleVenta.nombre}</span>
+        <span className="paypal__index">{intemsDetalleVenta.count}</span>
+        <span className="paypal__item-price">{precioTP}</span>
+      </div>
     </li>
   );
 };

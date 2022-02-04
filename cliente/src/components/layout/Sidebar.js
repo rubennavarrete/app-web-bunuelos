@@ -287,11 +287,7 @@ const Sidebar = ({ query }) => {
       );
 
     case "/reportes":
-      return (
-        <div className="crud">
-          <h2>Menu reportes</h2>;
-        </div>
-      );
+      return <div className="crud no-print"></div>;
 
     default:
   }

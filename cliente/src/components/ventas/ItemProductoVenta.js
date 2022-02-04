@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import VentasContext from "../../context/ventas/ventaContext";
 
 const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   const ventasContext = useContext(VentasContext);
-  const { actualizarDetalleVenta } = ventasContext;
+  const { actualizarDetalleVenta, eliminarItems } = ventasContext;
 
   let [cantidad, guardarCantidad] = useState(1);
   let [total, guardarTotal] = useState(intemsDetalleVenta.precio);
-
-  // useEffect(() => {
-  //   precioTotal();
-  // }, [cantidad]);
 
   const aumentar = () => {
     cantidad++;
@@ -29,11 +25,6 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
       cantidad = 1;
     }
   };
-
-  // const precioTotal = () => {
-  //   total = cantidad * intemsDetalleVenta.precio;
-  //   guardarTotal(total);
-  // };
 
   intemsDetalleVenta.count = cantidad;
   intemsDetalleVenta.pTotal = total;
@@ -70,7 +61,12 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
         <label>{preciototal}</label>
       </div>
       <div className="td_item item_remove">
-        <span className="material-icons-outlined">close</span>
+        <span
+          className="material-icons-outlined"
+          onClick={() => eliminarItems(intemsDetalleVenta.codProducto)}
+        >
+          close
+        </span>
       </div>
     </div>
   );

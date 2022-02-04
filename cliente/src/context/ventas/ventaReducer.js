@@ -7,6 +7,7 @@ import {
   CERRAR_INGRESAR_CLIENTE,
   CANCELAR_VENTA,
   ACTUALIZAR_DETALLE_VENTA,
+  ELIMINAR_ITEMS,
 } from "../../types";
 
 export default (state, action) => {
@@ -33,6 +34,13 @@ export default (state, action) => {
       return {
         ...state,
         intemsDetalleVenta: [...state.intemsDetalleVenta, action.payload],
+      };
+    case ELIMINAR_ITEMS:
+      return {
+        ...state,
+        intemsDetalleVenta: state.intemsDetalleVenta.filter(
+          (item) => item.codProducto !== action.payload
+        ),
       };
     case MOSTRAR_INGRESAR_CLIENTE:
       return {

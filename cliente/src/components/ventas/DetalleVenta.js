@@ -80,6 +80,7 @@ const DetalleVenta = () => {
   ];
 
   useEffect(() => {
+    console.log("useEffect");
     guardarCalcIva((subTotal * ivaT.value) / 100);
     guardarTotal(
       parseInt(subTotal) + parseFloat((subTotal * ivaT.value) / 100)
@@ -88,18 +89,16 @@ const DetalleVenta = () => {
   }, [state, intemsDetalleVenta, ivaT, subTotal]);
 
   const calcularTotal = () => {
-    let valor;
-    if (intemsDetalleVenta.length === 1) valor = intemsDetalleVenta[0].pTotal;
-    else {
-      valor =
-        intemsDetalleVenta.length === 0
-          ? 0
-          : intemsDetalleVenta.reduce((prev, cur) => {
-              return prev.pTotal + cur.pTotal;
-            });
-    }
-    // console.log("valor: ", valor);
-    guardarSubtotal(valor);
+    const valor =
+      intemsDetalleVenta.length === 0
+        ? 0
+        : intemsDetalleVenta.reduce((prev, cur) => {
+            console.log("prev: ", prev);
+            console.log("cur: ", cur);
+            return { pTotal: prev.pTotal + cur.pTotal };
+          });
+    console.log("valor: ", valor);
+    guardarSubtotal(valor.pTotal);
   };
 
   const formatMoney = (prev_price) => {
