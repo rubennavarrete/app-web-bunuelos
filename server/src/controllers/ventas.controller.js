@@ -4,12 +4,15 @@ import { getConnection, sql, queries } from "../database";
 
 export const mostrarPAVender = async (res) => {
   try {
+    console.log("estoy en el try");
+
     const pool = await getConnection();
     const result = await pool.request().query(queries.mostrarPAVender);
     res.json(result.recordset);
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    console.log(error);
+   // res.status(500);
+   // res.send(error.message);
   }
 };
 
@@ -29,8 +32,8 @@ export const detalleventa = async (req, res) => {
 
   res.send(result.recordset);
   }catch (error) {
-    res.status(500);
-    res.send(error.message);
+   // res.status(500);
+    //res.send(error.message);
   }
   
 };
@@ -44,8 +47,8 @@ export const generarOC = async (req, res) => {
     const result = await pool.request().query(queries.generarOC);
    
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    //res.status(500);
+   // res.send(error.message);
   }
 };
 
@@ -85,8 +88,8 @@ export const llenarOrdenCompra = async (req, res) => {
       usernameU
     });
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+   // res.status(500);
+   // res.send(error.message);
   }
 };
 //--------------------------------------------------------
@@ -121,8 +124,8 @@ export const insertarDv = async (req, res) => {
       cant
     });
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+   // res.status(500);
+   // res.send(error.message);
   }
 };
 //--------------------------------------------------------
@@ -170,8 +173,7 @@ export const modificarDv = async (req, res) => {
       cant
     });
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+   // res.send(error.message);
   }
 };
 //--------------------------------------------------------

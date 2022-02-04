@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ### Eliminando un producto por su código de producto  
-DELETE {{api}}/AA03
+DELETE {{api}}/AA15
 
 ### Obteniendo todos los productos que coinciden con la entrada 
-GET {{api}}/buscar/A
+GET {{api}}/OC
