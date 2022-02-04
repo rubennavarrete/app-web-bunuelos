@@ -28,6 +28,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
 
   intemsDetalleVenta.count = cantidad;
   intemsDetalleVenta.pTotal = total;
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -36,6 +37,11 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   const precio_usd = formatter.format(intemsDetalleVenta.precio);
 
   const preciototal = formatter.format(total);
+
+  const botonEliminar = () => {
+    eliminarItems(intemsDetalleVenta.codProducto);
+    intemsDetalleVenta.seleccionado = false;
+  };
 
   return (
     <div className="tr_item">
@@ -63,7 +69,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
       <div className="td_item item_remove">
         <span
           className="material-icons-outlined"
-          onClick={() => eliminarItems(intemsDetalleVenta.codProducto)}
+          onClick={() => botonEliminar()}
         >
           close
         </span>

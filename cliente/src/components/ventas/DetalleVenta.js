@@ -6,7 +6,8 @@ import VentasContext from "../../context/ventas/ventaContext";
 
 const DetalleVenta = () => {
   const ventasContext = useContext(VentasContext);
-  const { cancelarVenta, intemsDetalleVenta, state } = ventasContext;
+  const { cancelarVenta, intemsDetalleVenta, state, vistaIngresar } =
+    ventasContext;
 
   const [subTotal, guardarSubtotal] = useState(0);
   const [ivaT, cambiarIvaT] = useState({ value: 0 });
@@ -86,6 +87,7 @@ const DetalleVenta = () => {
       parseInt(subTotal) + parseFloat((subTotal * ivaT.value) / 100)
     );
     calcularTotal();
+    if (vistaIngresar === false) intemsDetalleVenta.seleccionado = true;
   }, [state, intemsDetalleVenta, ivaT, subTotal]);
 
   const calcularTotal = () => {
@@ -113,6 +115,10 @@ const DetalleVenta = () => {
 
   const handleChange = (e) => {
     cambiarIvaT({ value: e.target.value });
+  };
+
+  const cancelarLaVenta = () => {
+    cancelarVenta();
   };
 
   return (
@@ -172,7 +178,7 @@ const DetalleVenta = () => {
         </div>
       </div>
       <div className="contenedor-boton-cancelar">
-        <button className="cart-button" onClick={() => cancelarVenta()}>
+        <button className="cart-button" onClick={() => cancelarLaVenta()}>
           Cancelar Venta
         </button>
       </div>

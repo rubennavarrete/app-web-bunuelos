@@ -24,6 +24,7 @@ const ProductoVenta = ({ productosVenta }) => {
     if (clienteSeleccionado != null) {
       productosVenta.count = 0;
       productosVenta.pTotal = 0;
+      productosVenta.seleccionado = true;
       obtenerItemsDetalleVentas(productosVenta);
     } else {
       Swal.fire({
@@ -41,7 +42,7 @@ const ProductoVenta = ({ productosVenta }) => {
         <button
           className="list"
           onClick={() => comprobar()}
-          // disabled={productosVenta.seleccionado === true ? true : null}
+          disabled={productosVenta.seleccionado === true ? true : null}
         >
           <img
             src={
