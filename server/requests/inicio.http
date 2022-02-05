@@ -1,0 +1,15 @@
+@api = http://localhost:4000/api/inicio
+
+### caja de hoy
+GET {{api}}/caj
+
+### número total de productos
+GET {{api}}/pt
+
+### total ventas
+GET {{api}}/cn
+
+### clientes totales
+GET {{api}}/ct
+
+

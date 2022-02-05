@@ -113,6 +113,7 @@ const VentasState = (props) => {
     <VentasContext.Provider
       value={{
         state,
+        bloquear: state.bloquear,
         productosVenta: state.productosVenta,
         intemsDetalleVenta: state.intemsDetalleVenta,
         mostrarDetalleVenta: state.mostrarDetalleVenta,

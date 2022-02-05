@@ -1,0 +1,17 @@
+@api = http://localhost:4000/api/reportes
+
+### caja de hoy
+GET {{api}}/oc
+
+### número total de productos
+GET {{api}}/acabarse
+
+### total ventas
+GET {{api}}/caducados
+
+### clientes totales
+GET {{api}}/cumple
+
+### clientes totales
+GET {{api}}/factu
+
