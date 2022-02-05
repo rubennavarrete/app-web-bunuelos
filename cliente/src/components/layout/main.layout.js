@@ -19,10 +19,16 @@ const MainLayout = ({ children, ...props }) => {
   return (
     <div className="contenedor-app">
       <aside>
-        <div className="logo">
+        <div className="logo no-print">
           <img src={logo} alt="svg venta" />
         </div>
         <Sidebar query={search} />
+
+        <button
+          className="button button2 no-print" /*onClick={() => verificarCliente()}*/
+        >
+          Ayuda
+        </button>
 
         <User decoded={decoded} />
       </aside>

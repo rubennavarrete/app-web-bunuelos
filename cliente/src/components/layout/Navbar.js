@@ -11,7 +11,7 @@ const Navbar = (query) => {
   const token = localStorage.getItem("token");
 
   var decoded = jwt_decode(token);
-  console.log("decoded.tipoUs: ", decoded);
+
   return (
     <div className={styles.links}>
       {decoded.tipoUs === "A" ? (
