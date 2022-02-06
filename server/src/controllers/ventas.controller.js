@@ -68,45 +68,45 @@ export const InsertarOrdenCompra = async (req, res) => {
   }
 };
 
-export const llenarOrdenCompra = async (req, res) => {
-  const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
-  console.log(oc, Vtotal, fech, cedulC, usernameU);
-  if (
-    oc == null ||
-    Vtotal == null ||
-    fech == null ||
-    cedulC == null ||
-    usernameU == null
-  ) {
-    return res.status(400).json({
-      msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
-    });
-  }
+// export const llenarOrdenCompra = async (req, res) => {
+//   const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
+//   console.log(oc, Vtotal, fech, cedulC, usernameU);
+//   if (
+//     oc == null ||
+//     Vtotal == null ||
+//     fech == null ||
+//     cedulC == null ||
+//     usernameU == null
+//   ) {
+//     return res.status(400).json({
+//       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
+//     });
+//   }
 
-  try {
-    const pool = await getConnection();
+//   try {
+//     const pool = await getConnection();
 
-    await pool
-      .request()
-      .input("oc", sql.Int, oc)
-      .input("Vtotal", sql.Decimal, Vtotal)
-      .input("fech", sql.Date, fech)
-      .input("cedulC", sql.VarChar, cedulC)
-      .input("usernameU", sql.VarChar, usernameU)
-      .query(queries.llenarOrdenCompra);
+//     await pool
+//       .request()
+//       .input("oc", sql.Int, oc)
+//       .input("Vtotal", sql.Decimal, Vtotal)
+//       .input("fech", sql.Date, fech)
+//       .input("cedulC", sql.VarChar, cedulC)
+//       .input("usernameU", sql.VarChar, usernameU)
+//       .query(queries.llenarOrdenCompra);
 
-    res.json({
-      oc,
-      Vtotal,
-      fech,
-      cedulC,
-      usernameU,
-    });
-  } catch (error) {
-    // res.status(500);
-    // res.send(error.message);
-  }
-};
+//     res.json({
+//       oc,
+//       Vtotal,
+//       fech,
+//       cedulC,
+//       usernameU,
+//     });
+//   } catch (error) {
+//     // res.status(500);
+//     // res.send(error.message);
+//   }
+// };
 //--------------------------------------------------------
 
 export const insertarDv = async (req, res) => {

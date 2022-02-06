@@ -18,7 +18,7 @@ router.get("/ventas/dv/:no", detalleventa);
 
 router.post("/ventas/generarOc", InsertarOrdenCompra);
 
-router.post("/ventas/llenarOC", llenarOrdenCompra);
+// router.post("/ventas/llenarOC", llenarOrdenCompra);
 
 router.post("/ventas/insertarDv", insertarDv);
 
