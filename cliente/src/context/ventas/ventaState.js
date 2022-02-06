@@ -117,7 +117,7 @@ const VentasState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los Productos de Venta!",
+        text: "No pudimos obtener la información de los Productos de Venta!",
       });
     }
   };

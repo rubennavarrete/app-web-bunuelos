@@ -36,7 +36,7 @@ const InputProducto = ({
         if (resultado.data[0].codProducto !== undefined) {
           Swal.fire({
             title: " Alto",
-            text: "El producto que intenta registrar ya existe en la base de datos. Prueba con otra Código!",
+            text: "El producto que intenta registrar, ya existe en la base de datos. Prueba con otra Código!",
             icon: "warning",
           });
 

@@ -46,7 +46,7 @@ const BotonesR = () => {
             <img src={detalleV} alt="" />
           </div>
           <div className="card_title title-white">
-            <p>Ordenes De Compra</p>
+            <p>Órdenes De Compra</p>
           </div>
         </div>
 

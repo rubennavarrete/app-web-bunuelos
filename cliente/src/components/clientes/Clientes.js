@@ -28,7 +28,7 @@ const Clientes = () => {
     obtenerClientes();
   }, [cedulaObte, agregar]);
 
-  // recvisar si los datos que vienen de clientes tiene contenido
+  // revisar si los datos que vienen de clientes tiene contenido
 
   const onChangeAgregar = (e) => {
     buscar(e.target.value);
@@ -48,7 +48,7 @@ const Clientes = () => {
                   <input
                     type="number"
                     id="search"
-                    placeholder="Numero de cedula..."
+                    placeholder="Número de cédula..."
                     onChange={onChangeAgregar}
                   />
                 </div>
@@ -59,10 +59,10 @@ const Clientes = () => {
                 <thead>
                   <tr>
                     <th style={{ width: 64 }}>#</th>
-                    <th style={{ width: 184 }}>Cedula</th>
+                    <th style={{ width: 184 }}>Cédula</th>
                     <th style={{ width: 253 }}>Nombre</th>
-                    <th style={{ width: 276 }}>Direccion</th>
-                    <th style={{ width: 181 }}>Telefono</th>
+                    <th style={{ width: 276 }}>Dirección</th>
+                    <th style={{ width: 181 }}>Teléfono</th>
                     <th style={{ width: 350 }}>Correo</th>
                     <th>Fecha</th>
                   </tr>
@@ -86,9 +86,9 @@ const Clientes = () => {
             </section>
           </Fragment>
         ) : mostarActualizar ? (
-          <Editar titulo={"Actualizar datos del Cliente"} />
+          <Editar titulo={"Actualizar los datos del Cliente"} />
         ) : (
-          <Editar titulo={"Ingresar datos del Cliente"} />
+          <Editar titulo={"Ingresar los datos del Cliente"} />
         )}
       </div>
     </MainLayout>

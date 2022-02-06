@@ -18,7 +18,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
     } else {
       Swal.fire({
         title: "Límite Alcanzado",
-        text: "Se ha alcanzado el limite de producto en stock ",
+        text: "Se ha alcanzado el límite de productos en stock ",
         icon: "warning",
       });
     }

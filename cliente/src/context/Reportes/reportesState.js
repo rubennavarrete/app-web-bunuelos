@@ -58,7 +58,7 @@ const ReporteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion los productos caducados!",
+        text: "No pudimos obtener la información de los productos caducados!",
       });
     }
   };
@@ -76,7 +76,7 @@ const ReporteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion los Productos por acabarse!",
+        text: "No pudimos obtener la información de los Productos por acabarse!",
       });
     }
   };
@@ -94,7 +94,7 @@ const ReporteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion los clientes cumpleañeros!",
+        text: "No pudimos obtener la información de los clientes cumpleañeros!",
       });
     }
   };

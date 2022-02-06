@@ -79,12 +79,12 @@ const Login = (props) => {
           </div>
 
           <div className="campo-form">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Contraseña</label>
             <input
               type="password"
               id="password"
               name="password"
-              placeholder="Tu Password"
+              placeholder="Contraseña"
               value={password}
               onChange={onChange}
             />
