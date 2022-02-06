@@ -28,7 +28,7 @@ const Clientes = () => {
     obtenerClientes();
   }, [cedulaObte, agregar]);
 
-  // recvisar si los datos que vienen de clientes tiene contenido
+  // revisar si los datos que vienen de clientes tiene contenido
 
   const onChangeAgregar = (e) => {
     buscar(e.target.value);
@@ -86,9 +86,9 @@ const Clientes = () => {
             </section>
           </Fragment>
         ) : mostarActualizar ? (
-          <Editar titulo={"Actualizar datos del Cliente"} />
+          <Editar titulo={"Actualizar los datos del Cliente"} />
         ) : (
-          <Editar titulo={"Ingresar datos del Cliente"} />
+          <Editar titulo={"Ingresar los datos del Cliente"} />
         )}
       </div>
     </MainLayout>

@@ -224,7 +224,7 @@ const Sidebar = ({ query }) => {
 
           Swal.fire({
             title: " Muy Bien",
-            text: "Cliente verificado",
+            text: "Cliente Verificado",
             icon: "success",
             timer: "2000",
           });
@@ -246,7 +246,7 @@ const Sidebar = ({ query }) => {
 
     Swal.fire({
       title: " Muy Bien",
-      text: "Cliente verificado",
+      text: "Cliente Verificado",
       icon: "success",
       timer: "2000",
     });
@@ -304,7 +304,7 @@ const Sidebar = ({ query }) => {
       return (
         <div className="crud">
           <button className="button button2" onClick={() => verificarCliente()}>
-            Cedula del Cliente
+            Cédula del Cliente
           </button>
 
           <button

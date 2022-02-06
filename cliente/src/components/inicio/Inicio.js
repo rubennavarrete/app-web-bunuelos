@@ -81,7 +81,7 @@ const Inicio = () => {
               </div>
             </div>
             <div class="card__stuff-container">
-              <div class="card__stuff-text"> Total Venta</div>
+              <div class="card__stuff-text"> Total de Ventas</div>
             </div>
           </div>
           <div class="card clientesT">

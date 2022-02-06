@@ -176,7 +176,7 @@ const EditarProductos = ({ titulo }) => {
             expressionRegular={expresiones.nombre}
           />
           <div className="campo-form-cliente">
-            <label>Categoria</label>
+            <label>Categoría</label>
             <div className="select">
               <select
                 onChange={(e) => handleChange(e)}

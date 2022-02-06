@@ -91,7 +91,7 @@ const PlantillaClientesRegistrados = ({
         </h2>
         <p>{encabezado}</p>
 
-        <h4>Datos Reporte</h4>
+        <h4>Datos del Reporte</h4>
 
         <table id="checkoutSummary">
           <tbody>
