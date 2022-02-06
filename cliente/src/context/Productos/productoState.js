@@ -82,7 +82,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los Productos!",
+        text: "No pudimos obtener la información de los Productos!",
       });
     }
   };
@@ -100,7 +100,7 @@ const ProductosState = (props) => {
 
       Swal.fire({
         title: " Muy Bien",
-        text: "Producto ingresado exitosamente",
+        text: "Producto ingresado exitósamente",
         icon: "success",
         timer: "3000",
       });
@@ -159,7 +159,7 @@ const ProductosState = (props) => {
 
       Swal.fire({
         title: " Muy Bien",
-        text: "Producto actualizado exitosamente",
+        text: "Producto actualizado exitósamente",
         icon: "success",
         timer: "3000",
       });
@@ -168,7 +168,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No se puede actualizar la informacion de este producto!",
+        text: "No se puede actualizar la información de este producto!",
       });
     }
   };
