@@ -16,7 +16,7 @@ import {
   MOSTRAR_ACTUALIZAR_PRODUCTO,
   ACTUALIZAR_PRODUCTO,
 } from "../../types";
-
+//funcion principal
 const ProductosState = (props) => {
   const initialState = {
     productos: [],
