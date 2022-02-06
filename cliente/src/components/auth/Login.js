@@ -84,7 +84,7 @@ const Login = (props) => {
               type="password"
               id="password"
               name="password"
-              placeholder="Tu Password"
+              placeholder="Contraseña"
               value={password}
               onChange={onChange}
             />

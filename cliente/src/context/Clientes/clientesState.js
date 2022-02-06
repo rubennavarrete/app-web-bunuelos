@@ -80,7 +80,7 @@ const ClienteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion los Clientes!",
+        text: "No pudimos obtener la información los Clientes!",
       });
     }
   };
@@ -99,7 +99,7 @@ const ClienteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion los Clientes!",
+        text: "No pudimos obtener la informacón los Clientes!",
       });
     }
   };
@@ -169,7 +169,7 @@ const ClienteState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No se puede actualizar la informacion de este cliente!",
+        text: "No se puede actualizar la información de este cliente!",
       });
     }
   };

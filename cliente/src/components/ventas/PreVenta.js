@@ -37,7 +37,7 @@ const PreVenta = () => {
         <Editar />
       ) : (
         <p className="mensaje-vistas">
-          Para iniciar con la venta ingresa el numero de cedula del cliente!
+          Para iniciar con la venta ingresa el número de cédula del cliente!
         </p>
       )}
     </Fragment>

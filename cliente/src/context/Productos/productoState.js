@@ -100,7 +100,7 @@ const ProductosState = (props) => {
 
       Swal.fire({
         title: " Muy Bien",
-        text: "Producto ingresado exitósamente",
+        text: "Producto ingresado exitosamente",
         icon: "success",
         timer: "3000",
       });
@@ -128,7 +128,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "El producto que buscas no existe!",
+        text: "El producto que buscas, no existe!",
       });
     }
   };
@@ -159,7 +159,7 @@ const ProductosState = (props) => {
 
       Swal.fire({
         title: " Muy Bien",
-        text: "Producto actualizado exitósamente",
+        text: "Producto actualizado exitosamente",
         icon: "success",
         timer: "3000",
       });
@@ -211,7 +211,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No se puede eliminar a este producto!",
+        text: "No se puede eliminar este producto!",
       });
     }
   };

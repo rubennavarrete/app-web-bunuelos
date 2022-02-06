@@ -48,7 +48,7 @@ const Inicio = () => {
       <div className="contenedor-inicio">
         <section class="title">
           <p>BuñuelosDias</p>
-          <p>Lo mejor para tu economia</p>
+          <p>Lo mejor para tu economía</p>
         </section>
 
         <section class="cards">
