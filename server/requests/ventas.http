@@ -5,20 +5,28 @@
 GET {{api}}
 
 ### Obteniendo todos los productos que están siendo vendidos de la base de datos pasando como parámentro el número de orden (int)
-GET {{api}}/1
+GET {{api}}/dv/1
 
 
 ### Genera un OC en la base de datos para poder implementarlo en detalle de venta, los demas compos quedan nulos
-POST {{api}}
-
-### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
-
-POST {{api}}
+POST {{api}}/generarOc
 Content-Type: application/json
 
 {
-   "oc":1,
-    "Vtotal":"12.85",
+    "tt":14.85,
+    "fech": "2022-02-06T00:00:00.00Z",
+    "cedulaCli": "2300677362",
+    "nombreUS": "Ruben"
+}
+
+### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
+
+POST {{api}}/llenarOC
+Content-Type: application/json
+
+{
+   "oc":3,
+    "Vtotal":12.85,
     "fech": "2022-01-30T00:00:00.00Z",
     "cedulC": "2300677362",
     "usernameU": "Secaira"
@@ -26,14 +34,22 @@ Content-Type: application/json
 
 ### Insertar los campos para un detalle de compra (una fila en la tabla)
 
-POST {{api}}
+POST {{api}}/insertarDv
 Content-Type: application/json
 
-{
-    "codPro":"AA01",
-    "nOrd":1,
-    "cant": 2
-}
+[
+    {
+        "codProducto":"DC01",
+        "numeroOrden":1,
+        "count": 2
+    },
+    {
+        "codProducto":"BO01",
+        "numeroOrden":1,
+        "count": 2
+    }
+]
+
 
 ### Eliminando un producto de detalle venta, se necesita pasar el código del producto, el número de orden y la cantidad
 DELETE {{api}}/AA01/1/2
@@ -49,4 +65,4 @@ Content-Type: application/json
 }
 
 ### Obteniene la cantidad de OC que existen, le agregas +1 y tienes el valor del proximo OC
-GET {{api}}/buscar/A
+GET {{api}}/NumOC

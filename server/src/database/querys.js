@@ -46,12 +46,12 @@ export const queries = {
   //lo que debe aperecer en la tabla de detalle de venta
   detalleventa: "exec [dbo].[sp_DetalleVenta] @no",
 
-  //para nulliar y obtener el nuevo número de orden de compra
-  generarOC: "exec sp_insertarOrdenCompra",
+  //crea una nueva fila en orden de compra
+  InsertarOrdenCompra: "exec sp_insertarOrdenCompra @Vtotal,@fech,@cedulC,@usernameU",
 
   //para crear orden compra
   llenarOrdenCompra:
-    "sp_ModificarOrdenCompra @oc,@Vtotal,@fech,@cedulC,@usernameU",
+    "exec sp_ModificarOrdenCompra @oc,@Vtotal,@fech,@cedulC,@usernameU",
 
   //Para insertqar en la tabla detalle de venta
   insertarDv: "exec sp_insertarDetalleVenta @codPro, @nOrd, @cant",
