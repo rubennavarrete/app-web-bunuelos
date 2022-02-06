@@ -15,6 +15,8 @@ import {
   CANCELAR_VENTA,
   ACTUALIZAR_DETALLE_VENTA,
   ELIMINAR_ITEMS,
+  VALORES_FACTURA,
+  OBTENER_NUMERO_ORDEN,
 } from "../../types";
 
 const VentasState = (props) => {
@@ -23,7 +25,9 @@ const VentasState = (props) => {
     mostrarDetalleVenta: false,
     clienteSeleccionado: null,
     intemsDetalleVenta: [],
+    valoresFactura: 0,
     vistaIngresar: false,
+    numeroOrden: null,
   };
 
   // Creando dispach y state
@@ -63,6 +67,14 @@ const VentasState = (props) => {
     dispatch({
       type: ITEMS_DETALLE_VENTA,
       payload: productosVenta,
+    });
+  };
+
+  // Obtener los valores de iva, subtotal y total para el detalle de factura
+  const obtenerValoresFactura = (valores) => {
+    dispatch({
+      type: VALORES_FACTURA,
+      payload: valores,
     });
   };
 
@@ -109,6 +121,23 @@ const VentasState = (props) => {
     }
   };
 
+  // const obtenerNumeroOrden = async () => {
+  //   try {
+  //     const resultado = await clienteAxios.get("/api/ventas");
+
+  //     dispatch({
+  //       type: OBTENER_NUMERO_ORDEN,
+  //       payload: resultado.data,
+  //     });
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "No pudimos obtener el número de orden de compra!",
+  //     });
+  //   }
+  // };
+
   return (
     <VentasContext.Provider
       value={{
@@ -119,6 +148,8 @@ const VentasState = (props) => {
         mostrarDetalleVenta: state.mostrarDetalleVenta,
         clienteSeleccionado: state.clienteSeleccionado,
         vistaIngresar: state.vistaIngresar,
+        valoresFactura: state.valoresFactura,
+        numeroOrden: state.numeroOrden,
         obtenerProductosVenta,
         obtenerCedulaFactura,
         mostrarVistaVenta,
@@ -128,6 +159,8 @@ const VentasState = (props) => {
         cancelarVenta,
         actualizarDetalleVenta,
         eliminarItems,
+        obtenerValoresFactura,
+        // obtenerNumeroOrden,
       }}
     >
       {props.children}
