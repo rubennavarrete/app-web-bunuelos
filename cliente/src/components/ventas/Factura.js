@@ -7,8 +7,12 @@ import logo from "../../assets/Logo.svg";
 
 const Factura = () => {
   const ventasContext = useContext(VentasContext);
-  const { clienteSeleccionado, intemsDetalleVenta, valoresFactura } =
-    ventasContext;
+  const {
+    clienteSeleccionado,
+    intemsDetalleVenta,
+    valoresFactura,
+    numeroOrden,
+  } = ventasContext;
 
   const hoy = new Date().toISOString().substring(0, 10);
 
@@ -31,7 +35,7 @@ const Factura = () => {
 
         <div className="paypal__header-info">
           <span className="paypal__date">{hoy}</span>
-          <span className="paypal__ref">0f-113</span>
+          <span className="paypal__ref">Of-{numeroOrden}</span>
         </div>
       </div>
 

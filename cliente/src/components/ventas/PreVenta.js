@@ -11,15 +11,18 @@ import Editar from "../clientes/Editar";
 const PreVenta = () => {
   const ventasContext = useContext(VentasContext);
 
-  const { mostrarDetalleVenta, vistaIngresar } = ventasContext;
+  const { mostrarDetalleVenta, vistaIngresar, numeroOrden } = ventasContext;
   return (
     <Fragment>
       {mostrarDetalleVenta ? (
         <section className="cart_wrapper">
           <div className="cart_lists">
             <div className="cart_title">
-              <span className="material-icons-outlined">local_mall</span>
-              Detalle de Venta
+              <div className="">
+                <span className="material-icons-outlined">local_mall</span>
+                Detalle de Venta
+              </div>
+              <div className="orden-factura">ODV-{numeroOrden}</div>
             </div>
 
             <DetalleVenta />

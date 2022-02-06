@@ -121,22 +121,24 @@ const VentasState = (props) => {
     }
   };
 
-  // const obtenerNumeroOrden = async () => {
-  //   try {
-  //     const resultado = await clienteAxios.get("/api/ventas");
+  // Funcion para obtener numero de orden de compra
+  const obtenerNumeroOrden = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/ventas/NumOC");
+      console.log("resultado.data: ", resultado.data.OC);
 
-  //     dispatch({
-  //       type: OBTENER_NUMERO_ORDEN,
-  //       payload: resultado.data,
-  //     });
-  //   } catch (error) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops...",
-  //       text: "No pudimos obtener el número de orden de compra!",
-  //     });
-  //   }
-  // };
+      dispatch({
+        type: OBTENER_NUMERO_ORDEN,
+        payload: resultado.data.OC,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener el número de orden de compra!",
+      });
+    }
+  };
 
   return (
     <VentasContext.Provider
@@ -160,7 +162,7 @@ const VentasState = (props) => {
         actualizarDetalleVenta,
         eliminarItems,
         obtenerValoresFactura,
-        // obtenerNumeroOrden,
+        obtenerNumeroOrden,
       }}
     >
       {props.children}
