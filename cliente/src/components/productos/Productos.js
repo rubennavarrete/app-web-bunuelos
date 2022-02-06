@@ -72,7 +72,7 @@ const Productos = () => {
                     );
                   })
                 ) : (
-                  <p>No se encontron productos que coincidan</p>
+                  <p>No se encontraron productos que coincidan</p>
                 )}
               </ol>
             </div>

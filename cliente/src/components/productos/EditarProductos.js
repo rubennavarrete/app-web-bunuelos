@@ -162,7 +162,7 @@ const EditarProductos = ({ titulo }) => {
             type="text"
             name="codigo"
             placeholder="Ingrese el código del producto..."
-            leyenda="El codigo debe de ser de 4 caracteres 2 letras mayusculas y dos numeros "
+            leyenda="El código debe de ser de 4 caracteres 2 letras mayúsculas y dos números "
             expressionRegular={expresiones.codigo}
           />
           <InputProducto
@@ -199,7 +199,7 @@ const EditarProductos = ({ titulo }) => {
             type="text"
             name="precio"
             placeholder="Ingrese el precio del producto..."
-            leyenda="El precio debe de estar comprendido entre los 0.01 ctv hasta los 100 dolares, deve contener punto y no coma"
+            leyenda="El precio debe de estar comprendido entre los 0.01 ctv hasta los 100 dolares, debe contener punto y no coma"
             expressionRegular={expresiones.precio}
           />
           <InputProducto
@@ -209,7 +209,7 @@ const EditarProductos = ({ titulo }) => {
             type="text"
             name="stock"
             placeholder="Ingrese el stock del producto..."
-            leyenda="Ingrese solo numeros comprendidos entre 1 y 1000"
+            leyenda="Ingrese solo números comprendidos entre 1 y 1000"
             expressionRegular={expresiones.stock}
           />
           <div className="grup-input grup-cliente">
@@ -230,7 +230,7 @@ const EditarProductos = ({ titulo }) => {
             type="text"
             name="imagen"
             placeholder="Ingrese el link de la imagen del producto..."
-            leyenda="Ingrse un link valido"
+            leyenda="Ingrse un link válido"
             expressionRegular={expresiones.link}
           />
           <div className="grup-input grup-cliente">
