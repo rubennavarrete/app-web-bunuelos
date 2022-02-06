@@ -8,6 +8,8 @@ import VentasContext from "../../context/ventas/ventaContext";
 
 import Editar from "../clientes/Editar";
 
+import jwt_decode from "jwt-decode";
+
 const PreVenta = () => {
   const ventasContext = useContext(VentasContext);
 
@@ -17,10 +19,26 @@ const PreVenta = () => {
     numeroOrden,
     insertarDetalleVenta,
     intemsDetalleVenta,
+    insertarOrdenCompra,
+    valoresFactura,
+    clienteSeleccionado,
   } = ventasContext;
 
+  const token = localStorage.getItem("token");
+
+  var decoded = jwt_decode(token);
+
+  const hoy = new Date().toISOString().substring(0, 10);
+
   const insertarDetalle = () => {
+    insertarOrdenCompra({
+      tt: valoresFactura.tt,
+      fech: hoy,
+      cedulaCli: clienteSeleccionado.cedulaCli,
+      nombreUS: decoded.usernameUS,
+    });
     insertarDetalleVenta(intemsDetalleVenta);
+    // setTimeout(() => insertarDetalleVenta(intemsDetalleVenta), 3000);
   };
 
   return (

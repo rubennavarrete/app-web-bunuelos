@@ -143,29 +143,44 @@ const VentasState = (props) => {
 
   //Obtencion e insercion del orden de compra
   const insertarOrdenCompra = async (insOrdenCompra) => {
-    console.log("insDetVenta: ", insOrdenCompra);
+    console.log("OrdenCompra: ", insOrdenCompra);
+    try {
+      const resultado = await clienteAxios.post(
+        "/api/ventas/generarOc",
+        insOrdenCompra
+      );
+      console.log("OrdenCompra: ", resultado.data);
+      dispatch({
+        type: INSERTAR_ORDEN_COMPRA,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos insertar los datos en la tabla orden compra!",
+      });
+    }
   };
 
   //Obtencion e insercion del detalle de ventas de compra
   const insertarDetalleVenta = async (insDetVenta) => {
     console.log("insDetVenta: ", insDetVenta);
-    // try {
-    //   const resultado = await clienteAxios.post(
-    //     "/api/ventas/insertarDv",
-    //     insDetVenta
-    //   );
-    //   console.log("Insertar detalle: ", resultado.data);
-    //   dispatch({
-    //     type: INSERTAR_ORDEN_COMPRA,
-    //     payload: resultado.data,
-    //   });
-    // } catch (error) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "No pudimos insertar los datos en la tabla detalle de venta!",
-    //   });
-    // }
+    try {
+      const resultado = await clienteAxios.post(
+        "/api/ventas/insertarDv",
+        insDetVenta
+      );
+      console.log("Insertar detalle: ", resultado.data);
+      dispatch({
+        type: INSERTAR_ORDEN_COMPRA,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos insertar los datos en la tabla detalle de venta!",
+      });
+    }
   };
 
   return (
@@ -192,6 +207,7 @@ const VentasState = (props) => {
         obtenerValoresFactura,
         obtenerNumeroOrden,
         insertarDetalleVenta,
+        insertarOrdenCompra,
       }}
     >
       {props.children}

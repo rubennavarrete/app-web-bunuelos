@@ -13,8 +13,6 @@ const Reportes = () => {
 
   var decoded = jwt_decode(token);
 
-  console.log("decoded: ", decoded.nombreUS);
-
   //Obtener las funcnciones del context de reportes
   const reporteContext = useContext(reportesContext);
   const { mostrarReporte, numeroReporte } = reporteContext;
