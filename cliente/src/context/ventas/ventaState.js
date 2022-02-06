@@ -17,6 +17,7 @@ import {
   ELIMINAR_ITEMS,
   VALORES_FACTURA,
   OBTENER_NUMERO_ORDEN,
+  INSERTAR_ORDEN_COMPRA,
 } from "../../types";
 
 const VentasState = (props) => {
@@ -125,11 +126,11 @@ const VentasState = (props) => {
   const obtenerNumeroOrden = async () => {
     try {
       const resultado = await clienteAxios.get("/api/ventas/NumOC");
-      console.log("resultado.data: ", resultado.data.OC);
+      console.log("resultado.data: ", resultado.data.OC + 1);
 
       dispatch({
         type: OBTENER_NUMERO_ORDEN,
-        payload: resultado.data.OC,
+        payload: resultado.data.OC + 1,
       });
     } catch (error) {
       Swal.fire({
@@ -138,6 +139,33 @@ const VentasState = (props) => {
         text: "No pudimos obtener el número de orden de compra!",
       });
     }
+  };
+
+  //Obtencion e insercion del orden de compra
+  const insertarOrdenCompra = async (insOrdenCompra) => {
+    console.log("insDetVenta: ", insOrdenCompra);
+  };
+
+  //Obtencion e insercion del detalle de ventas de compra
+  const insertarDetalleVenta = async (insDetVenta) => {
+    console.log("insDetVenta: ", insDetVenta);
+    // try {
+    //   const resultado = await clienteAxios.post(
+    //     "/api/ventas/insertarDv",
+    //     insDetVenta
+    //   );
+    //   console.log("Insertar detalle: ", resultado.data);
+    //   dispatch({
+    //     type: INSERTAR_ORDEN_COMPRA,
+    //     payload: resultado.data,
+    //   });
+    // } catch (error) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "No pudimos insertar los datos en la tabla detalle de venta!",
+    //   });
+    // }
   };
 
   return (
@@ -163,6 +191,7 @@ const VentasState = (props) => {
         eliminarItems,
         obtenerValoresFactura,
         obtenerNumeroOrden,
+        insertarDetalleVenta,
       }}
     >
       {props.children}

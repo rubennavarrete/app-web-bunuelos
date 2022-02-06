@@ -11,7 +11,18 @@ import Editar from "../clientes/Editar";
 const PreVenta = () => {
   const ventasContext = useContext(VentasContext);
 
-  const { mostrarDetalleVenta, vistaIngresar, numeroOrden } = ventasContext;
+  const {
+    mostrarDetalleVenta,
+    vistaIngresar,
+    numeroOrden,
+    insertarDetalleVenta,
+    intemsDetalleVenta,
+  } = ventasContext;
+
+  const insertarDetalle = () => {
+    insertarDetalleVenta(intemsDetalleVenta);
+  };
+
   return (
     <Fragment>
       {mostrarDetalleVenta ? (
@@ -32,7 +43,9 @@ const PreVenta = () => {
             <div className="cart_title">Factura</div>
             <div className="form_row">
               <Factura />
-              <button className="btn">Vender</button>
+              <button className="btn" onClick={() => insertarDetalle()}>
+                Vender
+              </button>
             </div>
           </div>
         </section>

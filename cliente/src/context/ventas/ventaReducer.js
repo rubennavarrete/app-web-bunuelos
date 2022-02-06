@@ -10,6 +10,7 @@ import {
   ELIMINAR_ITEMS,
   VALORES_FACTURA,
   OBTENER_NUMERO_ORDEN,
+  INSERTAR_ORDEN_COMPRA,
 } from "../../types";
 
 export default (state, action) => {
@@ -85,6 +86,8 @@ export default (state, action) => {
         ...state,
         valoresFactura: action.payload,
       };
+    case INSERTAR_ORDEN_COMPRA:
+      return { ...state };
     default:
       return state;
   }

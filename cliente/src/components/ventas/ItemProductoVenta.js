@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   const ventasContext = useContext(VentasContext);
-  const { actualizarDetalleVenta, eliminarItems } = ventasContext;
+  const { actualizarDetalleVenta, eliminarItems, numeroOrden } = ventasContext;
 
   let [cantidad, guardarCantidad] = useState(1);
   let [total, guardarTotal] = useState(intemsDetalleVenta.precio);
@@ -17,7 +17,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
       actualizarDetalleVenta();
     } else {
       Swal.fire({
-        title: "Límite Alcansado",
+        title: "Límite Alcanzado",
         text: "Se ha alcanzado el limite de producto en stock ",
         icon: "warning",
       });
@@ -37,6 +37,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
 
   intemsDetalleVenta.count = cantidad;
   intemsDetalleVenta.pTotal = total;
+  intemsDetalleVenta.numeroOrden = numeroOrden;
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
