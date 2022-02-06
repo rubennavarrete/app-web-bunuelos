@@ -109,15 +109,40 @@ export const llenarOrdenCompra = async (req, res) => {
 //--------------------------------------------------------
 
 export const insertarDv = async (req, res) => {
-  const { codPro, nOrd, cant } = req.body;
-  console.log(codPro, nOrd, cant);
-  if (codPro == null || nOrd == null || cant == null) {
+ // console.log(req.body);
+  const array = req.body;
+ // console.log(array);
+  if (array.lenght==0) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
   }
+  let _SQL_INSERT_DV="";
+  array.map((item,index)=>{
+    _SQL_INSERT_DV+=" exec sp_insertarDetalleVenta "
+      +" '"+item.codPro+"',"+item.nOrd+","+item.cant;
+    console.log(item,index);
+    console.log(_SQL_INSERT_DV);
+  })
 
+  //res.status(200).send({msg:"Completo"});
   try {
+    const pool = await getConnection();
+
+    await pool
+      .request()
+      .query(_SQL_INSERT_DV);
+
+    res.json({
+      msg: "Productos insertados correctamente",status:1
+    });
+  }catch(error){}
+ // } catch (error) {
+   // res.status(500);
+   // res.send(error.message);
+ // }
+/*
+ // try {
     const pool = await getConnection();
 
     await pool
@@ -132,10 +157,10 @@ export const insertarDv = async (req, res) => {
       nOrd,
       cant
     });
-  } catch (error) {
+ // } catch (error) {
    // res.status(500);
    // res.send(error.message);
-  }
+ // }*/
 };
 //--------------------------------------------------------
 export const borrarDv = async (req, res) => {
@@ -183,13 +208,14 @@ export const modificarDv = async (req, res) => {
   }
 };
 //--------------------------------------------------------
+
 export const OC = async (req, res) => {
   let result;
   const pool = await getConnection();
 
   result = await pool.request().query(queries.OC);
-
-  res.send(result.recordset);
+  console.log(result.data);
+  res.send(result.recordset[0]);
 };
 
 

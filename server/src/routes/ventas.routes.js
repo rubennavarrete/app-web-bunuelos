@@ -14,7 +14,7 @@ import {
 
   router.get("/ventas", mostrarPAVender);
 
-  router.get("/ventas/:no", detalleventa);
+  router.get("/ventas/dv/:no", detalleventa);
 
   router.post("/ventas/generarOc", InsertarOrdenCompra);
 
