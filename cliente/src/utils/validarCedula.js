@@ -1,4 +1,5 @@
 const ValidarCedula = (cedula) => {
+  if (cedula === "9999999999") return true;
   //Preguntamos si la cedula consta de 10 digitos
   if (cedula != null && cedula.length === 10) {
     // Obtenemos el digito de la region que sonlos dos primeros digitos

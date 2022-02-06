@@ -7,9 +7,20 @@ import logo from "../../assets/Logo.svg";
 
 const Factura = () => {
   const ventasContext = useContext(VentasContext);
-  const { clienteSeleccionado, intemsDetalleVenta } = ventasContext;
+  const { clienteSeleccionado, intemsDetalleVenta, valoresFactura } =
+    ventasContext;
 
   const hoy = new Date().toISOString().substring(0, 10);
+
+  const formatMoney = (prev_price) => {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+
+    const precio_usd = formatter.format(prev_price);
+    return precio_usd;
+  };
 
   return (
     <div className="paypal">
@@ -64,15 +75,23 @@ const Factura = () => {
           <li className="paypal__cart-item">
             <div className="total-factura">
               <span className="paypal__cart-total">Subtotal:</span>
-              <span className="paypal__item-price">$268.00</span>
+              <span className="paypal__item-price">
+                {!isNaN(valoresFactura) ? 0 : formatMoney(valoresFactura.sub)}
+              </span>
             </div>
             <div className="total-factura">
-              <span className="paypal__cart-total">Iva: 12%</span>
-              <span className="paypal__item-price">$26.00</span>
+              <span className="paypal__cart-total">
+                Iva: {valoresFactura.iv} %
+              </span>
+              <span className="paypal__item-price">
+                {!isNaN(valoresFactura) ? 0 : formatMoney(valoresFactura.clI)}
+              </span>
             </div>
             <div className="total-factura">
               <span className="paypal__cart-total">Total:</span>
-              <span className="paypal__item-price">$294.00</span>
+              <span className="paypal__item-price">
+                {!isNaN(valoresFactura) ? 0 : formatMoney(valoresFactura.tt)}
+              </span>
             </div>
           </li>
         </ul>

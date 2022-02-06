@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import VentasContext from "../../context/ventas/ventaContext";
+import Swal from "sweetalert2";
 
 const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   const ventasContext = useContext(VentasContext);
@@ -9,10 +10,18 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   let [total, guardarTotal] = useState(intemsDetalleVenta.precio);
 
   const aumentar = () => {
-    cantidad++;
-    guardarCantidad(cantidad);
-    guardarTotal(cantidad * intemsDetalleVenta.precio);
-    actualizarDetalleVenta();
+    if (cantidad < intemsDetalleVenta.stock) {
+      cantidad++;
+      guardarCantidad(cantidad);
+      guardarTotal(cantidad * intemsDetalleVenta.precio);
+      actualizarDetalleVenta();
+    } else {
+      Swal.fire({
+        title: "Límite Alcansado",
+        text: "Se ha alcanzado el limite de producto en stock ",
+        icon: "warning",
+      });
+    }
   };
 
   const disminuir = () => {
@@ -28,6 +37,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
 
   intemsDetalleVenta.count = cantidad;
   intemsDetalleVenta.pTotal = total;
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -36,6 +46,11 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
   const precio_usd = formatter.format(intemsDetalleVenta.precio);
 
   const preciototal = formatter.format(total);
+
+  const botonEliminar = () => {
+    eliminarItems(intemsDetalleVenta.codProducto);
+    intemsDetalleVenta.seleccionado = false;
+  };
 
   return (
     <div className="tr_item">
@@ -63,7 +78,7 @@ const ItenProductoVenta = ({ intemsDetalleVenta }) => {
       <div className="td_item item_remove">
         <span
           className="material-icons-outlined"
-          onClick={() => eliminarItems(intemsDetalleVenta.codProducto)}
+          onClick={() => botonEliminar()}
         >
           close
         </span>

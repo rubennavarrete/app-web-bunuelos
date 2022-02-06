@@ -8,6 +8,8 @@ import {
   CANCELAR_VENTA,
   ACTUALIZAR_DETALLE_VENTA,
   ELIMINAR_ITEMS,
+  VALORES_FACTURA,
+  OBTENER_NUMERO_ORDEN,
 } from "../../types";
 
 export default (state, action) => {
@@ -16,6 +18,11 @@ export default (state, action) => {
       return {
         ...state,
         productosVenta: action.payload,
+      };
+    case OBTENER_NUMERO_ORDEN:
+      return {
+        ...state,
+        numeroOrden: action.payload,
       };
     case CEDULA_CLIENTE:
       return {
@@ -54,15 +61,29 @@ export default (state, action) => {
         vistaIngresar: false,
       };
     case CANCELAR_VENTA:
+      const nuevaLista = state.productosVenta.map((item, index) => {
+        return {
+          ...item,
+          clienteSeleccionado: null,
+          seleccionado: false,
+        };
+      });
       return {
         ...state,
         mostrarDetalleVenta: false,
-        clienteSeleccionado: [],
+        clienteSeleccionado: null,
         intemsDetalleVenta: [],
+        productosVenta: nuevaLista,
+        valoresFactura: 0,
       };
     case ACTUALIZAR_DETALLE_VENTA:
       return {
         ...state,
+      };
+    case VALORES_FACTURA:
+      return {
+        ...state,
+        valoresFactura: action.payload,
       };
     default:
       return state;

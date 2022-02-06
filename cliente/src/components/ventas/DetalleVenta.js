@@ -6,12 +6,20 @@ import VentasContext from "../../context/ventas/ventaContext";
 
 const DetalleVenta = () => {
   const ventasContext = useContext(VentasContext);
-  const { cancelarVenta, intemsDetalleVenta, state } = ventasContext;
+  const {
+    cancelarVenta,
+    intemsDetalleVenta,
+    state,
+    vistaIngresar,
+    obtenerValoresFactura,
+  } = ventasContext;
 
   const [subTotal, guardarSubtotal] = useState(0);
   const [ivaT, cambiarIvaT] = useState({ value: 0 });
   const [clacIva, guardarCalcIva] = useState((subTotal * ivaT.value) / 100);
   const [total, guardarTotal] = useState(0);
+
+  // Obtener los valores de iva, subtotal y total para el detalle de factura
 
   const ivas = [
     {
@@ -80,12 +88,12 @@ const DetalleVenta = () => {
   ];
 
   useEffect(() => {
-    console.log("useEffect");
     guardarCalcIva((subTotal * ivaT.value) / 100);
     guardarTotal(
       parseInt(subTotal) + parseFloat((subTotal * ivaT.value) / 100)
     );
     calcularTotal();
+    if (vistaIngresar === false) intemsDetalleVenta.seleccionado = true;
   }, [state, intemsDetalleVenta, ivaT, subTotal]);
 
   const calcularTotal = () => {
@@ -93,11 +101,8 @@ const DetalleVenta = () => {
       intemsDetalleVenta.length === 0
         ? 0
         : intemsDetalleVenta.reduce((prev, cur) => {
-            console.log("prev: ", prev);
-            console.log("cur: ", cur);
             return { pTotal: prev.pTotal + cur.pTotal };
           });
-    console.log("valor: ", valor);
     guardarSubtotal(valor.pTotal);
   };
 
@@ -114,6 +119,21 @@ const DetalleVenta = () => {
   const handleChange = (e) => {
     cambiarIvaT({ value: e.target.value });
   };
+
+  const cancelarLaVenta = () => {
+    cancelarVenta();
+  };
+
+  const valores = {
+    sub: subTotal,
+    iv: ivaT.value,
+    clI: clacIva,
+    tt: total,
+  };
+
+  useEffect(() => {
+    obtenerValoresFactura(valores);
+  }, [total]);
 
   return (
     <Fragment>
@@ -172,7 +192,7 @@ const DetalleVenta = () => {
         </div>
       </div>
       <div className="contenedor-boton-cancelar">
-        <button className="cart-button" onClick={() => cancelarVenta()}>
+        <button className="cart-button" onClick={() => cancelarLaVenta()}>
           Cancelar Venta
         </button>
       </div>
