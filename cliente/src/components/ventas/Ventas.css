@@ -2000,7 +2000,7 @@ body {
 
 .paypal__cart-item .contenedor-detalle {
   display: grid;
-  grid-template-columns: 160px 55px 70px;
+  grid-template-columns: 160px 65px 0px;
 }
 
 .paypal__index {

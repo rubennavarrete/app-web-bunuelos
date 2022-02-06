@@ -35,8 +35,12 @@ const Sidebar = ({ query }) => {
 
   //Obtener las funcnciones del context de Ventas
   const ventasContext = useContext(VentasContext);
-  const { obtenerCedulaFactura, mostrarVistaVenta, mostrarIngresarCliente } =
-    ventasContext;
+  const {
+    obtenerCedulaFactura,
+    mostrarVistaVenta,
+    mostrarIngresarCliente,
+    obtenerNumeroOrden,
+  } = ventasContext;
 
   //Metodos para el el componente de Clientes
 
@@ -216,6 +220,7 @@ const Sidebar = ({ query }) => {
           });
         } else {
           obtenerCedulaFactura(resultado.data[0]);
+          obtenerNumeroOrden();
 
           Swal.fire({
             title: " Muy Bien",
@@ -229,6 +234,24 @@ const Sidebar = ({ query }) => {
       },
       allowOutsideClick: () => !Swal.isLoading(),
     });
+  };
+
+  const consumidorFinal = async (ci) => {
+    const resultado = await clienteAxios.get(
+      `/api/clientes/buscar/${ci ? ci : "null"}`
+    );
+
+    obtenerCedulaFactura(resultado.data[0]);
+    obtenerNumeroOrden();
+
+    Swal.fire({
+      title: " Muy Bien",
+      text: "Cliente verificado",
+      icon: "success",
+      timer: "2000",
+    });
+
+    mostrarVistaVenta();
   };
 
   switch (query) {
@@ -281,7 +304,14 @@ const Sidebar = ({ query }) => {
       return (
         <div className="crud">
           <button className="button button2" onClick={() => verificarCliente()}>
-            Cedula del CLiente
+            Cedula del Cliente
+          </button>
+
+          <button
+            className="button button2"
+            onClick={() => consumidorFinal(9999999999)}
+          >
+            Consumidor Final
           </button>
         </div>
       );

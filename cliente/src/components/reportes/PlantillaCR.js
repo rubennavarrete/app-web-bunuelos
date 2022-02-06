@@ -27,7 +27,15 @@ const PlantillaClientesRegistrados = ({
 
   //Obtener las funcnciones del context de reportes
   const reporteContext = useContext(reportesContext);
-  const { ocultarVistaReporte } = reporteContext;
+  const {
+    ocultarVistaReporte,
+    obtenerProductosCaducados,
+    octecnerCaducados,
+    obtnerPoductosAcabarse,
+    acabarse,
+    obtenerClientesCumpleaneros,
+    cumpleaneros,
+  } = reporteContext;
 
   //Obtener las funcnciones del context de Productos
   const productoContext = useContext(ProductosContext);
@@ -43,6 +51,18 @@ const PlantillaClientesRegistrados = ({
     obtenerProductos();
   }, []);
 
+  //Obtener clientes cuando carga el componente
+  useEffect(() => {
+    obtenerProductosCaducados();
+  }, []);
+
+  useEffect(() => {
+    obtnerPoductosAcabarse();
+  }, []);
+
+  useEffect(() => {
+    obtenerClientesCumpleaneros();
+  }, []);
   return (
     <main>
       <section className="onecolumn">
@@ -145,6 +165,85 @@ const PlantillaClientesRegistrados = ({
               )}
             </ol>
           </div>
+        ) : numeroR === 4 ? (
+          <div className="contenedor-cards">
+            <div className="encabezado">
+              <p>Código</p>
+              <p>Nombre</p>
+              <p>Categoría</p>
+              <p>Precio</p>
+              <p>Stock</p>
+              <p>Caducidad</p>
+              <p>Elaboración</p>
+              <p>Imagen </p>
+            </div>
+            <ol className="gradient-list">
+              {acabarse.length > 0 ? (
+                acabarse.map((item) => {
+                  return (
+                    <CardProducto key={item.codProducto} productos={item} />
+                  );
+                })
+              ) : (
+                <p>Aun tenemos productos disponibles</p>
+              )}
+            </ol>
+          </div>
+        ) : numeroR === 5 ? (
+          <div className="contenedor-cards">
+            <div className="encabezado">
+              <p>Código</p>
+              <p>Nombre</p>
+              <p>Categoría</p>
+              <p>Precio</p>
+              <p>Stock</p>
+              <p>Caducidad</p>
+              <p>Elaboración</p>
+              <p>Imagen </p>
+            </div>
+            <ol className="gradient-list">
+              {octecnerCaducados.length > 0 ? (
+                octecnerCaducados.map((item) => {
+                  return (
+                    <CardProducto key={item.codProducto} productos={item} />
+                  );
+                })
+              ) : (
+                <p>No se encontron productos caducados</p>
+              )}
+            </ol>
+          </div>
+        ) : numeroR === 6 ? (
+          <section className="content-tabla">
+            <table className="rwd_auto fontsize">
+              <thead>
+                <tr>
+                  <th style={{ width: 64 }}>#</th>
+                  <th style={{ width: 184 }}>Cedula</th>
+                  <th style={{ width: 253 }}>Nombre</th>
+                  <th style={{ width: 276 }}>Direccion</th>
+                  <th style={{ width: 181 }}>Telefono</th>
+                  <th style={{ width: 350 }}>Correo</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+            </table>
+            <div className="table-responsive">
+              <table className="rwd_auto fontsize">
+                <tbody>
+                  {cumpleaneros.length > 0 ? (
+                    cumpleaneros.map((item) => {
+                      return <Tabla key={item.cedulaCli} clientes={item} />;
+                    })
+                  ) : (
+                    <p className="mensaje-vistas">
+                      No se encontron clientes cumpleañeros!
+                    </p>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
         ) : null}
 
         <h4> </h4>
