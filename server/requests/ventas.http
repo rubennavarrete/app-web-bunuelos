@@ -13,10 +13,10 @@ POST {{api}}/generarOc
 Content-Type: application/json
 
 {
-    "Vtotal":12.85,
+    "tt":14.85,
     "fech": "2022-02-06T00:00:00.00Z",
-    "cedulC": "2300677362",
-    "usernameU": "Secaira"
+    "cedulaCli": "2300677362",
+    "nombreUS": "Ruben"
 }
 
 ### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
@@ -39,14 +39,14 @@ Content-Type: application/json
 
 [
     {
-        "codPro":"AA08",
-        "nOrd":1,
-        "cant": 2
+        "codProducto":"DC01",
+        "numeroOrden":1,
+        "count": 2
     },
     {
-        "codPro":"AA06",
-        "nOrd":1,
-        "cant": 2
+        "codProducto":"BO01",
+        "numeroOrden":1,
+        "count": 2
     }
 ]
 

@@ -34,13 +34,13 @@ export const detalleventa = async (req, res) => {
 };
 
 export const InsertarOrdenCompra = async (req, res) => {
-  const {  Vtotal, fech, cedulC, usernameU } = req.body;
-  console.log("entre a la fucion de controlller");
+  const {  tt, fech, cedulaCli, nombreUS } = req.body;
+  console.log("entre a la fucion de controlller"+tt, fech, cedulaCli, nombreUS);
   if (
-    Vtotal == null ||
+    tt == null ||
     fech == null ||
-    cedulC == null ||
-    usernameU == null
+    cedulaCli == null ||
+    nombreUS == null
   ) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
@@ -49,10 +49,10 @@ export const InsertarOrdenCompra = async (req, res) => {
   try {
     const pool = await getConnection();
     const result = await pool.request()
-      .input("Vtotal", sql.Decimal, Vtotal)
+      .input("Vtotal", sql.Decimal, tt)
       .input("fech", sql.Date, fech)
-      .input("cedulC", sql.VarChar, cedulC)
-      .input("usernameU", sql.VarChar, usernameU)
+      .input("cedulC", sql.VarChar, cedulaCli)
+      .input("usernameU", sql.VarChar, nombreUS)
       .query(queries.InsertarOrdenCompra);
 
       res.json({
@@ -120,7 +120,7 @@ export const insertarDv = async (req, res) => {
   let _SQL_INSERT_DV="";
   array.map((item,index)=>{
     _SQL_INSERT_DV+=" exec sp_insertarDetalleVenta "
-      +" '"+item.codPro+"',"+item.nOrd+","+item.cant;
+      +" '"+item.codProducto+"',"+item.numeroOrden+","+item.count;
     console.log(item,index);
     console.log(_SQL_INSERT_DV);
   })
