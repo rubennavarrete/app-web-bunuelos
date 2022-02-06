@@ -9,16 +9,24 @@ GET {{api}}/1
 
 
 ### Genera un OC en la base de datos para poder implementarlo en detalle de venta, los demas compos quedan nulos
-POST {{api}}
-
-### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
-
-POST {{api}}
+POST {{api}}/generarOc
 Content-Type: application/json
 
 {
-   "oc":1,
-    "Vtotal":"12.85",
+    "Vtotal":12.85,
+    "fech": "2022-02-06T00:00:00.00Z",
+    "cedulC": "2300677362",
+    "usernameU": "Secaira"
+}
+
+### Insertar los campos de la tabla orden de compra (para que deje de estar nuliada)
+
+POST {{api}}/llenarOC
+Content-Type: application/json
+
+{
+   "oc":3,
+    "Vtotal":12.85,
     "fech": "2022-01-30T00:00:00.00Z",
     "cedulC": "2300677362",
     "usernameU": "Secaira"
@@ -26,7 +34,7 @@ Content-Type: application/json
 
 ### Insertar los campos para un detalle de compra (una fila en la tabla)
 
-POST {{api}}
+POST {{api}}/insertarDv
 Content-Type: application/json
 
 {
@@ -49,4 +57,4 @@ Content-Type: application/json
 }
 
 ### Obteniene la cantidad de OC que existen, le agregas +1 y tienes el valor del proximo OC
-GET {{api}}/buscar/A
+GET {{api}}/NumOC

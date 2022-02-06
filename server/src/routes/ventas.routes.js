@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
     mostrarPAVender,
     detalleventa,
-    generarOC,
+    InsertarOrdenCompra,
     llenarOrdenCompra,
     insertarDv,
     borrarDv,
@@ -16,16 +16,16 @@ import {
 
   router.get("/ventas/:no", detalleventa);
 
-  router.post("/ventas", generarOC);
+  router.post("/ventas/generarOc", InsertarOrdenCompra);
 
-  router.post("/ventas", llenarOrdenCompra);
+  router.post("/ventas/llenarOC", llenarOrdenCompra);
 
-  router.post("/ventas", insertarDv);
+  router.post("/ventas/insertarDv", insertarDv);
 
-  router.delete("/ventas/:codPro/:nOrd/:cant", borrarDv);
+ // router.delete("/ventas/:codPro/:nOrd/:cant", borrarDv);
 
-  router.put("/ventas/:codPro", modificarDv);
+ // router.put("/ventas/:codPro", modificarDv);
 
-  router.get("/ventas/OC", OC);
+  router.get("/ventas/NumOC", OC);
 
   export default router;
