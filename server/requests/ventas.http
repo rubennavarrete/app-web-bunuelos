@@ -37,11 +37,19 @@ Content-Type: application/json
 POST {{api}}/insertarDv
 Content-Type: application/json
 
-{
-    "codPro":"AA01",
-    "nOrd":1,
-    "cant": 2
-}
+[
+    {
+        "codPro":"AA08",
+        "nOrd":1,
+        "cant": 2
+    },
+    {
+        "codPro":"AA06",
+        "nOrd":1,
+        "cant": 2
+    }
+]
+
 
 ### Eliminando un producto de detalle venta, se necesita pasar el código del producto, el número de orden y la cantidad
 DELETE {{api}}/AA01/1/2
