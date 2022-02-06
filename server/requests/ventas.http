@@ -5,7 +5,7 @@
 GET {{api}}
 
 ### Obteniendo todos los productos que están siendo vendidos de la base de datos pasando como parámentro el número de orden (int)
-GET {{api}}/1
+GET {{api}}/dv/1
 
 
 ### Genera un OC en la base de datos para poder implementarlo en detalle de venta, los demas compos quedan nulos

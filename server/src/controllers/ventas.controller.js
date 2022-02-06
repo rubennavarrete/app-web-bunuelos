@@ -11,8 +11,8 @@ export const mostrarPAVender = async (req, res) => {
     res.json(result.recordset);
   } catch (error) {
     console.log(error);
-   // res.status(500);
-   // res.send(error.message);
+    // res.status(500);
+    // res.send(error.message);
   }
 };
 
@@ -34,36 +34,32 @@ export const detalleventa = async (req, res) => {
 };
 
 export const InsertarOrdenCompra = async (req, res) => {
-  const {  Vtotal, fech, cedulC, usernameU } = req.body;
+  const { Vtotal, fech, cedulC, usernameU } = req.body;
   console.log("entre a la fucion de controlller");
-  if (
-    Vtotal == null ||
-    fech == null ||
-    cedulC == null ||
-    usernameU == null
-  ) {
+  if (Vtotal == null || fech == null || cedulC == null || usernameU == null) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
   }
   try {
     const pool = await getConnection();
-    const result = await pool.request()
+    const result = await pool
+      .request()
       .input("Vtotal", sql.Decimal, Vtotal)
       .input("fech", sql.Date, fech)
       .input("cedulC", sql.VarChar, cedulC)
       .input("usernameU", sql.VarChar, usernameU)
       .query(queries.InsertarOrdenCompra);
 
-      res.json({
-        Vtotal,
-        fech,
-        cedulC,
-        usernameU
-      });
+    res.json({
+      Vtotal,
+      fech,
+      cedulC,
+      usernameU,
+    });
   } catch (error) {
     //res.status(500);
-   // res.send(error.message);
+    // res.send(error.message);
   }
 };
 
@@ -102,8 +98,8 @@ export const llenarOrdenCompra = async (req, res) => {
       usernameU,
     });
   } catch (error) {
-   // res.status(500);
-   // res.send(error.message);
+    // res.status(500);
+    // res.send(error.message);
   }
 };
 //--------------------------------------------------------
@@ -130,11 +126,11 @@ export const insertarDv = async (req, res) => {
     res.json({
       codPro,
       nOrd,
-      cant
+      cant,
     });
   } catch (error) {
-   // res.status(500);
-   // res.send(error.message);
+    // res.status(500);
+    // res.send(error.message);
   }
 };
 //--------------------------------------------------------
@@ -179,7 +175,7 @@ export const modificarDv = async (req, res) => {
       cant,
     });
   } catch (error) {
-   // res.send(error.message);
+    // res.send(error.message);
   }
 };
 //--------------------------------------------------------
@@ -189,7 +185,5 @@ export const OC = async (req, res) => {
 
   result = await pool.request().query(queries.OC);
 
-  res.send(result.recordset);
+  res.send(result.recordset[0]);
 };
-
-
