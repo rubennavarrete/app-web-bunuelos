@@ -48,14 +48,61 @@ export const InsertarOrdenCompra = async (req, res) => {
   }
   try {
     const pool = await getConnection();
+<<<<<<< HEAD
+    const result = await pool.request()
+      .input("Vtotal", sql.Float, tt)
+=======
     const result = await pool
       .request()
       .input("Vtotal", sql.Decimal, tt)
+>>>>>>> 545bf85f2e21fbdb70e355b4ec85952ad2428098
       .input("fech", sql.Date, fech)
       .input("cedulC", sql.VarChar, cedulaCli)
       .input("usernameU", sql.VarChar, nombreUS)
       .query(queries.InsertarOrdenCompra);
 
+<<<<<<< HEAD
+      res.json({
+        Vtotal,
+        fech,
+        cedulC,
+        usernameU
+      });
+  } catch (error) {
+    //res.status(500);
+   // res.send(error.message);
+  }
+};
+
+export const llenarOrdenCompra = async (req, res) => {
+  const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
+  console.log(oc, Vtotal, fech, cedulC, usernameU);
+  if (
+    oc == null ||
+    Vtotal == null ||
+    fech == null ||
+    cedulC == null ||
+    usernameU == null
+  ) {
+    return res.status(400).json({
+      msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
+    });
+  }
+
+  try {
+    const pool = await getConnection();
+
+    await pool
+      .request()
+      .input("oc", sql.Int, oc)
+      .input("Vtotal", sql.Float, Vtotal)
+      .input("fech", sql.Date, fech)
+      .input("cedulC", sql.VarChar, cedulC)
+      .input("usernameU", sql.VarChar, usernameU)
+      .query(queries.llenarOrdenCompra);
+
+=======
+>>>>>>> 545bf85f2e21fbdb70e355b4ec85952ad2428098
     res.json({
       Vtotal,
       fech,
