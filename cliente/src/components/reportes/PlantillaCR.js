@@ -110,7 +110,7 @@ const PlantillaClientesRegistrados = ({
           </tbody>
         </table>
 
-        <h4>Información Del Reporte</h4>
+        <h4>Información del Reporte</h4>
 
         {numeroR === 1 ? (
           <section className="content-tabla">
@@ -135,7 +135,7 @@ const PlantillaClientesRegistrados = ({
                       return <Tabla key={item.cedulaCli} clientes={item} />;
                     })
                   ) : (
-                    <p className="mensaje-vistas">No se encontraron clientes!</p>
+                    <p className="mensaje-vistas">No se encontraron clientes?</p>
                   )}
                 </tbody>
               </table>
@@ -237,7 +237,7 @@ const PlantillaClientesRegistrados = ({
                     })
                   ) : (
                     <p className="mensaje-vistas">
-                      No se encontron clientes cumpleañeros!
+                      No se encontron clientes cumpleañeros?
                     </p>
                   )}
                 </tbody>
