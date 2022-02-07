@@ -91,7 +91,7 @@ const PlantillaClientesRegistrados = ({
         </h2>
         <p>{encabezado}</p>
 
-        <h4>Datos Reporte</h4>
+        <h4>Datos del Reporte:</h4>
 
         <table id="checkoutSummary">
           <tbody>
@@ -118,10 +118,10 @@ const PlantillaClientesRegistrados = ({
               <thead>
                 <tr>
                   <th style={{ width: 64 }}>#</th>
-                  <th style={{ width: 184 }}>Cedula</th>
+                  <th style={{ width: 184 }}>Cédula</th>
                   <th style={{ width: 253 }}>Nombre</th>
-                  <th style={{ width: 276 }}>Direccion</th>
-                  <th style={{ width: 181 }}>Telefono</th>
+                  <th style={{ width: 276 }}>Dirección</th>
+                  <th style={{ width: 181 }}>Teléfono</th>
                   <th style={{ width: 350 }}>Correo</th>
                   <th>Fecha</th>
                 </tr>
@@ -135,7 +135,7 @@ const PlantillaClientesRegistrados = ({
                       return <Tabla key={item.cedulaCli} clientes={item} />;
                     })
                   ) : (
-                    <p className="mensaje-vistas">No se encontron clientes!</p>
+                    <p className="mensaje-vistas">No se encontraron clientes!</p>
                   )}
                 </tbody>
               </table>
@@ -219,10 +219,10 @@ const PlantillaClientesRegistrados = ({
               <thead>
                 <tr>
                   <th style={{ width: 64 }}>#</th>
-                  <th style={{ width: 184 }}>Cedula</th>
+                  <th style={{ width: 184 }}>Cédula</th>
                   <th style={{ width: 253 }}>Nombre</th>
-                  <th style={{ width: 276 }}>Direccion</th>
-                  <th style={{ width: 181 }}>Telefono</th>
+                  <th style={{ width: 276 }}>Dirección</th>
+                  <th style={{ width: 181 }}>Teléfono</th>
                   <th style={{ width: 350 }}>Correo</th>
                   <th>Fecha</th>
                 </tr>

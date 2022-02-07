@@ -1,31 +1,31 @@
 import { Router } from "express";
 import {
-    mostrarPAVender,
-    detalleventa,
-    InsertarOrdenCompra,
-    llenarOrdenCompra,
-    insertarDv,
-    borrarDv,
-    modificarDv,
-    OC
-  } from "../controllers/ventas.controller";
- 
-  const router = Router();
+  mostrarPAVender,
+  detalleventa,
+  InsertarOrdenCompra,
+  llenarOrdenCompra,
+  insertarDv,
+  borrarDv,
+  modificarDv,
+  OC,
+} from "../controllers/ventas.controller";
 
-  router.get("/ventas", mostrarPAVender);
+const router = Router();
 
-  router.get("/ventas/dv/:no", detalleventa);
+router.get("/ventas", mostrarPAVender);
 
-  router.post("/ventas/generarOc", InsertarOrdenCompra);
+router.get("/ventas/dv/:no", detalleventa);
 
-  router.post("/ventas/llenarOC", llenarOrdenCompra);
+router.post("/ventas/generarOc", InsertarOrdenCompra);
 
-  router.post("/ventas/insertarDv", insertarDv);
+// router.post("/ventas/llenarOC", llenarOrdenCompra);
 
- // router.delete("/ventas/:codPro/:nOrd/:cant", borrarDv);
+router.post("/ventas/insertarDv", insertarDv);
 
- // router.put("/ventas/:codPro", modificarDv);
+// router.delete("/ventas/:codPro/:nOrd/:cant", borrarDv);
 
-  router.get("/ventas/NumOC", OC);
+// router.put("/ventas/:codPro", modificarDv);
 
-  export default router;
+router.get("/ventas/NumOC", OC);
+
+export default router;

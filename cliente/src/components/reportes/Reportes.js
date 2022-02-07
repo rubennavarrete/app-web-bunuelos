@@ -13,8 +13,6 @@ const Reportes = () => {
 
   var decoded = jwt_decode(token);
 
-  console.log("decoded: ", decoded.nombreUS);
-
   //Obtener las funcnciones del context de reportes
   const reporteContext = useContext(reportesContext);
   const { mostrarReporte, numeroReporte } = reporteContext;
@@ -104,7 +102,7 @@ const Reportes = () => {
               seccion={"Clientes Cumpleañeros"}
               titulo={"CLIENTES_CUMPLEAÑEROS"}
               encabezado={
-                "Reporte enfocado en la presentación de los clientes que estan proximos a cumplir años."
+                "Reporte enfocado en la presentación de los clientes que estan próximos a cumplir años."
               }
               numeroR={6}
               emisor={decoded.nombreUS}

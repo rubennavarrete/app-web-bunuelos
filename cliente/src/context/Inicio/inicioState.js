@@ -39,7 +39,7 @@ const InicioState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de la Caja de Hoy!",
+        text: "No pudimos obtener la información de la Caja de Hoy!",
       });
     }
   };
@@ -57,7 +57,7 @@ const InicioState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de el total de venta!",
+        text: "No pudimos obtener la información de el total de venta!",
       });
     }
   };
@@ -75,7 +75,7 @@ const InicioState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los clientes totales!",
+        text: "No pudimos obtener la información de los clientes totales!",
       });
     }
   };
@@ -93,7 +93,7 @@ const InicioState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los clientes totales!",
+        text: "No pudimos obtener la información de los clientes totales!",
       });
     }
   };

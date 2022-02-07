@@ -79,7 +79,7 @@ const Sidebar = ({ query }) => {
           ) {
             swalWithBootstrapButtons.fire(
               "Cancelado",
-              "El cliente no se elimino :)",
+              "El cliente no se eliminó:)",
               "error"
             );
           }
@@ -87,7 +87,7 @@ const Sidebar = ({ query }) => {
     } else {
       Swal.fire({
         title: "Seleccione un Cliente",
-        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        text: "Asegúrese de haber seleccionado un cliente, antes de realizar la acción ",
         icon: "warning",
       });
     }
@@ -101,7 +101,7 @@ const Sidebar = ({ query }) => {
     } else {
       Swal.fire({
         title: "Seleccione un Cliente",
-        text: "Asegúrese de haber seleccionado un cliente antes de realizar la acción ",
+        text: "Asegúrese de haber seleccionado un cliente, antes de realizar la acción ",
         icon: "warning",
       });
     }
@@ -142,7 +142,7 @@ const Sidebar = ({ query }) => {
           ) {
             swalWithBootstrapButtons.fire(
               "Cancelado",
-              "El Producto no se elimino! :)",
+              "El Producto no se eliminó!:)",
               "error"
             );
           }
@@ -150,7 +150,7 @@ const Sidebar = ({ query }) => {
     } else {
       Swal.fire({
         title: "Seleccione un Producto",
-        text: "Asegúrese de haber seleccionado un Producto antes de realizar la acción ",
+        text: "Asegúrese de haber seleccionado un Producto, antes de realizar la acción ",
         icon: "warning",
       });
     }
@@ -164,7 +164,7 @@ const Sidebar = ({ query }) => {
     } else {
       Swal.fire({
         title: "Seleccione un Producto",
-        text: "Asegúrese de haber seleccionado un Producto antes de realizar la acción ",
+        text: "Asegúrese de haber seleccionado un Producto, antes de realizar la acción ",
         icon: "warning",
       });
     }
@@ -178,8 +178,8 @@ const Sidebar = ({ query }) => {
 
   const verificarCliente = () => {
     Swal.fire({
-      title: "Cedula Identidad",
-      text: "Ingrese la cedula del cliente para realizar la factura!",
+      title: "Cédula Identidad",
+      text: "Ingrese la cédula del cliente para realizar la factura!",
       input: "number",
       inputAttributes: {
         autocapitalize: "off",
@@ -190,8 +190,8 @@ const Sidebar = ({ query }) => {
       preConfirm: async (ci) => {
         if (!ValidarCedula(ci)) {
           Swal.fire({
-            title: "Ingresa una cedula valida",
-            text: "La cedula no perteneacea a ninguna regin",
+            title: "Ingresa una cédula válida",
+            text: "La cédula no perteneace a ninguna región",
             icon: "warning",
             timer: "3000",
           });
@@ -205,7 +205,7 @@ const Sidebar = ({ query }) => {
         if (resultado.data.length === 0) {
           Swal.fire({
             title: "El cliente no existe en la base de datos",
-            text: "Desea Registrar el cliente!",
+            text: "Desea Registrar el cliente?",
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: "Registrar",
@@ -224,7 +224,7 @@ const Sidebar = ({ query }) => {
 
           Swal.fire({
             title: " Muy Bien",
-            text: "Cliente verificado",
+            text: "Cliente Verificado",
             icon: "success",
             timer: "2000",
           });
@@ -246,7 +246,7 @@ const Sidebar = ({ query }) => {
 
     Swal.fire({
       title: " Muy Bien",
-      text: "Cliente verificado",
+      text: "Cliente Verificado",
       icon: "success",
       timer: "2000",
     });
@@ -304,7 +304,7 @@ const Sidebar = ({ query }) => {
       return (
         <div className="crud">
           <button className="button button2" onClick={() => verificarCliente()}>
-            Cedula del Cliente
+            Cédula del Cliente
           </button>
 
           <button

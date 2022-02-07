@@ -17,6 +17,7 @@ import {
   ELIMINAR_ITEMS,
   VALORES_FACTURA,
   OBTENER_NUMERO_ORDEN,
+  INSERTAR_ORDEN_COMPRA,
 } from "../../types";
 
 const VentasState = (props) => {
@@ -116,27 +117,71 @@ const VentasState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los Productos de Venta!",
+        text: "No pudimos obtener la información de los Productos de Venta!",
       });
     }
   };
 
-  // const obtenerNumeroOrden = async () => {
-  //   try {
-  //     const resultado = await clienteAxios.get("/api/ventas");
+  // Funcion para obtener numero de orden de compra
+  const obtenerNumeroOrden = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/ventas/NumOC");
+      console.log("resultado.data: ", resultado.data.OC + 1);
 
-  //     dispatch({
-  //       type: OBTENER_NUMERO_ORDEN,
-  //       payload: resultado.data,
-  //     });
-  //   } catch (error) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops...",
-  //       text: "No pudimos obtener el número de orden de compra!",
-  //     });
-  //   }
-  // };
+      dispatch({
+        type: OBTENER_NUMERO_ORDEN,
+        payload: resultado.data.OC + 1,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener el número de orden de compra!",
+      });
+    }
+  };
+
+  //Obtencion e insercion del orden de compra
+  const insertarOrdenCompra = async (insOrdenCompra) => {
+    console.log("OrdenCompra: ", insOrdenCompra);
+    try {
+      const resultado = await clienteAxios.post(
+        "/api/ventas/generarOc",
+        insOrdenCompra
+      );
+      console.log("OrdenCompra: ", resultado.data);
+      dispatch({
+        type: INSERTAR_ORDEN_COMPRA,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos insertar los datos en la tabla orden compra!",
+      });
+    }
+  };
+
+  //Obtencion e insercion del detalle de ventas de compra
+  const insertarDetalleVenta = async (insDetVenta) => {
+    console.log("insDetVenta: ", insDetVenta);
+    try {
+      const resultado = await clienteAxios.post(
+        "/api/ventas/insertarDv",
+        insDetVenta
+      );
+      console.log("Insertar detalle: ", resultado.data);
+      dispatch({
+        type: INSERTAR_ORDEN_COMPRA,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos insertar los datos en la tabla detalle de venta!",
+      });
+    }
+  };
 
   return (
     <VentasContext.Provider
@@ -160,7 +205,9 @@ const VentasState = (props) => {
         actualizarDetalleVenta,
         eliminarItems,
         obtenerValoresFactura,
-        // obtenerNumeroOrden,
+        obtenerNumeroOrden,
+        insertarDetalleVenta,
+        insertarOrdenCompra,
       }}
     >
       {props.children}

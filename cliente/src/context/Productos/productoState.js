@@ -16,7 +16,7 @@ import {
   MOSTRAR_ACTUALIZAR_PRODUCTO,
   ACTUALIZAR_PRODUCTO,
 } from "../../types";
-
+//funcion principal
 const ProductosState = (props) => {
   const initialState = {
     productos: [],
@@ -82,7 +82,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No pudimos obtener la informacion de los Productos!",
+        text: "No pudimos obtener la información de los Productos!",
       });
     }
   };
@@ -128,7 +128,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "El producto que buscas no existe!",
+        text: "El producto que buscas, no existe!",
       });
     }
   };
@@ -168,7 +168,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No se puede actualizar la informacion de este producto!",
+        text: "No se puede actualizar la información de este producto!",
       });
     }
   };
@@ -211,7 +211,7 @@ const ProductosState = (props) => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "No se puede eliminar a este producto!",
+        text: "No se puede eliminar este producto!",
       });
     }
   };

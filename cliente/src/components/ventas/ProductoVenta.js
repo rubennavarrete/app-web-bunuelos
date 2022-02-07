@@ -29,7 +29,7 @@ const ProductoVenta = ({ productosVenta }) => {
     } else {
       Swal.fire({
         title: "Consejo",
-        text: "Antes de continuar ingresa las cedula del cliente para la facturacion!",
+        text: "Antes de continuar, ingresa la cédula del cliente para la facturación!",
         icon: "info",
         timer: "5000",
       });

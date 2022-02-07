@@ -1,3 +1,30 @@
+
+
+.franga-central{
+  background-color: var(--gris2);
+  display:grid;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  width: 100vh;
+}
+
+.img-box{
+
+}
+
+.login-box{
+  justify-content: center;
+    /* height: 14vh; */
+    width: 75vh;
+    display: flex;
+    padding-bottom: 70px;
+}
+
+.franga-central .login-box {
+
+}
+
 .user {
   font-size: 18px;
   display: flex;

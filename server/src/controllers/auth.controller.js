@@ -39,8 +39,9 @@ export const autenticarUsuario = async (req, res) => {
       nombreUS: user.nombreUS,
       tipoUs: user.tipoUs,
       urImgUs: user.urImgUs,
+      usernameUS: user.usernameUs,
     };
-    console.log("->",datos);
+    console.log("->", datos);
     const token = jwt.sign(datos, process.env.SECRETA, {
       expiresIn: "7d",
     });
