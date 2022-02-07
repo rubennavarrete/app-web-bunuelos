@@ -1,7 +1,7 @@
 import sql from "mssql";
 
 const dbSettings = {
-  user: "Crix",
+  user: "melany",
   password: "12345.",
   server: "localhost",
   database: "BonuelosDias",

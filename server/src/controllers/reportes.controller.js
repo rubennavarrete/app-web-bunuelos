@@ -44,3 +44,12 @@ export const factura = async (req, res) => {
   
     res.send(result.recordset);
 };
+
+export const masVendido = async (req, res) => {
+    let result;
+    const pool = await getConnection();
+  
+    result = await pool.request().query(queries.masVendido);
+  
+    res.send(result.recordset);
+};

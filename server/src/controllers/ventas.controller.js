@@ -48,20 +48,13 @@ export const InsertarOrdenCompra = async (req, res) => {
   }
   try {
     const pool = await getConnection();
-<<<<<<< HEAD
     const result = await pool.request()
       .input("Vtotal", sql.Float, tt)
-=======
-    const result = await pool
-      .request()
-      .input("Vtotal", sql.Decimal, tt)
->>>>>>> 545bf85f2e21fbdb70e355b4ec85952ad2428098
       .input("fech", sql.Date, fech)
       .input("cedulC", sql.VarChar, cedulaCli)
       .input("usernameU", sql.VarChar, nombreUS)
       .query(queries.InsertarOrdenCompra);
 
-<<<<<<< HEAD
       res.json({
         Vtotal,
         fech,
@@ -101,8 +94,6 @@ export const llenarOrdenCompra = async (req, res) => {
       .input("usernameU", sql.VarChar, usernameU)
       .query(queries.llenarOrdenCompra);
 
-=======
->>>>>>> 545bf85f2e21fbdb70e355b4ec85952ad2428098
     res.json({
       Vtotal,
       fech,

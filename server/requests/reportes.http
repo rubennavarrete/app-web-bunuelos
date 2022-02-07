@@ -15,3 +15,7 @@ GET {{api}}/cumple
 ### clientes totales
 GET {{api}}/factu
 
+### clientes totales
+GET {{api}}/masVendido
+
+

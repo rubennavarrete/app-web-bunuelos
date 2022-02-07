@@ -4,7 +4,8 @@ import {
     PporAcabarse,
     Pcaducados,
     CumpleañosCli,
-    factura
+    factura,
+    masVendido
   } from "../controllers/reportes.controller";
 
 
@@ -20,5 +21,6 @@ import {
 
   router.get("/reportes/factu",factura);
 
+  router.get("/reportes/masVendido", masVendido);
 
   export default router;

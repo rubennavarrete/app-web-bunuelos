@@ -8,6 +8,7 @@ import {
   borrarDv,
   modificarDv,
   OC,
+  masVendido,
 } from "../controllers/ventas.controller";
 
 const router = Router();
