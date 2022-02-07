@@ -11,8 +11,8 @@ export const mostrarPAVender = async (req, res) => {
     res.json(result.recordset);
   } catch (error) {
     console.log(error);
-   // res.status(500);
-   // res.send(error.message);
+    // res.status(500);
+    // res.send(error.message);
   }
 };
 
@@ -33,68 +33,122 @@ export const detalleventa = async (req, res) => {
   }
 };
 
-export const generarOC = async (req, res) => {
-  console.log("entre a la fucion de controlller");
-  try {
-    const pool = await getConnection();
-    const result = await pool.request().query(queries.generarOC);
-  } catch (error) {
-    //res.status(500);
-   // res.send(error.message);
-  }
-};
-
-export const llenarOrdenCompra = async (req, res) => {
-  const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
-  console.log(oc, Vtotal, fech, cedulC, usernameU);
-  if (
-    oc == null ||
-    Vtotal == null ||
-    fech == null ||
-    cedulC == null ||
-    usernameU == null
-  ) {
+export const InsertarOrdenCompra = async (req, res) => {
+  const { tt, fech, cedulaCli, nombreUS } = req.body;
+  console.log(
+    "entre a la fucion de controlller" + tt,
+    fech,
+    cedulaCli,
+    nombreUS
+  );
+  if (tt == null || fech == null || cedulaCli == null || nombreUS == null) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
   }
-
   try {
     const pool = await getConnection();
-
-    await pool
+    const result = await pool
       .request()
-      .input("oc", sql.Int, oc)
-      .input("Vtotal", sql.Decimal, Vtotal)
+      .input("Vtotal", sql.Decimal, tt)
       .input("fech", sql.Date, fech)
-      .input("cedulC", sql.VarChar, cedulC)
-      .input("usernameU", sql.VarChar, usernameU)
-      .query(queries.llenarOrdenCompra);
+      .input("cedulC", sql.VarChar, cedulaCli)
+      .input("usernameU", sql.VarChar, nombreUS)
+      .query(queries.InsertarOrdenCompra);
 
     res.json({
-      oc,
       Vtotal,
       fech,
       cedulC,
       usernameU,
     });
   } catch (error) {
-   // res.status(500);
-   // res.send(error.message);
+    //res.status(500);
+    // res.send(error.message);
   }
 };
+
+// export const llenarOrdenCompra = async (req, res) => {
+//   const { oc, Vtotal, fech, cedulC, usernameU } = req.body;
+//   console.log(oc, Vtotal, fech, cedulC, usernameU);
+//   if (
+//     oc == null ||
+//     Vtotal == null ||
+//     fech == null ||
+//     cedulC == null ||
+//     usernameU == null
+//   ) {
+//     return res.status(400).json({
+//       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
+//     });
+//   }
+
+//   try {
+//     const pool = await getConnection();
+
+//     await pool
+//       .request()
+//       .input("oc", sql.Int, oc)
+//       .input("Vtotal", sql.Decimal, Vtotal)
+//       .input("fech", sql.Date, fech)
+//       .input("cedulC", sql.VarChar, cedulC)
+//       .input("usernameU", sql.VarChar, usernameU)
+//       .query(queries.llenarOrdenCompra);
+
+//     res.json({
+//       oc,
+//       Vtotal,
+//       fech,
+//       cedulC,
+//       usernameU,
+//     });
+//   } catch (error) {
+//     // res.status(500);
+//     // res.send(error.message);
+//   }
+// };
 //--------------------------------------------------------
 
 export const insertarDv = async (req, res) => {
-  const { codPro, nOrd, cant } = req.body;
-  console.log(codPro, nOrd, cant);
-  if (codPro == null || nOrd == null || cant == null) {
+  // console.log(req.body);
+  const array = req.body;
+  // console.log(array);
+  if (array.lenght == 0) {
     return res.status(400).json({
       msg: "Solicitud incorrecta. Por favor rellena todos los campos correctamente",
     });
   }
+  let _SQL_INSERT_DV = "";
+  array.map((item, index) => {
+    _SQL_INSERT_DV +=
+      " exec sp_insertarDetalleVenta " +
+      " '" +
+      item.codProducto +
+      "'," +
+      item.numeroOrden +
+      "," +
+      item.count;
+    console.log(item, index);
+    console.log(_SQL_INSERT_DV);
+  });
 
+  //res.status(200).send({msg:"Completo"});
   try {
+    const pool = await getConnection();
+
+    await pool.request().query(_SQL_INSERT_DV);
+
+    res.json({
+      msg: "Productos insertados correctamente",
+      status: 1,
+    });
+  } catch (error) {}
+  // } catch (error) {
+  // res.status(500);
+  // res.send(error.message);
+  // }
+  /*
+ // try {
     const pool = await getConnection();
 
     await pool
@@ -109,10 +163,10 @@ export const insertarDv = async (req, res) => {
       nOrd,
       cant,
     });
-  } catch (error) {
+ // } catch (error) {
    // res.status(500);
    // res.send(error.message);
-  }
+ // }*/
 };
 //--------------------------------------------------------
 export const borrarDv = async (req, res) => {
@@ -156,15 +210,16 @@ export const modificarDv = async (req, res) => {
       cant,
     });
   } catch (error) {
-   // res.send(error.message);
+    // res.send(error.message);
   }
 };
 //--------------------------------------------------------
+
 export const OC = async (req, res) => {
   let result;
   const pool = await getConnection();
 
   result = await pool.request().query(queries.OC);
-
-  res.send(result.recordset);
+  console.log(result.data);
+  res.send(result.recordset[0]);
 };

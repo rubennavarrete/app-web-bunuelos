@@ -355,6 +355,7 @@ body {
   font-size: 22px;
   font-weight: 400;
   height: 50px;
+  justify-content: space-between;
 }
 .cart_wrapper .cart_lists .cart_title span {
   margin-right: 8px;
