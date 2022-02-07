@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 import clienteContext from "./clientesContext";
 import clientesReducer from "./clientesReducer";
@@ -77,7 +77,11 @@ const ClienteState = (props) => {
         payload: resultado.data,
       });
     } catch (error) {
-      swal("¡Ups!", "No pudimos obtener la informacion los Clientes", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener la informacion los Clientes!",
+      });
     }
   };
 
@@ -86,13 +90,17 @@ const ClienteState = (props) => {
       const resultado = await clienteAxios.get(
         `/api/clientes/buscar/${ci ? ci : "null"}`
       );
-      console.log("% resultado Buscar %: ", resultado);
+
       dispach({
         type: OBTENER_CLIENTES,
         payload: resultado.data,
       });
     } catch (error) {
-      swal("¡Ups!", "El cliente que buscas no existe!", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener la informacion los Clientes!",
+      });
     }
   };
 
@@ -109,21 +117,29 @@ const ClienteState = (props) => {
 
     try {
       const resultado = await clienteAxios.post("/api/clientes", clientes);
-      console.log(resultado);
 
       dispach({
         type: AGREGAR_CLIENTE,
         payload: resultado.data,
       });
+
+      Swal.fire({
+        title: " Muy Bien",
+        text: "Cliente ingresado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
     } catch (error) {
-      swal("¡Ups!", "No se puede agregar a este cliente", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No se puede agregar a este cliente!",
+      });
     }
   };
 
   // Edita o modica un cliente
   const actualizarCliente = async (ci) => {
-    console.log("ci", ci.cedulaCli);
-    console.log("datos", ci);
     const datosA = {
       nombreCli: ci.nombreCli,
       direccionCli: ci.direccionCli,
@@ -132,45 +148,71 @@ const ClienteState = (props) => {
       fechNac: ci.fechNac,
     };
 
-    console.log("datosA", datosA);
-
     try {
       const resultado = await clienteAxios.put(
         `/api/clientes/${ci.cedulaCli}`,
         datosA
       );
-      console.log("resultado", resultado);
+
       dispach({
         type: ACTUALIZAR_CLIENTE,
         payload: resultado.data,
       });
+
+      Swal.fire({
+        title: " Muy Bien",
+        text: "Cliente actualizado exitosamente",
+        icon: "success",
+        timer: "3000",
+      });
     } catch (error) {
-      swal(
-        "¡Ups!",
-        "No se puede actualizar la informacion de este cliente",
-        "error"
-      );
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No se puede actualizar la informacion de este cliente!",
+      });
     }
   };
 
   // Eliminar un cliente por su numero de cedula
   const eliminarCliente = async (ci) => {
     try {
-      await clienteAxios.delete(`/api/clientes/${ci}`);
+      const resultado = await clienteAxios.delete(`/api/clientes/${ci}`);
 
       dispach({
         type: ELIMINAR_CLIENTE,
         payload: ci,
       });
 
-      swal({
-        title: " Muy Bien",
-        text: "Cliente eliminado exitosamente",
-        icon: "success",
-        timer: "3000",
-      });
+      console.log(resultado.data.msg);
+      if (resultado.data.tipo === 1) {
+        Swal.fire({
+          title: " Alto",
+          text: resultado.data.msg,
+          icon: "warning",
+          timer: "3000",
+        });
+      } else if (resultado.data.tipo === 2) {
+        Swal.fire({
+          title: " Muy Bien",
+          text: resultado.data.msg,
+          icon: "success",
+          timer: "3000",
+        });
+      } else if (resultado.data.tipo === 3) {
+        Swal.fire({
+          title: " No encontrado",
+          text: resultado.data.msg,
+          icon: "error",
+          timer: "3000",
+        });
+      }
     } catch (error) {
-      swal("¡Ups!", "No se puede eliminar a este cliente", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No se puede eliminar a este cliente!",
+      });
     }
   };
 

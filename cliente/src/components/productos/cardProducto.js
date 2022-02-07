@@ -1,6 +1,24 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
+
+import ProductosContext from "../../context/Productos/productoContext";
 
 const CardProducto = ({ productos }) => {
+  //Obtener las funcnciones del context de Productos
+  const clienteContext = useContext(ProductosContext);
+  const { obtenerCodigoProducto } = clienteContext;
+
+  const capturarCodigo = (productos) => {
+    obtenerCodigoProducto(productos.codProducto);
+  };
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const precio_usd = formatter.format(productos.precio);
+  const elaboracion = productos.fechaElab;
+  const caducidad = productos.fechaCad;
+
   return (
     <Fragment>
       <li>
@@ -8,23 +26,15 @@ const CardProducto = ({ productos }) => {
           type="radio"
           name="my-input"
           id="radio"
-          //   onClick={() => capturarCedula(clientes)}
+          onClick={() => capturarCodigo(productos)}
         />
         <p>{productos.codProducto}</p>
         <p>{productos.nombre}</p>
         <p>{productos.categoria}</p>
-        <p>{productos.precio}</p>
+        <p>{precio_usd}</p>
         <p>{productos.stock}</p>
-        <p>
-          {productos.fechaCad !== null
-            ? productos.fechaCad.substring(0, 10)
-            : null}
-        </p>
-        <p>
-          {productos.fechaCad !== null
-            ? productos.fechaElab.substring(0, 10)
-            : null}
-        </p>
+        <p>{caducidad && caducidad.substring(0, 10)}</p>
+        <p>{elaboracion && elaboracion.substring(0, 10)}</p>
         <img
           src={
             productos.fotoUrl !== null

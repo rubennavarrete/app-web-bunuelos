@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import Swal from "sweetalert2";
+import clienteAxios from "../../config/axios";
 
 import clientesContext from "../../context/Clientes/clientesContext";
 
@@ -25,10 +27,26 @@ const Input = ({
     cambiarEstado({ ...estado, campo: e.target.value });
   };
 
-  const validacion = () => {
+  const validacion = async () => {
     if (tipoExpresion === "1") {
       if (ValidarCedula(estado.campo)) {
         cambiarEstado({ ...estado, valido: true });
+
+        if (!mostarActualizar && estado.campo.length === 10) {
+          const resultado = await clienteAxios.get(
+            `/api/clientes/buscar/${estado.campo}`
+          );
+
+          if (resultado.data[0].cedulaCli !== undefined) {
+            Swal.fire({
+              title: " Alto",
+              text: "El cliente que intenta registrar ya existe en la base de datos. Prueba con otra cedula!",
+              icon: "warning",
+            });
+
+            cambiarEstado({ ...estado, campo: "", valido: null });
+          }
+        }
       } else {
         cambiarEstado({ ...estado, valido: false });
       }

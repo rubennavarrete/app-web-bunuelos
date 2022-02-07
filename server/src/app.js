@@ -7,6 +7,10 @@ import cors from "cors";
 import authRouter from "./routes/auth.routes";
 import clientesRouter from "./routes/clientes.routes";
 import productosRouter from "./routes/productos.routes";
+import ventasRouter from "./routes/ventas.routes";
+import inicioRouter from "./routes/inicio.routes";
+import reportesRouter from "./routes/reportes.routes";
+
 
 const app = express();
 
@@ -41,5 +45,14 @@ app.use("/api", clientesRouter);
 
 //Rutas para gestionar productos
 app.use("/api", productosRouter);
+
+//Rutas para gestionar ventas
+app.use("/api", ventasRouter);
+
+//Rutas para gestionar el inicio
+app.use("/api", inicioRouter);
+
+//Rutas para gestionar los reportes
+app.use("/api", reportesRouter);
 
 export default app;

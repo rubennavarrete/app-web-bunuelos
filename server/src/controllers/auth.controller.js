@@ -40,7 +40,7 @@ export const autenticarUsuario = async (req, res) => {
       tipoUs: user.tipoUs,
       urImgUs: user.urImgUs,
     };
-
+    console.log("->",datos);
     const token = jwt.sign(datos, process.env.SECRETA, {
       expiresIn: "7d",
     });

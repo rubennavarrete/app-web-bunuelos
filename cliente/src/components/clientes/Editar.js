@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import swal from "sweetalert";
 
 import clientesContext from "../../context/Clientes/clientesContext";
+
+import VentasContext from "../../context/ventas/ventaContext";
 
 import Input from "../inputs/Input";
 
@@ -19,18 +20,8 @@ const Editar = ({ titulo }) => {
     mostarActualizar,
   } = clienteContext;
 
-  //State para agregar cliente
-  const [cliente, guardarCliente] = useState({
-    cedulaCli: "",
-    nombreCli: "",
-    direccionCli: "",
-    celularCli: "",
-    correoCli: "",
-    fechNac: "",
-  });
-
-  //Extraer de agregar cliente
-  // const { cedula, nombre, direccion, telefono, correo, fecha } = cliente;
+  const ventasContext = useContext(VentasContext);
+  const { cerrarIngresarCliente, obtenerCedulaFactura } = ventasContext;
 
   //State para validar los campos del componente input
   const [cedulaV, cambiarCedulaV] = useState({ campo: "", valido: null });
@@ -49,13 +40,6 @@ const Editar = ({ titulo }) => {
       cambiarCedulaV({ campo: datoActualizar[0].cedulaCli, valido: true });
     }
 
-    console.log("Cambio cedulaV.valido a: ", cedulaV.valido);
-    console.log("Cambio nombreV.valido a: ", nombreV.valido);
-    console.log("Cambio direccionV.valido a: ", direccionV.valido);
-    console.log("Cambio telefonoV.valido a: ", telefonoV.valido);
-    console.log("Cambio correoV.valido a: ", correoV.valido);
-    console.log("Cambio fechaV.valido a: ", fechaV.valido);
-
     if (
       cedulaV.valido === true &&
       nombreV.valido === true &&
@@ -65,45 +49,32 @@ const Editar = ({ titulo }) => {
       fechaV.valido === true
     ) {
       cambiarFormularioV(true);
-      console.log("Cambio formularioV a: ", formularioV);
       if (!mostarActualizar) {
-        swal({
-          title: " Muy Bien",
-          text: "Cliente ingresado exitosamente",
-          icon: "success",
-          timer: "3000",
+        agregarCliente({
+          cedulaCli: cedulaV.campo,
+          nombreCli: nombreV.campo,
+          direccionCli: direccionV.campo,
+          celularCli: telefonoV.campo,
+          correoCli: correoV.campo,
+          fechNac: fechaV.campo,
         });
-        setTimeout(
-          () =>
-            agregarCliente({
-              cedulaCli: cedulaV.campo,
-              nombreCli: nombreV.campo,
-              direccionCli: direccionV.campo,
-              celularCli: telefonoV.campo,
-              correoCli: correoV.campo,
-              fechNac: fechaV.campo,
-            }),
-          3000
-        );
+        obtenerCedulaFactura({
+          cedulaCli: cedulaV.campo,
+          nombreCli: nombreV.campo,
+          direccionCli: direccionV.campo,
+          celularCli: telefonoV.campo,
+          correoCli: correoV.campo,
+          fechNac: fechaV.campo,
+        });
       } else {
-        swal({
-          title: " Muy Bien",
-          text: "Cliente actualizado exitosamente",
-          icon: "success",
-          timer: "3000",
+        actualizarCliente({
+          cedulaCli: cedulaV.campo,
+          nombreCli: nombreV.campo,
+          direccionCli: direccionV.campo,
+          celularCli: telefonoV.campo,
+          correoCli: correoV.campo,
+          fechNac: fechaV.campo,
         });
-        setTimeout(
-          () =>
-            actualizarCliente({
-              cedulaCli: cedulaV.campo,
-              nombreCli: nombreV.campo,
-              direccionCli: direccionV.campo,
-              celularCli: telefonoV.campo,
-              correoCli: correoV.campo,
-              fechNac: fechaV.campo,
-            }),
-          3000
-        );
       }
 
       cambiarCedulaV({ campo: "", valido: null });
@@ -115,7 +86,7 @@ const Editar = ({ titulo }) => {
       //agregar al State
     } else {
       cambiarFormularioV(false);
-      console.log("Cambio formularioV a: ", formularioV);
+
       setTimeout(() => cambiarFormularioV(null), 4000);
     }
   };
@@ -143,9 +114,13 @@ const Editar = ({ titulo }) => {
         campo: datoActualizar[0].fechNac.substring(0, 10),
         valido: true,
       });
-      console.log("En el useEffect");
     }
   }, []);
+
+  const cerrar = () => {
+    cerrarAgregarCliente();
+    cerrarIngresarCliente();
+  };
 
   return (
     <div className="form-usuario">
@@ -153,8 +128,8 @@ const Editar = ({ titulo }) => {
         <div className="botn-cerrar">
           <button
             type="button"
-            className="btn btn-block btn-primario redondear"
-            onClick={() => cerrarAgregarCliente()}
+            className="btn2 btn-block btn-primario redondear"
+            onClick={() => cerrar()}
           >
             X
           </button>
@@ -239,7 +214,7 @@ const Editar = ({ titulo }) => {
           <div className="boton-centrado">
             <input
               type="submit"
-              className="btn btn-primario btn-block"
+              className="btn2 btn-primario btn-block"
               value="Ingresar"
             />
           </div>
