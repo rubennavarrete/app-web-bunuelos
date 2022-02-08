@@ -39,12 +39,12 @@ Content-Type: application/json
 
 [
     {
-        "codProducto":"DC01",
+        "codProducto":"AA01",
         "numeroOrden":1,
         "count": 2
     },
     {
-        "codProducto":"BO01",
+        "codProducto":"AA02",
         "numeroOrden":1,
         "count": 2
     }

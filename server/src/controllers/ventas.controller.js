@@ -50,7 +50,7 @@ export const InsertarOrdenCompra = async (req, res) => {
     const pool = await getConnection();
     const result = await pool
       .request()
-      .input("Vtotal", sql.Decimal, tt)
+      .input("Vtotal", sql.Float, tt)
       .input("fech", sql.Date, fech)
       .input("cedulC", sql.VarChar, cedulaCli)
       .input("usernameU", sql.VarChar, nombreUS)
