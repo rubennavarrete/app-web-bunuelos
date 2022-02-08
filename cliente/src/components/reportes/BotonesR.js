@@ -82,7 +82,7 @@ const BotonesR = () => {
             <img src={factura} alt="" />
           </div>
           <div className="card_title title-white">
-            <p>Facturas</p>
+            <p>Más Vendidos</p>
           </div>
         </div>
       </div>

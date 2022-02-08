@@ -13,6 +13,7 @@ import {
   OBTENER_PRODUCTOS_ACABARSE,
   OBTENER_CLIENTES_CUMPLEANEROS,
   OBTENER_ORDEN_COMPRA,
+  OBTENER_MAS_VENDIDOS,
 } from "../../types";
 
 const ReporteState = (props) => {
@@ -23,6 +24,7 @@ const ReporteState = (props) => {
     acabarse: [],
     cumpleaneros: [],
     ordenCompra: [],
+    masVendidos: [],
   };
 
   // Dispach para ejecutar las acciones
@@ -115,6 +117,23 @@ const ReporteState = (props) => {
     }
   };
 
+  const obtenerMasVendidos = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/reportes/masVendido");
+
+      dispach({
+        type: OBTENER_MAS_VENDIDOS,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener la información de los productos más vendidos!",
+      });
+    }
+  };
+
   return (
     <reporteContext.Provider
       value={{
@@ -124,6 +143,7 @@ const ReporteState = (props) => {
         acabarse: state.acabarse,
         cumpleaneros: state.cumpleaneros,
         ordenCompra: state.ordenCompra,
+        masVendidos: state.masVendidos,
         mostrarVistaReporte,
         obtenerNumeroReporte,
         ocultarVistaReporte,
@@ -131,6 +151,7 @@ const ReporteState = (props) => {
         obtnerPoductosAcabarse,
         obtenerClientesCumpleaneros,
         obtenerOrdenCompras,
+        obtenerMasVendidos,
       }}
     >
       {props.children}

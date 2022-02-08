@@ -1,21 +1,14 @@
-import React, { useState } from "react";
-import { Document, Page } from "react-pdf";
+import React from "react";
+import testPdf from "../../assets/MANUAL.pdf";
 
 const Ayuda = () => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  };
   return (
     <div>
-      <Document file="MANUAL.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+      <iframe
+        id="page"
+        style={{ width: "100%", height: "89vh" }}
+        src={testPdf}
+      />
     </div>
   );
 };

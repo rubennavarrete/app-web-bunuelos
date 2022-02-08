@@ -63,7 +63,8 @@ const Login = (props) => {
           <img
             className="login-img"
             src="http://localhost:3030/static/media/Logo.00ef15bb255e84228d0067bbc034135c.svg"
-          ></img>
+            alt=""
+          />
         </div>
 
         <div className="login-box">

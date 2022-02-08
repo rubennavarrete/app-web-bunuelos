@@ -8,6 +8,7 @@ import clientesContext from "../../context/Clientes/clientesContext";
 import reportesContext from "../../context/Reportes/reportesContext";
 import ProductosContext from "../../context/Productos/productoContext";
 import OrdenC from "./OrdenCompra";
+import MasVendidos from "./MasVendidos";
 
 const impromirReporte = () => {
   window.print();
@@ -38,6 +39,8 @@ const PlantillaClientesRegistrados = ({
     cumpleaneros,
     obtenerOrdenCompras,
     ordenCompra,
+    obtenerMasVendidos,
+    masVendidos,
   } = reporteContext;
 
   //Obtener las funcnciones del context de Productos
@@ -71,6 +74,10 @@ const PlantillaClientesRegistrados = ({
 
   useEffect(() => {
     obtenerOrdenCompras();
+  }, []);
+
+  useEffect(() => {
+    obtenerMasVendidos();
   }, []);
   return (
     <main>
@@ -119,7 +126,7 @@ const PlantillaClientesRegistrados = ({
           </tbody>
         </table>
 
-        <h4>Información Del Reporte</h4>
+        <h4>Información del Reporte</h4>
 
         {numeroR === 1 ? (
           <section className="content-tabla">
@@ -248,7 +255,7 @@ const PlantillaClientesRegistrados = ({
                     })
                   ) : (
                     <p className="mensaje-vistas">
-                      No se encontron clientes cumpleañeros!
+                      No se encontron clientes cumpleañeros?
                     </p>
                   )}
                 </tbody>
@@ -261,10 +268,10 @@ const PlantillaClientesRegistrados = ({
               <thead>
                 <tr>
                   <th style={{ width: 64 }}>#</th>
-                  <th style={{ width: 253 }}>Valor Total</th>
-                  <th style={{ width: 276 }}>Fecha</th>
+                  <th style={{ width: 170 }}>Valor Total</th>
+                  <th style={{ width: 300 }}>Fecha</th>
                   <th style={{ width: 181 }}>Cédula</th>
-                  <th style={{ width: 350 }}>Vendedor</th>
+                  <th style={{ width: 250 }}>Vendedor</th>
                 </tr>
               </thead>
             </table>
@@ -278,6 +285,34 @@ const PlantillaClientesRegistrados = ({
                   ) : (
                     <p className="mensaje-vistas">
                       No se encontron ordenes de compra!
+                    </p>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : numeroR === 7 ? (
+          <section className="content-tabla">
+            <table className="rwd_auto fontsize">
+              <thead>
+                <tr>
+                  <th style={{ width: 80 }}>Cantidad</th>
+                  <th style={{ width: 150 }}>Código </th>
+                  <th style={{ width: 400 }}>Nombre</th>
+                  <th style={{ width: 200 }}>Ganancia</th>
+                </tr>
+              </thead>
+            </table>
+            <div className="table-responsive">
+              <table className="rwd_auto fontsize">
+                <tbody>
+                  {masVendidos.length > 0 ? (
+                    masVendidos.map((item) => {
+                      return <MasVendidos key={item.numOrden} mas={item} />;
+                    })
+                  ) : (
+                    <p className="mensaje-vistas">
+                      No se encontron los productos más vendidos!
                     </p>
                   )}
                 </tbody>

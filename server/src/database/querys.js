@@ -94,4 +94,6 @@ export const queries = {
 
      //Para mostrar la tabla Orden de Compra
     factura: "select * from OrdenCompra oc inner join DetalleVenta dv on dv.numOrd=oc.numOrden",
+
+    masVendido:"exec sp_Pmasvendido",
 };

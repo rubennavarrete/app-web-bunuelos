@@ -6,6 +6,7 @@ import {
   OBTENER_PRODUCTOS_ACABARSE,
   OBTENER_CLIENTES_CUMPLEANEROS,
   OBTENER_ORDEN_COMPRA,
+  OBTENER_MAS_VENDIDOS,
 } from "../../types";
 
 export default (state, action) => {
@@ -44,6 +45,11 @@ export default (state, action) => {
       return {
         ...state,
         ordenCompra: action.payload,
+      };
+    case OBTENER_MAS_VENDIDOS:
+      return {
+        ...state,
+        masVendidos: action.payload,
       };
     default:
       return state;

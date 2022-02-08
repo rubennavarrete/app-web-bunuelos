@@ -11,12 +11,13 @@ const Ventas = () => {
   //Obtener las funcnciones del context de Ventas
   const ventasContext = useContext(VentasContext);
 
-  const { obtenerProductosVenta, productosVenta } = ventasContext;
+  const { obtenerProductosVenta, productosVenta, mostrarDetalleVenta } =
+    ventasContext;
 
   //Obtener productos de ventas cuando carga el componente
   useEffect(() => {
     obtenerProductosVenta();
-  }, []);
+  }, [mostrarDetalleVenta]);
 
   return (
     <MainLayout>
