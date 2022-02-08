@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 import { useLocation } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import User from "../auth/User";
+
+import Ayuda from "./ayuda";
 
 import logo from "../../assets/Logo.svg";
 
@@ -16,6 +19,12 @@ const MainLayout = ({ children, ...props }) => {
 
   var decoded = jwt_decode(token);
 
+  const [mostrar, guardarMostrar] = useState(false);
+
+  const mostrarAyuda = () => {
+    guardarMostrar(true);
+  };
+
   return (
     <div className="contenedor-app">
       <aside>
@@ -25,7 +34,8 @@ const MainLayout = ({ children, ...props }) => {
         <Sidebar query={search} />
 
         <button
-          className="button button2 no-print" /*onClick={() => verificarCliente()}*/
+          className="button button2 no-print"
+          onClick={() => mostrarAyuda()}
         >
           Ayuda
         </button>
@@ -37,9 +47,13 @@ const MainLayout = ({ children, ...props }) => {
         <nav>
           <Navbar query={search} />
         </nav>
-        <main>
-          <div className="contenedor-tareas">{children}</div>
-        </main>
+        {mostrar ? (
+          <Ayuda />
+        ) : (
+          <main>
+            <div className="contenedor-tareas">{children}</div>
+          </main>
+        )}
       </div>
     </div>
   );

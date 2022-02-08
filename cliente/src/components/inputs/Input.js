@@ -51,12 +51,32 @@ const Input = ({
         cambiarEstado({ ...estado, valido: false });
       }
     } else if (tipoExpresion === "2") {
-      if (expressionRegular.test(estado.campo)) {
-        cambiarEstado({ ...estado, valido: true });
+      if (name === "fecha") {
+        var edad = calcularEdad(estado.campo);
+        if (edad >= 16) {
+          cambiarEstado({ ...estado, valido: true });
+        } else {
+          cambiarEstado({ ...estado, valido: false });
+        }
       } else {
-        cambiarEstado({ ...estado, valido: false });
+        if (expressionRegular.test(estado.campo)) {
+          cambiarEstado({ ...estado, valido: true });
+        } else {
+          cambiarEstado({ ...estado, valido: false });
+        }
       }
     }
+  };
+
+  const calcularEdad = (fecha_nacimiento) => {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha_nacimiento);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+    }
+    return edad;
   };
 
   return (

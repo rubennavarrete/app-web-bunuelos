@@ -7,6 +7,7 @@ import CardProducto from "../productos/cardProducto";
 import clientesContext from "../../context/Clientes/clientesContext";
 import reportesContext from "../../context/Reportes/reportesContext";
 import ProductosContext from "../../context/Productos/productoContext";
+import OrdenC from "./OrdenCompra";
 
 const impromirReporte = () => {
   window.print();
@@ -35,11 +36,15 @@ const PlantillaClientesRegistrados = ({
     acabarse,
     obtenerClientesCumpleaneros,
     cumpleaneros,
+    obtenerOrdenCompras,
+    ordenCompra,
   } = reporteContext;
 
   //Obtener las funcnciones del context de Productos
   const productoContext = useContext(ProductosContext);
   const { obtenerProductos, productos } = productoContext;
+
+  console.log("ordenCompra: ", ordenCompra);
 
   //Obtener clientes cuando carga el componente
   useEffect(() => {
@@ -62,6 +67,10 @@ const PlantillaClientesRegistrados = ({
 
   useEffect(() => {
     obtenerClientesCumpleaneros();
+  }, []);
+
+  useEffect(() => {
+    obtenerOrdenCompras();
   }, []);
   return (
     <main>
@@ -135,7 +144,9 @@ const PlantillaClientesRegistrados = ({
                       return <Tabla key={item.cedulaCli} clientes={item} />;
                     })
                   ) : (
-                    <p className="mensaje-vistas">No se encontraron clientes!</p>
+                    <p className="mensaje-vistas">
+                      No se encontraron clientes!
+                    </p>
                   )}
                 </tbody>
               </table>
@@ -238,6 +249,35 @@ const PlantillaClientesRegistrados = ({
                   ) : (
                     <p className="mensaje-vistas">
                       No se encontron clientes cumpleañeros!
+                    </p>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : numeroR === 3 ? (
+          <section className="content-tabla">
+            <table className="rwd_auto fontsize">
+              <thead>
+                <tr>
+                  <th style={{ width: 64 }}>#</th>
+                  <th style={{ width: 253 }}>Valor Total</th>
+                  <th style={{ width: 276 }}>Fecha</th>
+                  <th style={{ width: 181 }}>Cédula</th>
+                  <th style={{ width: 350 }}>Vendedor</th>
+                </tr>
+              </thead>
+            </table>
+            <div className="table-responsive">
+              <table className="rwd_auto fontsize">
+                <tbody>
+                  {ordenCompra.length > 0 ? (
+                    ordenCompra.map((item) => {
+                      return <OrdenC key={item.numOrden} ordenes={item} />;
+                    })
+                  ) : (
+                    <p className="mensaje-vistas">
+                      No se encontron ordenes de compra!
                     </p>
                   )}
                 </tbody>

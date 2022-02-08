@@ -88,7 +88,7 @@
 }
 .card__count-text--big {
   text-transform: uppercase;
-  font-size: 5rem;
+  font-size: 30px;
   font-weight: 300;
 }
 .card__stuff-container {

@@ -29,18 +29,10 @@ const Inicio = () => {
   // Obtener los datod al cargar el componente
   useEffect(() => {
     obtenerCajaHoy();
-  }, []);
-
-  useEffect(() => {
     obtenerTotalVenta();
-  }, []);
-
-  useEffect(() => {
     obtenerClientesTotales();
-  }, []);
-
-  useEffect(() => {
     obtenerProductosTotales();
+    console.log("cajaHoy: ", cajaHoy);
   }, []);
 
   return (
@@ -61,7 +53,12 @@ const Inicio = () => {
             <div class="card__count-container">
               <div class="card__count-text">
                 <span class="card__count-text--big">
-                  ${!cajaHoy === null ? cajaHoy : 0}
+                  $
+                  {cajaHoy !== null
+                    ? cajaHoy.Total.toFixed(2) !== null
+                      ? cajaHoy.Total.toFixed(2)
+                      : 0
+                    : 0}
                 </span>
               </div>
             </div>

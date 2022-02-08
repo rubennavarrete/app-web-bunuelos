@@ -12,6 +12,7 @@ import {
   OBTENER_CADUCADOS,
   OBTENER_PRODUCTOS_ACABARSE,
   OBTENER_CLIENTES_CUMPLEANEROS,
+  OBTENER_ORDEN_COMPRA,
 } from "../../types";
 
 const ReporteState = (props) => {
@@ -21,6 +22,7 @@ const ReporteState = (props) => {
     octecnerCaducados: [],
     acabarse: [],
     cumpleaneros: [],
+    ordenCompra: [],
   };
 
   // Dispach para ejecutar las acciones
@@ -48,7 +50,6 @@ const ReporteState = (props) => {
   const obtenerProductosCaducados = async () => {
     try {
       const resultado = await clienteAxios.get("/api/reportes/caducados");
-      console.log("resultado.data: ", resultado.data);
 
       dispach({
         type: OBTENER_CADUCADOS,
@@ -66,7 +67,6 @@ const ReporteState = (props) => {
   const obtnerPoductosAcabarse = async () => {
     try {
       const resultado = await clienteAxios.get("/api/reportes/acabarse");
-      console.log("resultado.data: ", resultado.data);
 
       dispach({
         type: OBTENER_PRODUCTOS_ACABARSE,
@@ -84,7 +84,6 @@ const ReporteState = (props) => {
   const obtenerClientesCumpleaneros = async () => {
     try {
       const resultado = await clienteAxios.get("/api/reportes/cumple");
-      console.log("resultado.data: ", resultado.data);
 
       dispach({
         type: OBTENER_CLIENTES_CUMPLEANEROS,
@@ -99,6 +98,23 @@ const ReporteState = (props) => {
     }
   };
 
+  const obtenerOrdenCompras = async () => {
+    try {
+      const resultado = await clienteAxios.get("/api/reportes/oc");
+
+      dispach({
+        type: OBTENER_ORDEN_COMPRA,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "No pudimos obtener la información de las ordenes de compras!",
+      });
+    }
+  };
+
   return (
     <reporteContext.Provider
       value={{
@@ -107,12 +123,14 @@ const ReporteState = (props) => {
         octecnerCaducados: state.octecnerCaducados,
         acabarse: state.acabarse,
         cumpleaneros: state.cumpleaneros,
+        ordenCompra: state.ordenCompra,
         mostrarVistaReporte,
         obtenerNumeroReporte,
         ocultarVistaReporte,
         obtenerProductosCaducados,
         obtnerPoductosAcabarse,
         obtenerClientesCumpleaneros,
+        obtenerOrdenCompras,
       }}
     >
       {props.children}

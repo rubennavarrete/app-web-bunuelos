@@ -199,7 +199,7 @@ const Editar = ({ titulo }) => {
             type="text"
             name="fecha"
             placeholder="Ingrese la fecha de nacimiento..."
-            leyenda="Ingrese una fecha con el siguiente formato yyyy-mm-dd"
+            leyenda="Ingrese una fecha con el siguiente formato yyyy-mm-dd, cumpliendo los 16 años de edad!"
             expressionRegular={expresiones.fecha}
             tipoExpresion="2"
           />

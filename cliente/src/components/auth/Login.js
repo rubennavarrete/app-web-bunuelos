@@ -60,7 +60,10 @@ const Login = (props) => {
     <div className="form-usuario">
       <div className="franga-central">
         <div className="img-box">
-          <img className="login-img" src="http://localhost:3030/static/media/Logo.00ef15bb255e84228d0067bbc034135c.svg"></img>
+          <img
+            className="login-img"
+            src="http://localhost:3030/static/media/Logo.00ef15bb255e84228d0067bbc034135c.svg"
+          ></img>
         </div>
 
         <div className="login-box">
@@ -84,12 +87,12 @@ const Login = (props) => {
               </div>
 
               <div className="campo-form">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Contraseña</label>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  placeholder="Tu Password"
+                  placeholder="Tu Contraseña"
                   value={password}
                   onChange={onChange}
                 />
@@ -104,14 +107,10 @@ const Login = (props) => {
               </div>
             </form>
           </div>
-            
         </div>
-        
-
-         
       </div>
-      </div>
-  )
+    </div>
+  );
 };
 
 export default Login;

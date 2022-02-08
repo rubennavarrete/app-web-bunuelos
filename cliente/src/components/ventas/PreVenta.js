@@ -9,6 +9,7 @@ import VentasContext from "../../context/ventas/ventaContext";
 import Editar from "../clientes/Editar";
 
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 
 const PreVenta = () => {
   const ventasContext = useContext(VentasContext);
@@ -22,6 +23,7 @@ const PreVenta = () => {
     insertarOrdenCompra,
     valoresFactura,
     clienteSeleccionado,
+    cancelarVenta,
   } = ventasContext;
 
   const token = localStorage.getItem("token");
@@ -31,14 +33,28 @@ const PreVenta = () => {
   const hoy = new Date().toISOString().substring(0, 10);
 
   const insertarDetalle = () => {
-    insertarOrdenCompra({
-      tt: valoresFactura.tt,
-      fech: hoy,
-      cedulaCli: clienteSeleccionado.cedulaCli,
-      nombreUS: decoded.usernameUS,
-    });
-    insertarDetalleVenta(intemsDetalleVenta);
-    // setTimeout(() => insertarDetalleVenta(intemsDetalleVenta), 3000);
+    if (intemsDetalleVenta.length > 0) {
+      insertarOrdenCompra({
+        tt: valoresFactura.tt,
+        fech: hoy,
+        cedulaCli: clienteSeleccionado.cedulaCli,
+        nombreUS: decoded.usernameUS,
+      });
+      insertarDetalleVenta(intemsDetalleVenta);
+      Swal.fire({
+        title: " Muy Bien",
+        text: "La venta ha sido generada satisfactoriamente",
+        icon: "success",
+      });
+
+      setTimeout(() => cancelarVenta(), 2000);
+    } else {
+      Swal.fire({
+        title: "Lo sentimos!",
+        text: "Es necesario ingresar productos para generar la venta!",
+        icon: "warning",
+      });
+    }
   };
 
   return (

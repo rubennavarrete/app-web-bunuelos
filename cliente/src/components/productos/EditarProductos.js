@@ -18,17 +18,6 @@ const EditarProductos = ({ titulo }) => {
     actualizarProducto,
   } = productoContext;
 
-  const hoy = new Date().toISOString().substring(0, 10);
-  //State para validar los campos del componente input
-  const [codigoV, cambiarCodigoV] = useState({ campo: "", valido: null });
-  const [nombreV, cambiarNombreV] = useState({ campo: "", valido: null });
-  const [categoriaV, cambiarCategoriaV] = useState("");
-  const [precioV, cambiarPrecioV] = useState({ campo: "", valido: null });
-  const [stockV, cambiarStockV] = useState({ campo: "", valido: null });
-  const [fechaV, cambiarFechaV] = useState(hoy);
-  const [imagenV, cambiarImagenV] = useState({ campo: "", valido: null });
-  const [formularioV, cambiarFormularioV] = useState(null);
-
   const categorias = [
     {
       value: "",
@@ -46,6 +35,17 @@ const EditarProductos = ({ titulo }) => {
       value: "BO",
     },
   ];
+
+  const hoy = new Date().toISOString().substring(0, 10);
+  //State para validar los campos del componente input
+  const [codigoV, cambiarCodigoV] = useState({ campo: "", valido: null });
+  const [nombreV, cambiarNombreV] = useState({ campo: "", valido: null });
+  const [categoriaV, cambiarCategoriaV] = useState((categorias.value = ""));
+  const [precioV, cambiarPrecioV] = useState({ campo: "", valido: null });
+  const [stockV, cambiarStockV] = useState({ campo: "", valido: null });
+  const [fechaV, cambiarFechaV] = useState(hoy);
+  const [imagenV, cambiarImagenV] = useState({ campo: "", valido: null });
+  const [formularioV, cambiarFormularioV] = useState(null);
 
   const handleChange = (e) => {
     cambiarCategoriaV({ value: e.target.value });
@@ -93,7 +93,7 @@ const EditarProductos = ({ titulo }) => {
 
       cambiarCodigoV({ campo: "", valido: null });
       cambiarNombreV({ campo: "", valido: null });
-      cambiarCategoriaV("");
+      cambiarCategoriaV((categorias.value = ""));
       cambiarPrecioV({ campo: "", valido: null });
       cambiarStockV({ campo: "", valido: null });
       cambiarImagenV({ campo: "", valido: null });
@@ -108,7 +108,7 @@ const EditarProductos = ({ titulo }) => {
     codigo: /^[A-Z]{2}[0-9]{2}$/,
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,50}$/, // Letras y espacios, pueden llevar acentos.
     precio: /^[0-9]+([.][0-9]+)?$/,
-    stock: /^\D*[1-9]{1,1}\d{0,3}$/, // 4 numeros del 1 al 1000.
+    stock: /^D*[1-9]{1,1}\d{0,2}$/, // 4 numeros del 1 al 1000.
     link: /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/,
   };
 
@@ -126,6 +126,14 @@ const EditarProductos = ({ titulo }) => {
       cambiarImagenV({ campo: productoActualizar[0].fotoUrl, valido: true });
     }
   }, []);
+
+  useEffect(() => {
+    actualizarCategoria();
+  }, [agregarProducto]);
+
+  const actualizarCategoria = () => {
+    categorias.value = "";
+  };
 
   const visualizar = () => {
     Swal.fire({

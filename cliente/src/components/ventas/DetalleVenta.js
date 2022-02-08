@@ -90,7 +90,7 @@ const DetalleVenta = () => {
   useEffect(() => {
     guardarCalcIva((subTotal * ivaT.value) / 100);
     guardarTotal(
-      parseInt(subTotal) + parseFloat((subTotal * ivaT.value) / 100)
+      parseFloat(subTotal) + parseFloat((subTotal * ivaT.value) / 100)
     );
     calcularTotal();
     if (vistaIngresar === false) intemsDetalleVenta.seleccionado = true;

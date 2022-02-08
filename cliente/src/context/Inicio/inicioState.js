@@ -30,7 +30,6 @@ const InicioState = (props) => {
   const obtenerCajaHoy = async () => {
     try {
       const resultado = await clienteAxios.get("/api/inicio/caj");
-
       dispach({
         type: OBTENER_CAJA,
         payload: resultado.data,
