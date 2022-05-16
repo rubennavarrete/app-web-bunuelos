@@ -8,12 +8,12 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "cedulaCli": "0706635091",
-    "nombreCli": "Cristhian Romero",
-    "direccionCli": "Las Palmas",
-    "celularCli": "0986783467",
-    "correoCli": "crisyangel@yahoo.com",
-    "fechNac": "1996-09-28T00:00:00.00Z"
+    "cedulaCli": "0803259258",
+    "nombreCli": "Saul",
+    "direccionCli": "Samta Matianita",
+    "celularCli": "0345454645",
+    "correoCli": "saul@yahoo.com",
+    "fechNac": "1995-09-28T00:00:00.00Z"
 }
 
 ### Obteniendo un cliente por su numero de cedula 

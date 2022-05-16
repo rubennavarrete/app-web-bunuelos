@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  mssql:
+    image: 'mcr.microsoft.com/mssql/server'
+    ports:
+        - '1444:1433'
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Secret1234
+    volumes:
+        - './drive:/var/opt/mssql'
+  web:
+    build: ./cliente
+    ports:
+      - "3000:3000"
+    restart: always
+    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+  api:
+    build: ./server
+    ports:
+      - "4000:4000"
+    restart: always
+    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
+    environment:
+      NODE_ENV: production
+      PORT: 4000

@@ -113,10 +113,10 @@ const Reportes = () => {
         return (
           <MainLayout>
             <PlantillaCR
-              seccion={"Facturas"}
-              titulo={"FACTURAS"}
+              seccion={"Mas vendido"}
+              titulo={"MAS_VENDIDOS"}
               encabezado={
-                "Reporte enfocado en la presentación de la facturación del día."
+                "Reporte enfocado en la presentación de los productos mas vendidos."
               }
               numeroR={7}
               emisor={decoded.nombreUS}
