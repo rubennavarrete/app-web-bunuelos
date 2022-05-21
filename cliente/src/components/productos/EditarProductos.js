@@ -64,22 +64,22 @@ const EditarProductos = ({ titulo }) => {
     ) {
       if (!actualizar) {
         agregarProducto({
-          codProducto: codigoV.campo,
+          codproducto: codigoV.campo,
           nombre: nombreV.campo,
           categoria: categoriaV.value,
           precio: precioV.campo,
           stock: stockV.campo,
-          fechElab: fechaV,
+          fechelab: fechaV,
           foto: imagenV.campo,
         });
       } else {
         actualizarProducto({
-          codProducto: codigoV.campo,
+          codproducto: codigoV.campo,
           nombre: nombreV.campo,
           categoria: categoriaV,
           precio: precioV.campo,
           stock: stockV.campo,
-          fechElab: fechaV,
+          fechelab: fechaV,
           foto: imagenV.campo,
         });
         console.log("codigoV.campo: ", codigoV.campo);

@@ -3,7 +3,7 @@ export const queries = {
   //Consultas para autentificar usuario
   obtenerUsuario:
     "Select usernameUs, contrasenaUs, nombreUS, tipoUs, urImgUs from Usuario where usernameUs = $1",
-
+  // ----------------------------------------------CLIENTES-------------------------------------------
   //Consultas para el apartado de clientes
   obtenerClientes: "SELECT * FROM Cliente",
 
@@ -69,16 +69,17 @@ export const queries = {
   // ----------------------------------------------INICIO-------------------------------------------
 
   // CAJA DE HOY
-  caja: "EXEC sp_gananciahoy",
+  caja: "select coalesce(sum(valorTotal), 0)  as Total from OrdenCompra where fecha = CURRENT_DATE",
 
   //Número de productos toteles registrados
-  procT: "EXEC sp_Tproducto",
+  procT: "select COUNT(codProducto) as PTotal from Producto",
 
   //número totales de compras realizadas
-  nCompras: "EXEC sp_Tordencompra",
+  nCompras:
+    "select COUNT(numOrden) as tot from OrdenCompra where fecha = CURRENT_DATE",
 
   //Número de clientes toteles registrados
-  clientT: "EXEC sp_Tcliente",
+  clientT: "select COUNT(cedulaCli) as cliT from Cliente",
 
   // ----------------------------------------------REPORTES-------------------------------------------
   //Para mostrar la tabla Orden de Compra

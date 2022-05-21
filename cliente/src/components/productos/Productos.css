@@ -30,7 +30,7 @@ body {
 }
 
 .contenedor-cards {
-  margin: 4rem;
+  margin: 4rem 4rem 7rem;
   padding: 2rem;
   background: white;
   border-radius: 15px;
@@ -194,6 +194,7 @@ ol.gradient-list > li > p {
   width: 9vw;
   font-weight: 700;
   font-size: 17px;
+  margin: 0;
 }
 
 ol.gradient-list > li > img {

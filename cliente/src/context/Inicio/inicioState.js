@@ -30,9 +30,10 @@ const InicioState = (props) => {
   const obtenerCajaHoy = async () => {
     try {
       const resultado = await clienteAxios.get("/api/inicio/caj");
+      console.log("resultado caja hoy", resultado.data.total);
       dispach({
         type: OBTENER_CAJA,
-        payload: resultado.data,
+        payload: resultado.data.total,
       });
     } catch (error) {
       Swal.fire({
@@ -68,7 +69,7 @@ const InicioState = (props) => {
 
       dispach({
         type: OBTENER_CLIENTES_TOTALES,
-        payload: resultado.data.cliT,
+        payload: resultado.data.clit,
       });
     } catch (error) {
       Swal.fire({
@@ -86,7 +87,7 @@ const InicioState = (props) => {
 
       dispach({
         type: OBTENER_NUMERO_PRODUCTOS,
-        payload: resultado.data.PTotal,
+        payload: resultado.data.ptotal,
       });
     } catch (error) {
       Swal.fire({

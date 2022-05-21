@@ -164,7 +164,6 @@ input[type="radio"] {
 
 .seccion-principal .info {
   text-align: center;
-  margin-top: 10%;
 }
 .seccion-principal .info span {
   color: #4d4d4d;
@@ -245,7 +244,7 @@ aside {
 
 /** TAREAS LISTADO **/
 .contenedor-tareas {
-  margin-top: 6rem;
+  margin-top: 2rem;
 }
 
 .listado-tareas {

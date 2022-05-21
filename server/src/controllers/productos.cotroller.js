@@ -15,8 +15,11 @@ export const obtenerProductos = async (req, res) => {
 
   try {
     const pool = await getConnection();
-    const result = await pool.request().query(queries.obtenerProductos);
-    res.json(result.recordset);
+    const result = await pool
+      // .request()
+      .query(queries.obtenerProductos);
+    console.log("productos: ", result.rows);
+    res.json(result.rows);
   } catch (error) {
     res.status(500);
     res.send(error.message);

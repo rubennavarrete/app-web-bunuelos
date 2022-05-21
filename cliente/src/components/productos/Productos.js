@@ -68,7 +68,7 @@ const Productos = () => {
                 {productos.length > 0 ? (
                   productos.map((item) => {
                     return (
-                      <CardProducto key={item.codProducto} productos={item} />
+                      <CardProducto key={item.codproducto} productos={item} />
                     );
                   })
                 ) : (

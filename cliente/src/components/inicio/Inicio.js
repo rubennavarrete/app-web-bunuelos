@@ -52,14 +52,7 @@ const Inicio = () => {
             </div>
             <div class="card__count-container">
               <div class="card__count-text">
-                <span class="card__count-text--big">
-                  $
-                  {cajaHoy !== null
-                    ? cajaHoy.Total.toFixed(2) !== null
-                      ? cajaHoy.Total.toFixed(2)
-                      : 0
-                    : 0}
-                </span>
+                <span class="card__count-text--big">${cajaHoy}</span>
               </div>
             </div>
             <div class="card__stuff-container">
@@ -74,7 +67,7 @@ const Inicio = () => {
             </div>
             <div class="card__count-container">
               <div class="card__count-text">
-                <span class="card__count-text--big">{totalVenta}</span>
+                <span class="card__count-text--big">${totalVenta}</span>
               </div>
             </div>
             <div class="card__stuff-container">

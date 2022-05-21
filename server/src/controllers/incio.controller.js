@@ -5,7 +5,7 @@ export const caja = async (req, res) => {
   const pool = await getConnection();
 
   result = await pool.query(queries.caja);
-
+  console.log("resultado caja hoy", result.rows[0]);
   res.send(result.rows[0]);
 };
 
@@ -15,6 +15,7 @@ export const procT = async (req, res) => {
 
   result = await pool.query(queries.procT);
 
+  console.log("productos totales", result.rows[0]);
   res.send(result.rows[0]);
 };
 

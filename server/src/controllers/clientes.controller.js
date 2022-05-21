@@ -91,7 +91,6 @@ export const obtenerCliente = async (req, res) => {
 export const buscar = async (req, res) => {
   const { cedulaCli } = req.params;
   let result;
-  console.log("cedulaCli", cedulaCli);
   const pool = await getConnection();
   if (cedulaCli !== "null") {
     result = await pool
@@ -117,8 +116,6 @@ export const eliminarCliente = async (req, res) => {
     // .input("cedulaCli", cedulaCli)
     .query(queries.eliminarClienteCi, [cedulaCli]);
 
-  console.log("resultado de la eliminacion: ", result);
-
   res.send(result.rows[0]);
 };
 
@@ -132,7 +129,6 @@ export const numeroTotalClientes = async (req, res) => {
 
 export const actualizarCliente = async (req, res) => {
   const { nombreCli, direccionCli, celularCli, correoCli, fechNac } = req.body;
-  console.log(nombreCli, direccionCli, celularCli, correoCli, fechNac);
   const { cedulaCli } = req.params;
   if (
     nombreCli == null ||

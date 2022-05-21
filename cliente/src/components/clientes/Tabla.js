@@ -23,13 +23,13 @@ const Tabla = ({ clientes }) => {
           onClick={() => capturarCedula(clientes)}
         />
       </th>
-      <td>{clientes.cedulaCli}</td>
-      <td>{clientes.nombreCli}</td>
-      <td>{clientes.direccionCli}</td>
-      <td>{clientes.celularCli}</td>
-      <td>{clientes.correoCli}</td>
+      <td>{clientes.cedulacli}</td>
+      <td>{clientes.nombrecli}</td>
+      <td>{clientes.direccioncli}</td>
+      <td>{clientes.celularcli}</td>
+      <td>{clientes.correocli}</td>
       <td>
-        {clientes.fechNac !== null ? clientes.fechNac.substring(0, 10) : null}
+        {clientes.fechnac !== null ? clientes.fechnac.substring(0, 10) : null}
       </td>
     </tr>
   );

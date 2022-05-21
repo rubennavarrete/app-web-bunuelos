@@ -8,7 +8,7 @@ const CardProducto = ({ productos }) => {
   const { obtenerCodigoProducto } = clienteContext;
 
   const capturarCodigo = (productos) => {
-    obtenerCodigoProducto(productos.codProducto);
+    obtenerCodigoProducto(productos.codproducto);
   };
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -16,8 +16,8 @@ const CardProducto = ({ productos }) => {
     currency: "USD",
   });
   const precio_usd = formatter.format(productos.precio);
-  const elaboracion = productos.fechaElab;
-  const caducidad = productos.fechaCad;
+  const elaboracion = productos.fechaelab;
+  const caducidad = productos.fechacad;
 
   return (
     <Fragment>
@@ -28,7 +28,7 @@ const CardProducto = ({ productos }) => {
           id="radio"
           onClick={() => capturarCodigo(productos)}
         />
-        <p>{productos.codProducto}</p>
+        <p>{productos.codproducto}</p>
         <p>{productos.nombre}</p>
         <p>{productos.categoria}</p>
         <p>{precio_usd}</p>
@@ -37,8 +37,8 @@ const CardProducto = ({ productos }) => {
         <p>{elaboracion && elaboracion.substring(0, 10)}</p>
         <img
           src={
-            productos.fotoUrl !== null
-              ? productos.fotoUrl
+            productos.fotourl !== null
+              ? productos.fotourl
               : `https://media.istockphoto.com/photos/modern-bakery-with-assortment-of-different-bread-picture-id682921082?k=20&m=682921082&s=612x612&w=0&h=A4DUnmwDHxuDjy-CuQOdZ3VD14G4MIX6n6gDw7MB-h0=`
           }
           alt=""
