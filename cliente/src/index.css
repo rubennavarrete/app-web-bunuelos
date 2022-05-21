@@ -162,6 +162,22 @@ input[type="radio"] {
   }
 }
 
+.seccion-principal .info {
+  text-align: center;
+  margin-top: 10%;
+}
+.seccion-principal .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.seccion-principall .info span {
+  color: #000000;
+  text-decoration: none;
+}
+.seccion-principal .info span .fa {
+  color: #ef3b3a;
+}
+
 /* BARRA LATERAL */
 aside {
   padding: 3rem;
@@ -328,10 +344,13 @@ aside {
 }
 
 .form-usuario {
+  background-image: url("https://cdn.pixabay.com/photo/2019/02/25/17/36/mockup-4020150_960_720.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 83vh;
 }
 
 .contenedor-form {

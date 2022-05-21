@@ -20,10 +20,10 @@ Content-Type: application/json
 GET {{api}}/0706635091
 
 ### Obteniendo los clientes que coincidan con los digitos ingresados
-GET {{api}}/buscar/17
+GET {{api}}/buscar/08
 
 ### Eliminando un cliente por su numero de cedula 
-DELETE {{api}}/0803051150
+DELETE {{api}}/0803259258
 
 
 ### Obteniendo el total de clientes registrados desde la base de datos

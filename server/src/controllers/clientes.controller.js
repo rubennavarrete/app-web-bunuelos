@@ -16,8 +16,10 @@ export const obtenerClientes = async (req, res) => {
 
   try {
     const pool = await getConnection();
-    const result = await pool.request().query(queries.obtenerClientes);
-    res.json(result.recordset);
+    const result = await pool
+      // .request()
+      .query(queries.obtenerClientes);
+    res.json(result.rows);
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -44,14 +46,21 @@ export const crearNuevoCliente = async (req, res) => {
     const pool = await getConnection();
 
     await pool
-      .request()
-      .input("cedulaCli", sql.VarChar, cedulaCli)
-      .input("nombreCli", sql.VarChar, nombreCli)
-      .input("direccionCli", sql.VarChar, direccionCli)
-      .input("celularCli", sql.VarChar, celularCli)
-      .input("correoCli", sql.VarChar, correoCli)
-      .input("fechNac", sql.Date, fechNac)
-      .query(queries.ingresarClientes);
+      // .request()
+      // .input("cedulaCli", sql.VarChar, cedulaCli)
+      // .input("nombreCli", sql.VarChar, nombreCli)
+      // .input("direccionCli", sql.VarChar, direccionCli)
+      // .input("celularCli", sql.VarChar, celularCli)
+      // .input("correoCli", sql.VarChar, correoCli)
+      // .input("fechNac", sql.Date, fechNac)
+      .query(queries.ingresarClientes, [
+        cedulaCli,
+        nombreCli,
+        direccionCli,
+        celularCli,
+        correoCli,
+        fechNac,
+      ]);
 
     res.json({
       cedulaCli,
@@ -72,10 +81,10 @@ export const obtenerCliente = async (req, res) => {
   const { cedulaCli } = req.params;
   const pool = await getConnection();
   const result = await pool
-    .request()
-    .input("cedulaCli", cedulaCli)
-    .query(queries.buscarClienteCi);
-  res.send(result.recordset[0]);
+    // .request()
+    // .input("cedulaCli", cedulaCli)
+    .query(queries.buscarClienteCi, [cedulaCli]);
+  res.send({ data: result.rows });
 };
 
 // Con este nmetodo es para buscar los valores que coincidan
@@ -86,15 +95,16 @@ export const buscar = async (req, res) => {
   const pool = await getConnection();
   if (cedulaCli !== "null") {
     result = await pool
-      .request()
-      .input("cedulaCli", cedulaCli)
-      .query("Select * from Cliente where cedulaCli LIKE '" + cedulaCli + "%'");
+      // .request()
+      // .input("cedulaCli", cedulaCli)
+      .query(
+        "Select * from Cliente where cedulaCli LIKE '" + [cedulaCli] + "%'"
+      );
   } else {
-    result = await pool.request().query(queries.obtenerClientes);
+    result = await pool.query(queries.obtenerClientes, [cedulaCli]);
   }
 
-  console.log("result", result);
-  res.send(result.recordset);
+  res.send(result.rows);
 };
 
 // Con este nmetodo se busca y elimina a un cliente por su cedula
@@ -103,20 +113,21 @@ export const eliminarCliente = async (req, res) => {
   const pool = await getConnection();
   const result = await pool
 
-    .request()
-    .input("cedulaCli", cedulaCli)
-    .query(queries.eliminarClienteCi);
+    // .request()
+    // .input("cedulaCli", cedulaCli)
+    .query(queries.eliminarClienteCi, [cedulaCli]);
 
   console.log("resultado de la eliminacion: ", result);
 
-  res.send(result.recordset[0]);
+  res.send(result.rows[0]);
 };
 
 export const numeroTotalClientes = async (req, res) => {
   const pool = await getConnection();
-  const result = await pool.request().query(queries.obtenerTotalClientes);
-  console.log(result);
-  res.json(result.recordset[0][""]);
+  const result = await pool
+    // .request()
+    .query(queries.obtenerTotalClientes);
+  res.json(result.rows[0]);
 };
 
 export const actualizarCliente = async (req, res) => {
@@ -137,14 +148,21 @@ export const actualizarCliente = async (req, res) => {
   const pool = await getConnection();
 
   await pool
-    .request()
-    .input("nombreCli", sql.VarChar, nombreCli)
-    .input("direccionCli", sql.VarChar, direccionCli)
-    .input("celularCli", sql.VarChar, celularCli)
-    .input("correoCli", sql.VarChar, correoCli)
-    .input("fechNac", sql.Date, fechNac)
-    .input("cedulaCli", cedulaCli)
-    .query(queries.actualizarClienteCi);
+    // .request()
+    // .input("nombreCli", sql.VarChar, nombreCli)
+    // .input("direccionCli", sql.VarChar, direccionCli)
+    // .input("celularCli", sql.VarChar, celularCli)
+    // .input("correoCli", sql.VarChar, correoCli)
+    // .input("fechNac", sql.Date, fechNac)
+    // .input("cedulaCli", cedulaCli)
+    .query(queries.actualizarClienteCi, [
+      nombreCli,
+      direccionCli,
+      celularCli,
+      correoCli,
+      fechNac,
+      cedulaCli,
+    ]);
 
   res.json({
     cedulaCli,

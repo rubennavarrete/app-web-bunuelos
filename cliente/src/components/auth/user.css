@@ -1,28 +1,23 @@
-
-
-.franga-central{
-  background-color: var(--gris2);
-  display:grid;
+.franga-central {
+  display: grid;
   height: 100vh;
   align-items: center;
   justify-content: center;
   width: 100vh;
 }
 
-.img-box{
-
+.img-box {
 }
 
-.login-box{
+.login-box {
   justify-content: center;
-    /* height: 14vh; */
-    width: 75vh;
-    display: flex;
-    padding-bottom: 70px;
+  /* height: 14vh; */
+  width: 75vh;
+  display: flex;
+  padding-bottom: 250px;
 }
 
 .franga-central .login-box {
-
 }
 
 .user {
@@ -43,4 +38,20 @@
 .user h3,
 .user p {
   margin: 7px 0;
+}
+
+.franga-central .info {
+  text-align: center;
+  margin-bottom: -30px;
+}
+.franga-central .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.franga-central .info span {
+  color: #000000;
+  text-decoration: none;
+}
+.franga-central .info span .fa {
+  color: #ef3b3a;
 }

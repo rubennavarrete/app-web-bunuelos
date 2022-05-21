@@ -2,22 +2,22 @@ export const queries = {
   // ----------------------------------------------LOGIN-------------------------------------------
   //Consultas para autentificar usuario
   obtenerUsuario:
-    "Select usernameUs, contrasenaUs, nombreUS, tipoUs, urImgUs from Usuario where usernameUs = @usernameUs",
+    "Select usernameUs, contrasenaUs, nombreUS, tipoUs, urImgUs from Usuario where usernameUs = $1",
 
   //Consultas para el apartado de clientes
   obtenerClientes: "SELECT * FROM Cliente",
 
   ingresarClientes:
-    "INSERT INTO Cliente (cedulaCli, nombreCli, direccionCli, celularCli, correoCli, fechNac) VALUES (@cedulaCli, @nombreCli, @direccionCli, @celularCli, @correoCli, @fechNac)",
+    "INSERT INTO Cliente (cedulaCli, nombreCli, direccionCli, celularCli, correoCli, fechNac) VALUES ($1, $2, $3, $4, $5, $6)",
 
-  buscarClienteCi: "Select * from Cliente where cedulaCli = @cedulaCli",
+  buscarClienteCi: "Select * from Cliente where cedulaCli = $1",
 
-  eliminarClienteCi: "exec sp_BorrarCliente @cedulaCli",
+  eliminarClienteCi: "CALL sp_BorrarCliente($1)",
 
-  obtenerTotalClientes: "SELECT COUNT(*) FROM [BonuelosDias].[dbo].[Cliente]",
+  obtenerTotalClientes: "SELECT COUNT(*) FROM Cliente",
 
   actualizarClienteCi:
-    "UPDATE Cliente SET nombreCli = @nombreCli, direccionCli = @direccionCli, celularCli = @celularCli, correoCli = @correoCli, fechNac = @fechNac WHERE cedulaCli = @cedulaCli",
+    "UPDATE Cliente SET nombreCli = $1, direccionCli = $2, celularCli = $3, correoCli = $4, fechNac = $5 WHERE cedulaCli = $6",
   //"exec sp_ModificarCliente @cedulaantigua, @cedula, @nombre, @direccion, @celular, @correoCli, @fecN",
 
   // modificarCliente:
@@ -47,7 +47,8 @@ export const queries = {
   detalleventa: "exec [dbo].[sp_DetalleVenta] @no",
 
   //crea una nueva fila en orden de compra
-  InsertarOrdenCompra: "exec sp_insertarOrdenCompra @Vtotal,@fech,@cedulC,@usernameU",
+  InsertarOrdenCompra:
+    "exec sp_insertarOrdenCompra @Vtotal,@fech,@cedulC,@usernameU",
 
   //para crear orden compra
   llenarOrdenCompra:
@@ -65,35 +66,36 @@ export const queries = {
   // conocer en que número de orden se está
   OC: "select COUNT(numOrden) as OC from OrdenCompra",
 
-    // ----------------------------------------------INICIO-------------------------------------------
+  // ----------------------------------------------INICIO-------------------------------------------
 
-      // CAJA DE HOY
-      caja:"EXEC sp_gananciahoy",
+  // CAJA DE HOY
+  caja: "EXEC sp_gananciahoy",
 
-      //Número de productos toteles registrados
-      procT: "EXEC sp_Tproducto",
+  //Número de productos toteles registrados
+  procT: "EXEC sp_Tproducto",
 
-      //número totales de compras realizadas
-      nCompras: "EXEC sp_Tordencompra",
+  //número totales de compras realizadas
+  nCompras: "EXEC sp_Tordencompra",
 
-      //Número de clientes toteles registrados
-      clientT: "EXEC sp_Tcliente",
+  //Número de clientes toteles registrados
+  clientT: "EXEC sp_Tcliente",
 
-    // ----------------------------------------------REPORTES-------------------------------------------
-    //Para mostrar la tabla Orden de Compra
-    OrdenCompra: "select * from OrdenCompra",
+  // ----------------------------------------------REPORTES-------------------------------------------
+  //Para mostrar la tabla Orden de Compra
+  OrdenCompra: "select * from OrdenCompra",
 
-    //Para mostrar la tabla Orden de Compra
-    PporAcabarse: "exec sp_PporAcabarse",
+  //Para mostrar la tabla Orden de Compra
+  PporAcabarse: "exec sp_PporAcabarse",
 
-    //Para mostrar la tabla Orden de Compra
-    Pcaducados: "exec sp_Pcaducados",
+  //Para mostrar la tabla Orden de Compra
+  Pcaducados: "exec sp_Pcaducados",
 
-    //Para mostrar la tabla Orden de Compra
-    CumpleañosCli: "sp_CumpleañosCli",
+  //Para mostrar la tabla Orden de Compra
+  CumpleañosCli: "sp_CumpleañosCli",
 
-     //Para mostrar la tabla Orden de Compra
-    factura: "select * from OrdenCompra oc inner join DetalleVenta dv on dv.numOrd=oc.numOrden",
+  //Para mostrar la tabla Orden de Compra
+  factura:
+    "select * from OrdenCompra oc inner join DetalleVenta dv on dv.numOrd=oc.numOrden",
 
-    masVendido:"exec sp_Pmasvendido",
+  masVendido: "exec sp_Pmasvendido",
 };

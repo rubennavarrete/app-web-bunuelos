@@ -18,28 +18,28 @@ export const autenticarUsuario = async (req, res) => {
     const pool = await getConnection();
     //Revisamos si el usuario ingresado es correcto
     let usuario = await pool
-      .request()
-      .input("usernameUs", usernameUs)
-      .query(queries.obtenerUsuario);
-
-    if (usuario.recordset.length === 0) {
+      // .request()
+      // .input("usernameUs", usernameUs)
+      .query(queries.obtenerUsuario, [usernameUs]);
+    if (usuario.rows.length === 0) {
       return res.status(400).json({
         msg: "Usuario Incorrecto",
       });
     }
-    const user = usuario.recordset[0];
 
-    if (user.contrasenaUs !== contrasenaUs) {
+    const user = usuario.rows[0];
+
+    if (user.contrasenaus !== contrasenaUs) {
       return res.status(400).json({
         msg: "Contraseña Incorrecta",
       });
     }
 
     const datos = {
-      nombreUS: user.nombreUS,
-      tipoUs: user.tipoUs,
-      urImgUs: user.urImgUs,
-      usernameUS: user.usernameUs,
+      nombreUS: user.nombreus,
+      tipoUs: user.tipous,
+      urImgUs: user.urimgus,
+      usernameUS: user.usernameus,
     };
     console.log("->", datos);
     const token = jwt.sign(datos, process.env.SECRETA, {

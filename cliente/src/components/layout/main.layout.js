@@ -54,6 +54,13 @@ const MainLayout = ({ children, ...props }) => {
             <div className="contenedor-tareas">{children}</div>
           </main>
         )}
+
+        <div class="info">
+          <span>
+            Made by <i class="fa fa-heart"></i>
+            <a href="#">Ruben Valencia</a>
+          </span>
+        </div>
       </div>
     </div>
   );

@@ -1,23 +1,35 @@
-import sql from "mssql";
+const { Pool, Client } = require("pg");
 
-const dbSettings = {
-  user: "RUBEN",
-  password: "12345",
-  server: "localhost",
-  database: "BonuelosDias",
-  options: {
-    encrypt: true,
-    trustServerCertificate: true,
-  },
+const credentials = {
+  user: "postgres",
+  host: "161.35.14.175",
+  database: "Bunuelos",
+  password: "postgres",
+  port: 3232,
 };
+
+async function poolDemo() {
+  const pool = new Pool(credentials);
+  const now = await pool.query("SELECT NOW()");
+  await pool.end();
+
+  return now;
+}
+
+async function clientDemo() {
+  const client = new Client(credentials);
+  await client.connect();
+  const now = await client.query("SELECT NOW()");
+  await client.end();
+
+  return now;
+}
 
 export async function getConnection() {
   try {
-    const pool = await sql.connect(dbSettings);
+    const pool = new Pool(credentials);
     return pool;
   } catch (error) {
     console.error(error);
   }
 }
-
-export { sql };

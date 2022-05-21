@@ -62,7 +62,7 @@ const Login = (props) => {
         <div className="img-box">
           <img
             className="login-img"
-            src="http://localhost:3030/static/media/Logo.00ef15bb255e84228d0067bbc034135c.svg"
+            src="https://firebasestorage.googleapis.com/v0/b/bunuelosdias-cdb3b.appspot.com/o/trash%2FLogo.svg?alt=media&token=f27e8d4c-5c4e-4bbc-ad3a-d72c5565d89b"
             alt=""
           />
         </div>
@@ -105,6 +105,13 @@ const Login = (props) => {
                   className="btn btn-primario btn-block"
                   value="Iniciar Sesión"
                 />
+              </div>
+
+              <div class="info">
+                <span>
+                  Made by <i class="fa fa-heart"></i>
+                  <a href="#">Ruben Valencia</a>
+                </span>
               </div>
             </form>
           </div>

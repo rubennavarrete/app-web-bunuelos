@@ -4,34 +4,34 @@ export const caja = async (req, res) => {
   let result;
   const pool = await getConnection();
 
-  result = await pool.request().query(queries.caja);
+  result = await pool.query(queries.caja);
 
-  res.send(result.recordset[0]);
+  res.send(result.rows[0]);
 };
 
 export const procT = async (req, res) => {
   let result;
   const pool = await getConnection();
 
-  result = await pool.request().query(queries.procT);
+  result = await pool.query(queries.procT);
 
-  res.send(result.recordset[0]);
+  res.send(result.rows[0]);
 };
 
 export const nCompras = async (req, res) => {
   let result;
   const pool = await getConnection();
 
-  result = await pool.request().query(queries.nCompras);
+  result = await pool.query(queries.nCompras);
 
-  res.send(result.recordset[0]);
+  res.send(result.rows[0]);
 };
 
 export const clientT = async (req, res) => {
   let result;
   const pool = await getConnection();
 
-  result = await pool.request().query(queries.clientT);
+  result = await pool.query(queries.clientT);
 
-  res.send(result.recordset[0]);
+  res.send(result.rows[0]);
 };
