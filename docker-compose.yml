@@ -26,4 +26,5 @@ services:
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
       NODE_ENV: production
+      DB_HOST: db
       PORT: 4000
