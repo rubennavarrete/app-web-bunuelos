@@ -16,7 +16,7 @@ services:
     ports:
       - "3000:3000"
     restart: always
-    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
+    env_file: ./cliente/.env 
     environment:
       NODE_ENV: production
   api:
