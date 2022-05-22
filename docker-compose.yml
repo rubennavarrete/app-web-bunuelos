@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.8'
 
 services:
   db:
@@ -9,6 +9,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '3232:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
   web:
     build: ./cliente
     ports:
@@ -23,3 +25,8 @@ services:
       - "4000:4000"
     restart: always
     env_file: ./server/.env
+    links:
+      - db
+volumes:
+  db:
+    driver: local
