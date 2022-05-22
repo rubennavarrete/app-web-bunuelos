@@ -1,29 +1,12 @@
-const { Pool, Client } = require("pg");
+const { Pool } = require("pg");
 
 const credentials = {
-  user: "postgres",
-  host: "161.35.14.175",
-  database: "Bunuelos",
-  password: "postgres",
-  port: 3232,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  host: process.env.DB_SERVER,
+  port: process.env.DB_PORT,
 };
-
-async function poolDemo() {
-  const pool = new Pool(credentials);
-  const now = await pool.query("SELECT NOW()");
-  await pool.end();
-
-  return now;
-}
-
-async function clientDemo() {
-  const client = new Client(credentials);
-  await client.connect();
-  const now = await client.query("SELECT NOW()");
-  await client.end();
-
-  return now;
-}
 
 export async function getConnection() {
   try {
